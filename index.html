@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新春祝福 · 余老师</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #fef3d9 0%, #fedba5 100%);
+            font-family: 'Segoe UI', '微软雅黑', '楷体', 'KaiTi', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .card {
+            max-width: 780px;
+            width: 100%;
+            background: rgba(255, 248, 235, 0.85);
+            backdrop-filter: blur(3px);
+            border-radius: 48px 48px 36px 36px;
+            box-shadow: 0 20px 40px rgba(180, 100, 20, 0.2), 
+                        0 6px 12px rgba(0, 0, 0, 0.1),
+                        inset 2px 2px 10px rgba(255, 245, 215, 0.8);
+            border: 2px solid #fff8e0;
+            padding: 2.8rem 2.2rem 2.6rem;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        /* 主题大字 */
+        .main-message {
+            font-size: clamp(2.6rem, 13vw, 4.8rem);
+            font-weight: 700;
+            color: #b3512b;
+            text-shadow: 3px 3px 0 #ffeeb0, 5px 5px 0 rgba(210, 120, 30, 0.25);
+            letter-spacing: 6px;
+            line-height: 1.2;
+            margin-bottom: 0.4rem;
+            word-break: keep-all;
+            border-bottom: 3px dashed #ffb882;
+            padding-bottom: 0.25em;
+            display: inline-block;
+        }
+
+        /* 装饰小元素——红灯笼 */
+        .lanterns {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 20px 0 12px;
+        }
+        .lantern {
+            background: #d6433e;
+            width: 20px;
+            height: 30px;
+            border-radius: 40% 40% 20% 20%;
+            box-shadow: 0 -2px 5px #ffc107, 0 6px 8px #a13d2b;
+            position: relative;
+            transform: rotate(2deg);
+        }
+        .lantern::before {
+            content: "";
+            position: absolute;
+            top: -6px;
+            left: 4px;
+            width: 12px;
+            height: 8px;
+            background: #f5b342;
+            border-radius: 20px 20px 0 0;
+            box-shadow: 0 -1px 3px gold;
+        }
+        .lantern::after {
+            content: "福";
+            position: absolute;
+            bottom: -14px;
+            left: 1px;
+            font-size: 13px;
+            color: #fbe106;
+            font-weight: bold;
+            text-shadow: 0 0 3px red;
+        }
+        .lantern.right {
+            transform: rotate(-3deg);
+        }
+
+        /* 小段文字区域 */
+        .blessing-text {
+            font-size: 1.5rem;
+            margin: 2rem 1rem 1.3rem;
+            padding: 0.8rem 1.2rem;
+            background: rgba(255, 255, 240, 0.7);
+            border-radius: 60px 20px 60px 20px;
+            border-left: 6px solid #e0843a;
+            border-right: 6px solid #e0843a;
+            color: #3b2c1a;
+            line-height: 1.7;
+            box-shadow: inset 0 0 0 2px #fff2ce, 0 8px 12px -6px #cc9f5f;
+        }
+
+        .blessing-text p {
+            font-weight: 400;
+            text-shadow: 1px 1px white;
+        }
+
+        /* 活泼的小点缀 */
+        .firecracker-line {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 24px 0 6px;
+            flex-wrap: wrap;
+        }
+        .cracker {
+            width: 10px;
+            height: 22px;
+            background: #c93f2b;
+            border-radius: 20% 20% 40% 40%;
+            box-shadow: 0 5px 0 #982b1a, 2px 8px 6px #96622d;
+        }
+        .cracker.gold {
+            background: #f3b53b;
+            box-shadow: 0 5px 0 #b8731e;
+        }
+
+        /* 小注脚——简单线条，无署名 */
+        .meta-spark {
+            margin-top: 32px;
+            color: #aa7744;
+            font-size: 1.1rem;
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        .meta-spark span {
+            font-size: 1.8rem;
+            line-height: 1;
+        }
+        hr {
+            border: none;
+            height: 2px;
+            background: radial-gradient(circle, #e7a55e, transparent);
+            width: 60%;
+            margin: 1rem auto 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <!-- 小巧灯笼气氛 -->
+        <div class="lanterns">
+            <div class="lantern"></div>
+            <div class="lantern right"></div>
+        </div>
+
+        <!-- 核心祝福：余老师新年快乐 (不加署名) -->
+        <div class="main-message">
+            余老师<br>新年快乐
+        </div>
+
+        <!-- 小段文字 (按要求另添一小段文字) 温馨感谢+新年愿景 -->
+        <div class="blessing-text">
+            <p>🌸 感谢您一路的耐心与指引<br>
+             🧧 愿新岁讲台生春，笔下藏福<br>
+             🎋 日日欢愉，事事顺意</p>
+        </div>
+
+        <!-- 俏皮小鞭炮，喜庆无署名 -->
+        <div class="firecracker-line">
+            <div class="cracker"></div><div class="cracker gold"></div><div class="cracker"></div>
+            <div class="cracker gold"></div><div class="cracker"></div><div class="cracker"></div>
+            <div class="cracker gold"></div><div class="cracker"></div>
+        </div>
+
+        <!-- 最后的装饰分割，只有小图案，确保不出现任何名字/署名 -->
+        <hr>
+        <div class="meta-spark">
+            <span>✨</span> 岁岁常欢愉 · 年年皆胜意 <span>✨</span>
+        </div>
+    </div>
+
+    <!-- 完全无署名，只有纯粹的祝福 -->
+</body>
+</html>
+```
