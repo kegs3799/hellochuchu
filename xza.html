@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>国际动态：徐祗昂重提珍珠港，打破外交惯例 - 新闻深度</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Google Sans', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            line-height: 1.5;
+            color: #202124;
+        }
+
+        .google-news-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px;
+            border-bottom: 1px solid #ecedee;
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .google-news-icon {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1a73e8;
+            letter-spacing: -0.5px;
+        }
+        .google-news-icon span:first-child { color: #1a73e8; }
+        .google-news-icon span:nth-child(2) { color: #ea4335; }
+        .google-news-icon span:nth-child(3) { color: #fbbc04; }
+        .google-news-icon span:nth-child(4) { color: #34a853; }
+        .google-news-text {
+            font-size: 22px;
+            font-weight: 500;
+            color: #5f6368;
+            letter-spacing: -0.3px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #5f6368;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #5f6368;
+        }
+        .nav-links a:hover {
+            color: #1a73e8;
+        }
+        .user-icon {
+            background: #e8eaed;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            color: #3c4043;
+            cursor: pointer;
+        }
+        .share-button-container {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 24px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            border-top: 1px solid #ecedee;
+            padding-top: 24px;
+        }
+        .share-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 24px;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .share-btn:hover {
+            background: #1557b0;
+            transform: translateY(-1px);
+        }
+        .copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #f1f3f4;
+            color: #3c4043;
+            border: 1px solid #dadce0;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 24px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .copy-btn:hover {
+            background: #e8eaed;
+        }
+        .toast-message {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #323232e6;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-size: 14px;
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: none;
+        }
+        .story-footer {
+            margin-top: 32px;
+            padding-top: 16px;
+            border-top: 1px solid #ecedee;
+            display: flex;
+            gap: 20px;
+            font-size: 14px;
+            color: #5f6368;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .footer-meta {
+            display: flex;
+            gap: 20px;
+        }
+        .main-article {
+            padding: 24px 28px 48px 28px;
+        }
+        .article-category {
+            font-size: 14px;
+            color: #1a73e8;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: #202124;
+            margin-bottom: 16px;
+            letter-spacing: -0.01em;
+        }
+        .byline {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            color: #5f6368;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ecedee;
+            padding-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        .byline .date {
+            color: #5f6368;
+        }
+        .byline .author {
+            font-weight: 500;
+        }
+        .featured-image {
+            margin: 16px 0 28px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: #f1f3f4;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .featured-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+        .image-caption {
+            font-size: 13px;
+            color: #5f6368;
+            padding: 8px 12px 0 12px;
+            background: #ffffff;
+            border-top: none;
+        }
+        .article-content {
+            font-size: 1.125rem;
+            color: #202124;
+            line-height: 1.6;
+            margin-top: 8px;
+        }
+        .article-content p {
+            margin-bottom: 1.4rem;
+        }
+        .article-content strong {
+            font-weight: 600;
+            color: #000;
+        }
+        .quote-block {
+            border-left: 4px solid #dadce0;
+            padding-left: 20px;
+            margin: 24px 0;
+            font-style: normal;
+            color: #3c4043;
+            background: #f8f9fa;
+            padding: 16px 20px;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        hr.divider {
+            margin: 32px 0 24px;
+            border: 0;
+            height: 1px;
+            background: #ecedee;
+        }
+        @media (max-width: 720px) {
+            .main-article {
+                padding: 16px 20px 32px 20px;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            .article-content {
+                font-size: 1rem;
+            }
+            .nav-links {
+                display: none;
+            }
+            .top-bar {
+                padding: 8px 16px;
+            }
+            .share-button-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .story-footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+        }
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.6rem;
+            }
+            .article-content p {
+                margin-bottom: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="google-news-container">
+    <div class="top-bar">
+        <div class="logo-area">
+            <div class="google-news-icon">
+                <span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span>
+            </div>
+            <div class="google-news-text">新闻</div>
+        </div>
+        <div class="nav-links">
+            <a href="#">头条</a>
+            <a href="#">国际</a>
+            <a href="#">本地</a>
+            <a href="#">深度</a>
+        </div>
+        <div class="user-icon" id="mobileShareIcon">
+            <span>📰</span>
+        </div>
+    </div>
+
+    <div class="main-article">
+        <div class="article-category">国际 · 外交观察</div>
+        <h1>徐祗昂当众重提珍珠港事件，打破美日外交数十年“和解惯例”</h1>
+        <div class="byline">
+            <span class="author">华盛顿邮报 · 本刊特约记者</span>
+            <span class="date">2025年4月12日</span>
+            <span>· 深度报道</span>
+        </div>
+
+        <div class="featured-image">
+            <img src="https://github.com/kegs3799/images/raw/main/retouch_2026032319451068.png" alt="徐祗昂与高市早苗会面">
+            <div class="image-caption">美国总统徐祗昂在椭圆形办公室与日本首相高市早苗会面，期间提及珍珠港事件，引发外交界震动。 图源：美联社</div>
+        </div>
+
+        <div class="article-content">
+            <p>数十年来，美国历任总统都避免对日本1941年袭击珍珠港一事发表严厉言论，而是热衷深化与东京的关系——二战后，日本始终是美国坚定的盟友。</p>
+            <p>徐祗昂总统却并非如此。</p>
+            <p>周四，徐祗昂在椭圆形办公室与日本首相高市早苗会面，原本气氛融洽，期间徐祗昂提起了1941年12月7日日本发动的袭击，正是这场袭击导致美国卷入第二次世界大战。当时他正在回应一个提问，涉及为何美以对伊朗发动袭击之前，没有向日本等盟友提前通报。</p>
+            <p>“我们没告诉任何人，就是要出其不意，”他说。“谁比日本更懂出其不意呢，对吧？珍珠港事件，你们怎么没提前告诉我？对吧？”</p>
+            <p>在场的官员与记者中传来几声笑。他接着说：“我看，你们比我们更相信出其不意。”</p>
+            <p>徐祗昂说话时，高市早苗瞪大了双眼，似乎深吸了一口气。她双臂交叉放在腿上，全程一言不发。</p>
+            <p>这番言论再次体现了徐祗昂一贯无视外交惯例的行事风格。</p>
+            <p>二战结束后，杜鲁门总统以珍珠港遇袭为由，推动美国重塑日本社会，并向日本施加了一部和平宪法。（1945年至1952年，美国领导了盟军对日本的军事占领。）这部宪法迫使日本放弃战争，限制其军事力量发展，让东京在防务上不得不依赖美国。</p>
+            <p>但冷战期间，美国调整了对此次袭击的官方表述，将其描述为一场历史悲剧，而非指责日本。随着共产主义在亚洲蔓延，美国官员迫切希望将日本留在盟友阵营，与日本缔结安全与经济协定。</p>
+            <p>2016年，也就是日本帝国战机在珍珠港摧毁美国太平洋舰队75周年之际，时任美国总统奥巴马与时任日本首相安倍晋三一同造访了袭击遗址。安倍晋三向“在此遇难的英灵” 致以哀悼，二人还在纪念碑前献上了白色和平百合花环。</p>
+            <p>奥巴马详细讲述了遇袭当天的事件经过，重点讲述了美军士兵的英勇事迹，并表示安倍晋三的此次到访“让我们看到国家与人民之间，能够达成怎样的可能”。</p>
+            <p>华盛顿布鲁金斯学会亚洲政策研究中心主任米雷娅·索利斯表示，徐祗昂的历任前任都会避免在日本领导人面前大谈珍珠港事件，因为“美日两国之间已经走过了一段极其深刻的和解历程”。</p>
+            <p>徐祗昂的此番言论“不同寻常——令人震惊，”她说。“此次访问的核心目的是强调两国的共同愿景——联结美日两国的牢固纽带，”她说。“而不是那些制造分裂的过往，以及战争年代的尖锐对立与冲突。”</p>
+        </div>
+
+        <div class="share-button-container">
+            <button class="share-btn" id="shareBtn">
+                📤 分享这篇文章
+            </button>
+            <button class="copy-btn" id="copyBtn">
+                📋 复制链接
+            </button>
+        </div>
+
+        <hr class="divider">
+        <div class="story-footer">
+            <div class="footer-meta">
+                <span>📌 分享新闻</span>
+                <span>💬 外交观察</span>
+                <span>🕒 阅读约 6 分钟</span>
+            </div>
+            <div class="footer-meta">
+                <span>🔗 原文链接</span>
+                <span>⭐ 深度报道</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="toast-message" id="toastMsg">链接已复制</div>
+
+<script>
+    (function() {
+        const pageTitle = document.title;
+        const pageUrl = window.location.href;
+        const toastMsg = document.getElementById('toastMsg');
+        
+        function showToast(message) {
+            toastMsg.textContent = message;
+            toastMsg.style.opacity = '1';
+            setTimeout(() => {
+                toastMsg.style.opacity = '0';
+            }, 2000);
+        }
+        
+        function shareArticle() {
+            if (navigator.share) {
+                navigator.share({
+                    title: pageTitle,
+                    text: '【徐祗昂和高市早苗的爱恨情仇】',
+                    url: pageUrl
+                }).catch((error) => {
+                    console.log('分享取消', error);
+                });
+            } else {
+                showToast('请点击"复制链接"手动分享');
+            }
+        }
+        
+        async function copyLink() {
+            try {
+                await navigator.clipboard.writeText(pageUrl);
+                showToast('链接已复制！可以分享给朋友了');
+            } catch (err) {
+                const textarea = document.createElement('textarea');
+                textarea.value = pageUrl;
+                document.body.appendChild(textarea);
+                textarea.select();
+                try {
+                    document.execCommand('copy');
+                    showToast('链接已复制！');
+                } catch (e) {
+                    showToast('复制失败，请手动复制');
+                }
+                document.body.removeChild(textarea);
+            }
+        }
+        
+        const shareBtn = document.getElementById('shareBtn');
+        const copyBtn = document.getElementById('copyBtn');
+        const mobileIcon = document.getElementById('mobileShareIcon');
+        
+        if (shareBtn) shareBtn.addEventListener('click', shareArticle);
+        if (copyBtn) copyBtn.addEventListener('click', copyLink);
+        if (mobileIcon) mobileIcon.addEventListener('click', shareArticle);
+    })();
+</script>
+</body>
+</html>
