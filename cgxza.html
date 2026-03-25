@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>伥鬼现｜怨灵画像</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            min-height: 100vh;
+            background: radial-gradient(circle at center, #0a0a0a 0%, #000000 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', 'Microsoft YaHei', 'SimHei', 'Courier New', monospace;
+            position: relative;
+            overflow-x: hidden;
+            cursor: default;
+        }
+
+        .horror-container {
+            position: relative;
+            width: 90vw;
+            max-width: 1000px;
+            margin: 20px auto;
+            border-radius: 32px;
+            box-shadow: 0 0 30px rgba(180, 0, 0, 0.3), 0 0 8px rgba(255, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(1px);
+            z-index: 2;
+        }
+
+        .central-image {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 28px;
+            border: 2px solid #5a0000;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(255, 0, 0, 0.2);
+            background: #1f1a1a;
+        }
+
+        .central-image:hover {
+            filter: brightness(1.02) contrast(1.1);
+            transform: scale(1.002);
+        }
+
+        /* 复古字体层：浮动的“死”字 — 使用复古风格字体 */
+        .floating-death {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            overflow: hidden;
+        }
+
+        /* 复古风格“死”字 — 借鉴老旧铅字/雕版/哥特风格 */
+        .death-char {
+            position: absolute;
+            color: #e60012;
+            font-size: 32px;
+            font-weight: 800;
+            /* 复古字体优先：华文楷书有古韵，加上衬线体旧式感 */
+            font-family: '华文楷书', 'KaiTi', 'Georgia', 'Times New Roman', '宋体', 'SimSun', 'Courier New', monospace;
+            text-shadow: 0 0 4px #aa2e2e, 0 0 10px #6b0f0f, 2px 2px 1px #2f0000;
+            opacity: 0.92;
+            white-space: nowrap;
+            animation: fadeOutAndDrift 1s ease-out forwards;
+            z-index: 10000;
+            pointer-events: none;
+            letter-spacing: 2px;
+            font-style: italic;
+            transform-origin: center center;
+        }
+
+        /* 增加墨迹斑驳的伪随机质感，通过伪类增加旧化效果 */
+        .death-char::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 40%, rgba(100, 0, 0, 0.2) 0%, transparent 70%);
+            pointer-events: none;
+            mix-blend-mode: overlay;
+            border-radius: 20%;
+        }
+
+        @keyframes fadeOutAndDrift {
+            0% {
+                opacity: 0.9;
+                transform: translate(0, 0) rotate(-3deg) scale(0.85);
+                filter: blur(0px) drop-shadow(0 0 2px #aa0000);
+            }
+            25% {
+                opacity: 1;
+                transform: translate(calc(var(--dx, 8px) * 0.4), calc(var(--dy, -12px) * 0.3)) rotate(2deg) scale(1.02);
+                filter: blur(0.3px);
+            }
+            60% {
+                opacity: 0.85;
+                transform: translate(calc(var(--dx, 15px) * 0.8), calc(var(--dy, -20px) * 0.7)) rotate(6deg) scale(1.04);
+                filter: blur(0.8px);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--dx, 30px), var(--dy, -40px)) rotate(12deg) scale(0.65);
+                filter: blur(2px);
+            }
+        }
+
+        /* 红色粒子效果容器 (Canvas 粒子背景) */
+        .red-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.8;
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 左上角免责声明 */
+        .disclaimer {
+            position: fixed;
+            top: 14px;
+            left: 18px;
+            font-size: 11px;
+            color: #7a7a7a;
+            background-color: rgba(10, 10, 10, 0.65);
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-family: 'Courier New', '华文楷书', monospace;
+            backdrop-filter: blur(2px);
+            z-index: 10001;
+            pointer-events: none;
+            border-left: 2px solid #8b3c3c;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+        }
+
+        /* 复古点缀 小印章 */
+        .vintage-stamp {
+            position: fixed;
+            bottom: 16px;
+            right: 18px;
+            font-size: 10px;
+            font-family: '华文楷书', 'KaiTi', monospace;
+            color: #6a2e2e;
+            background: rgba(0,0,0,0.4);
+            padding: 3px 8px;
+            border-radius: 20px;
+            z-index: 10001;
+            pointer-events: none;
+            backdrop-filter: blur(2px);
+            opacity: 0.5;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 640px) {
+            .death-char {
+                font-size: 24px;
+            }
+            .disclaimer {
+                font-size: 9px;
+                top: 8px;
+                left: 8px;
+            }
+            .vintage-stamp {
+                font-size: 8px;
+                bottom: 8px;
+                right: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="horror-container">
+        <!-- 图片链接区：用户自行替换图片链接 -->
+        <img class="central-image" src="https://github.com/kegs3799/images/raw/e42907ababcfd7418622404e9e9a10f417c528fc/bd65f86e-672f-44ce-a19b-b304c02989ad.png" alt="伥鬼祸世">
+    </div>
+
+    <!-- 红色粒子画布层 -->
+    <canvas id="redParticleCanvas" class="red-particles"></canvas>
+
+    <!-- 浮字层 -->
+    <div class="floating-death" id="deathFloatingLayer"></div>
+
+    <div class="disclaimer">
+        该图片为AI生成，如有雷同，纯属巧合
+    </div>
+    <div class="vintage-stamp">
+        怨 · 咒
+    </div>
+
+    <script>
+        (function() {
+            // ================= 复古浮字模块 =================
+            const deathContainer = document.getElementById('deathFloatingLayer');
+            if (!deathContainer) return;
+
+            const INTERVAL_MS = 200;        // 0.2秒
+            const WORDS_PER_BATCH = 5;       // 每次浮现5个
+            const DURATION_MS = 1000;         // 持续1秒
+
+            function randomRange(min, max) {
+                return Math.floor(Math.random() * (max - min + 1) + min);
+            }
+
+            // 复古字体大小错落有致 (偏仿古印刷)
+            function getRetroFontSize() {
+                const sizes = [28, 32, 36, 38, 42, 30, 34, 40, 44];
+                return sizes[Math.floor(Math.random() * sizes.length)] + 'px';
+            }
+
+            // 随机旋转复古感
+            function getRetroRotate() {
+                return (Math.random() * 28 - 14).toFixed(1);
+            }
+
+            // 创建单个复古“死”字
+            function createDeathCharacter() {
+                const deathSpan = document.createElement('div');
+                deathSpan.className = 'death-char';
+                deathSpan.innerText = '死';
+
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
+                const leftPos = randomRange(8, viewportWidth - 55);
+                const topPos = randomRange(8, viewportHeight - 70);
+                deathSpan.style.left = leftPos + 'px';
+                deathSpan.style.top = topPos + 'px';
+
+                deathSpan.style.fontSize = getRetroFontSize();
+                const randomOpacity = (Math.random() * 0.35 + 0.65).toFixed(2);
+                deathSpan.style.opacity = randomOpacity;
+
+                // 飘移方向：增加旧式摇曳感
+                const dx = randomRange(-55, 80);
+                const dy = randomRange(-95, 35);
+                deathSpan.style.setProperty('--dx', dx + 'px');
+                deathSpan.style.setProperty('--dy', dy + 'px');
+
+                const initRotate = getRetroRotate();
+                deathSpan.style.transform = `rotate(${initRotate}deg) scale(0.88)`;
+
+                // 更深邃的复古红影
+                const redIntensity = randomRange(140, 220);
+                deathSpan.style.textShadow = `0 0 5px rgb(${redIntensity}, 20, 20), 0 0 9px #690000, 1px 1px 0px #2f0000`;
+
+                // 偶尔使用更老式的衬线字体，随机部分字使用华文楷书或宋体增强复古感
+                const retroFonts = ['华文楷书', 'KaiTi', 'Georgia', 'Times New Roman', '宋体', 'SimSun', 'Courier New'];
+                const selectedFont = retroFonts[Math.floor(Math.random() * retroFonts.length)];
+                deathSpan.style.fontFamily = `'${selectedFont}', '华文楷书', 'KaiTi', monospace`;
+                
+                // 增加轻微字间距复古印刷感
+                deathSpan.style.letterSpacing = (Math.random() * 1.5 + 0.5) + 'px';
+
+                deathSpan.addEventListener('animationend', function(e) {
+                    if (e.target === deathSpan) {
+                        deathSpan.remove();
+                    }
+                });
+
+                setTimeout(() => {
+                    if (deathSpan.parentNode) {
+                        deathSpan.remove();
+                    }
+                }, DURATION_MS + 50);
+
+                return deathSpan;
+            }
+
+            function generateBatch(count) {
+                const fragment = document.createDocumentFragment();
+                for (let i = 0; i < count; i++) {
+                    const deathChar = createDeathCharacter();
+                    fragment.appendChild(deathChar);
+                }
+                deathContainer.appendChild(fragment);
+            }
+
+            let intervalId = setInterval(() => {
+                generateBatch(WORDS_PER_BATCH);
+            }, INTERVAL_MS);
+
+            window.addEventListener('beforeunload', () => {
+                if (intervalId) {
+                    clearInterval(intervalId);
+                    intervalId = null;
+                }
+            });
+
+            // 处理图片占位提示 (链接为空时显示占位，但用户自行填写链接)
+            const centralImg = document.querySelector('.central-image');
+            if (centralImg && (!centralImg.src || centralImg.src === window.location.href || centralImg.src === "")) {
+                if (!centralImg.hasAttribute('data-placeholder-set')) {
+                    centralImg.setAttribute('data-placeholder-set', 'true');
+                    if (!centralImg.src || centralImg.src === "") {
+                        centralImg.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 400'%3E%3Crect width='100%25' height='100%25' fill='%231a0505'/%3E%3Ctext x='50%25' y='50%25' font-size='20' fill='%238c3a3a' text-anchor='middle' dy='.3em' font-family='monospace'%3E⚰️ 旧影怨念 ⚰️%3C/text%3E%3C/svg%3E";
+                    }
+                }
+            }
+
+            // ========== 红色粒子效果 (Canvas 高性能粒子系统) ==========
+            const canvas = document.getElementById('redParticleCanvas');
+            let ctx = canvas.getContext('2d');
+            let particles = [];
+            let animationId = null;
+            let canvasWidth, canvasHeight;
+
+            // 粒子参数配置
+            const PARTICLE_COUNT = 110;        // 红色粒子数量
+            const PARTICLE_MAX_SPEED = 0.55;
+            const PARTICLE_SIZE_RANGE = [2, 7];
+
+            function resizeCanvas() {
+                canvasWidth = window.innerWidth;
+                canvasHeight = window.innerHeight;
+                canvas.width = canvasWidth;
+                canvas.height = canvasHeight;
+                if (ctx) {
+                    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+                }
+            }
+
+            // 创建粒子池: 红色调，暗红，鲜红，血橙
+            function initParticles() {
+                particles = [];
+                for (let i = 0; i < PARTICLE_COUNT; i++) {
+                    particles.push({
+                        x: Math.random() * canvasWidth,
+                        y: Math.random() * canvasHeight,
+                        radius: Math.random() * (PARTICLE_SIZE_RANGE[1] - PARTICLE_SIZE_RANGE[0]) + PARTICLE_SIZE_RANGE[0],
+                        vx: (Math.random() - 0.5) * PARTICLE_MAX_SPEED * 1.6,
+                        vy: (Math.random() - 0.5) * PARTICLE_MAX_SPEED * 1.4 + 0.1, // 轻微下沉感
+                        alpha: Math.random() * 0.65 + 0.25,
+                        color: `hsl(${Math.random() * 15 + 350}, 85%, ${Math.random() * 25 + 45}%)`, // 深红至亮红范围
+                        flicker: Math.random() * 0.6 + 0.4,
+                        flickerSpeed: 0.01 + Math.random() * 0.03
+                    });
+                }
+            }
+
+            function updateParticles() {
+                for (let p of particles) {
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    // 边界循环 (让粒子从另一边出现，增加弥漫感)
+                    if (p.x < -20) p.x = canvasWidth + 15;
+                    if (p.x > canvasWidth + 20) p.x = -15;
+                    if (p.y < -20) p.y = canvasHeight + 15;
+                    if (p.y > canvasHeight + 20) p.y = -20;
+
+                    // 轻微闪烁动态
+                    p.flicker += (Math.random() - 0.5) * 0.025;
+                    if (p.flicker > 0.95) p.flicker = 0.6;
+                    if (p.flicker < 0.4) p.flicker = 0.7;
+                }
+            }
+
+            function drawParticles() {
+                if (!ctx) return;
+                ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+                
+                // 添加一层极淡的暗红底纹叠加 (增强氛围)
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.12)';
+                ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+                
+                for (let p of particles) {
+                    // 动态透明度和光晕
+                    const glowAlpha = Math.min(0.45, p.alpha * (0.7 + p.flicker * 0.6));
+                    ctx.beginPath();
+                    // 绘制光晕效果（外发光）
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = `rgba(220, 40, 40, 0.7)`;
+                    ctx.arc(p.x, p.y, p.radius * 1.2, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(190, 30, 30, ${glowAlpha * 0.5})`;
+                    ctx.fill();
+                    
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    // 主颜色：血红/暗红渐变
+                    const mainColor = p.color || `hsl(0, 80%, 55%)`;
+                    ctx.fillStyle = mainColor;
+                    ctx.shadowBlur = 5;
+                    ctx.fill();
+                    
+                    // 增加核心亮点
+                    ctx.beginPath();
+                    ctx.arc(p.x - 0.8, p.y - 0.6, p.radius * 0.35, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255, 140, 100, 0.7)`;
+                    ctx.fill();
+                }
+                // 重置阴影
+                ctx.shadowBlur = 0;
+                // 添加朦胧血雾效果 (极轻微噪点)
+                if (Math.random() < 0.3) {
+                    ctx.fillStyle = 'rgba(100, 20, 20, 0.03)';
+                    ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+                }
+            }
+
+            function animateParticles() {
+                if (!canvas.isConnected) return;
+                updateParticles();
+                drawParticles();
+                animationId = requestAnimationFrame(animateParticles);
+            }
+
+            function startParticleSystem() {
+                if (!canvas || !ctx) return;
+                resizeCanvas();
+                initParticles();
+                if (animationId) cancelAnimationFrame(animationId);
+                animateParticles();
+            }
+
+            window.addEventListener('resize', () => {
+                resizeCanvas();
+                if (particles.length) {
+                    // 重新映射粒子位置避免集中，但保留粒子数量，更新宽高后重新映射部分位置防止超出
+                    for (let p of particles) {
+                        if (p.x > canvasWidth) p.x = canvasWidth * 0.95;
+                        if (p.y > canvasHeight) p.y = canvasHeight * 0.95;
+                        if (p.x < 0) p.x = 15;
+                        if (p.y < 0) p.y = 15;
+                    }
+                }
+            });
+
+            // 初始化canvas粒子引擎
+            if (canvas) {
+                ctx = canvas.getContext('2d');
+                if (ctx) {
+                    startParticleSystem();
+                } else {
+                    console.warn("Canvas 2D context 不可用");
+                }
+            }
+
+            // 确保在页面完全加载后再开始，避免尺寸错误
+            window.addEventListener('load', () => {
+                resizeCanvas();
+                if (particles.length === 0 && ctx) {
+                    initParticles();
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
