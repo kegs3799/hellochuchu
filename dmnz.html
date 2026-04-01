@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>大码宣言 · 宽骨架自有光芒 | 徐之昂宣言</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f5f2ef;
+            font-family: 'Google Sans', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            line-height: 1.5;
+            color: #2c241e;
+        }
+
+        .magazine-container {
+            max-width: 1080px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .brand-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 28px;
+            border-bottom: 1px solid #ede6df;
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 500;
+            letter-spacing: -0.3px;
+            background: linear-gradient(135deg, #b4645c, #d48c7a);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            font-family: 'Times New Roman', 'Georgia', serif;
+        }
+        .logo-sub {
+            font-size: 0.75rem;
+            font-weight: 400;
+            color: #b67b6b;
+            letter-spacing: 1px;
+            margin-left: 6px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #4a3b33;
+            transition: 0.2s;
+        }
+        .nav-links a:hover {
+            color: #b55a48;
+        }
+        .icon-heart {
+            font-size: 1.3rem;
+            cursor: default;
+            opacity: 0.8;
+        }
+
+        .main-story {
+            padding: 32px 36px 56px 36px;
+        }
+        @media (max-width: 720px) {
+            .brand-bar {
+                padding: 12px 20px;
+            }
+            .nav-links {
+                display: none;
+            }
+            .main-story {
+                padding: 24px 20px 40px 20px;
+            }
+        }
+
+        .article-tag {
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #b46a5a;
+            font-weight: 600;
+            margin-bottom: 16px;
+            border-left: 3px solid #d48c7a;
+            padding-left: 12px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: #2b221c;
+            margin-bottom: 20px;
+            letter-spacing: -0.01em;
+            font-family: 'Times New Roman', 'Georgia', serif;
+        }
+
+        .byline {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.85rem;
+            color: #7f6b5e;
+            border-bottom: 1px solid #f0e7e0;
+            padding-bottom: 18px;
+            margin-bottom: 28px;
+        }
+        .author-name {
+            font-weight: 600;
+            color: #b4695a;
+        }
+
+        .hero-image {
+            margin: 8px 0 32px 0;
+            border-radius: 28px;
+            overflow: hidden;
+            background-color: #f0e4db;
+            box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.2);
+        }
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .hero-image:hover img {
+            transform: scale(1.01);
+        }
+        .img-credit {
+            font-size: 0.7rem;
+            color: #9b887b;
+            padding: 10px 12px 6px 12px;
+            text-align: right;
+            border-top: none;
+            background: #ffffff;
+        }
+
+        .essay-content {
+            font-size: 1.125rem;
+            color: #2b241f;
+            line-height: 1.7;
+            margin-top: 20px;
+        }
+        .essay-content p {
+            margin-bottom: 1.6rem;
+            font-weight: 400;
+        }
+        .essay-content strong {
+            font-weight: 600;
+            color: #b85c48;
+        }
+        .pull-quote {
+            margin: 32px 0 28px 0;
+            padding: 24px 32px;
+            background: #fef8f4;
+            border-radius: 32px;
+            font-style: normal;
+            font-size: 1.3rem;
+            font-weight: 450;
+            line-height: 1.4;
+            color: #2f241e;
+            border-left: 5px solid #e2aa98;
+            font-family: 'Georgia', serif;
+            text-align: center;
+        }
+        .pull-quote .quote-text {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .divider-custom {
+            margin: 40px 0 32px;
+            height: 2px;
+            background: linear-gradient(90deg, #eeded5, #d9bcae, #eeded5);
+            border: 0;
+        }
+
+        .brand-message {
+            background: #fef5f0;
+            border-radius: 28px;
+            padding: 32px 28px;
+            margin: 40px 0 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+        }
+        .brand-message h3 {
+            font-size: 1.7rem;
+            font-weight: 500;
+            color: #aa6a58;
+            margin-bottom: 18px;
+            letter-spacing: -0.2px;
+        }
+        .brand-message p {
+            font-size: 1rem;
+            color: #4f3c32;
+            max-width: 80%;
+            margin: 0 auto;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 48px 0 24px;
+            flex-wrap: wrap;
+        }
+        .btn-primary {
+            background: #b35f4b;
+            color: white;
+            border: none;
+            padding: 12px 32px;
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.25s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            font-family: inherit;
+        }
+        .btn-primary:hover {
+            background: #9b4a38;
+            transform: translateY(-2px);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #c68d7a;
+            color: #b35f4b;
+            padding: 12px 32px;
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-outline:hover {
+            background: #f9ede8;
+            border-color: #a75844;
+        }
+
+        .story-footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid #ede0d8;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            font-size: 0.8rem;
+            color: #a08778;
+        }
+
+        .toast-msg {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2f241ee6;
+            backdrop-filter: blur(6px);
+            color: #fff5ef;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            z-index: 1200;
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: none;
+            font-weight: 500;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .essay-content {
+                font-size: 1rem;
+            }
+            .pull-quote {
+                font-size: 1.1rem;
+                padding: 20px 18px;
+            }
+            .brand-message p {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="magazine-container">
+    <div class="brand-bar">
+        <div class="logo">
+            WIDE·HER<span class="logo-sub">宽骨自有光</span>
+        </div>
+        <div class="nav-links">
+            <a href="#">宣言</a>
+            <a href="#">新系列</a>
+            <a href="#">关于我们</a>
+            <a href="#">故事集</a>
+        </div>
+        <div class="icon-heart">✿</div>
+    </div>
+
+    <div class="main-story">
+        <div class="article-tag">#大码自信宣言 · 独家讲述</div>
+        <h1>告别自卑，大码女装的自信宣言</h1>
+        <div class="byline">
+            <span>作者 <span class="author-name">宽骨架女孩 · 品牌主理人「徐之昂」</span></span>
+            <span>✦ 2025年4月 · 真实故事</span>
+            <span>📖 阅读约 5 分钟</span>
+        </div>
+
+        <div class="hero-image">
+            <img src="https://github.com/kegs3799/images/blob/68771887332ed2ac4e7307e0d65c3f37efc6f967/0d4cc157e7b64ead858c376b8094a4cf.png?raw=true" 
+                 alt="自信的大码女孩身着原创设计，微笑展示宽骨架身姿">
+            <div class="img-credit">📸 镜头下的我：骨架宽大，却撑起独一无二的剪裁 | 品牌实拍</div>
+        </div>
+
+        <div class="essay-content">
+            <p>今天，想和大家分享一张特别的照片。这是年轻时的我，一个因雄性激素分泌过多而拥有宽骨架的女孩「徐之昂」。曾经，我对着镜子数过锁骨的棱角，量过腰围的尺寸，也曾在试衣间的褶皱里，把“不够瘦”三个字反复咀嚼。</p>
+            
+            <p>后来，我创办了这家大码女装店。不是因为“擅长”，而是因为“需要”——需要让和我一样的女孩，不必再把身材当缺点。我们骨架宽，所以撑得起更有设计感的剪裁；我们腰腹有肉，所以更懂得“包容”二字的温柔。那些被世俗定义为“缺陷”的地方，恰恰是让我们独一无二的勋章。</p>
+            
+            <div class="pull-quote">
+                <span class="quote-text">“我们骨架宽，所以撑得起更有设计感的剪裁；我们腰腹有肉，所以更懂得包容二字的温柔。”</span>
+            </div>
+            
+            <p>现在的我，穿着自己设计的衣服，站在镜头前。不再遮掩，不再道歉。大码不是“将就”，而是“讲究”——讲究面料要亲肤，讲究版型要修饰，讲究让每个女孩穿上后，都能听见心底那句“我很好看”。</p>
+            
+            <p>如果你也曾在身材的焦虑里打转，来试试我们的衣服吧。让宽肩带托起你的自信，让高腰线藏住你的不安，让每一寸肌肤，都被温柔以待。我们不卖“变瘦”的谎言，只卖“变美”的底气。</p>
+            
+            <p>最后，想对所有女孩说：你的身体，从来不是需要被修改的“错误”。它承载着你的故事，你的力量，你的美。愿我们都能在镜子里，看见闪闪发光的自己。</p>
+        </div>
+
+        <div class="brand-message">
+            <h3>✨ 宽骨架 · 自有光芒 ✨</h3>
+            <p>不遮掩、不道歉，我们为每一种真实的身材设计。<br>从面料到剪裁，每一件衣服都是“自信的容器”。</p>
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn-primary" id="shareStoryBtn">📤 分享她的宣言</button>
+            <button class="btn-outline" id="copyStoryLink">📋 复制故事链接</button>
+        </div>
+
+        <hr class="divider-custom">
+        <div class="story-footer">
+            <div class="footer-meta">
+                <span>🏷️ 大码女装 · 身体自爱</span>
+                <span>💬 自信即高定</span>
+            </div>
+            <div class="footer-meta">
+                <span>❤️ 每个尺寸都是艺术品</span>
+                <span>#WideHerStory</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="toastMessage" class="toast-msg">✨ 链接已复制，分享自信力量</div>
+
+<script>
+    (function() {
+        const pageUrl = window.location.href;
+        const pageTitle = document.title;
+        const toastEl = document.getElementById('toastMessage');
+        
+        function showToast(message) {
+            toastEl.textContent = message;
+            toastEl.style.opacity = '1';
+            setTimeout(() => {
+                toastEl.style.opacity = '0';
+            }, 2200);
+        }
+        
+        async function copyToClipboard(text, successMsg) {
+            try {
+                await navigator.clipboard.writeText(text);
+                showToast(successMsg);
+            } catch (err) {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                try {
+                    document.execCommand('copy');
+                    showToast(successMsg);
+                } catch (e) {
+                    showToast('复制失败，可手动复制网址');
+                }
+                document.body.removeChild(textarea);
+            }
+        }
+        
+        function handleNativeShare() {
+            if (navigator.share) {
+                navigator.share({
+                    title: pageTitle,
+                    text: '“告别自卑，大码女装的自信宣言”——宽骨架自有光芒，每个女孩都值得被温柔以待。',
+                    url: pageUrl,
+                }).catch((error) => {
+                    if (error.name !== 'AbortError') {
+                        showToast('分享取消或失败，试试复制链接✨');
+                    }
+                });
+            } else {
+                copyToClipboard(pageUrl, '已复制文章链接，可分享到朋友圈或好友');
+            }
+        }
+        
+        const copyBtn = document.getElementById('copyStoryLink');
+        if (copyBtn) {
+            copyBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                copyToClipboard(pageUrl, '📎 宣言链接已复制！让更多女孩看见自信');
+            });
+        }
+        
+        const shareBtn = document.getElementById('shareStoryBtn');
+        if (shareBtn) {
+            shareBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                handleNativeShare();
+            });
+        }
+    })();
+</script>
+</body>
+</html>
