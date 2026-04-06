@@ -355,7 +355,58 @@
             <button class="btn-primary" id="shareStoryBtn">📤 分享她的宣言</button>
             <button class="btn-outline" id="copyStoryLink">📋 复制故事链接</button>
         </div>
+<footer class="ai-disclaimer">
+  <div class="disclaimer-container">
+    <p>
+      <strong>免责声明</strong><br>
+      本故事及其附带的所有视觉内容（包括但不限于插画、人物形象、场景画面等）均由人工智能技术生成。
+      故事中出现的所有人物名称、地名、组织名称、事件等均为AI在创作过程中随机生成或虚构，纯粹用于情节构建与艺术表达。
+    </p>
+    <p>
+      任何现实中的个人、实体、事件或组织如有名称或特征上的雷同，均属偶然巧合，绝非有意影射、暗示或丑化。
+      作者及发布平台不对任何因误解或类比而产生的关联承担责任。
+    </p>
+    <p>
+      本作品不构成对任何现实人物、群体或事件的评价、声明或立场表达。请读者以虚构作品的标准加以理解与欣赏。
+    </p>
+  </div>
+</footer>
 
+<style>
+  .ai-disclaimer {
+    background-color: transparent;      /* 完全透明背景，不干扰页脚区域 */
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-size: 0.7rem;                 /* 字号明显小于常规正文（常规约1rem） */
+    line-height: 1.5;
+    color: rgba(108, 117, 125, 0.65);  /* 灰色 + 更低透明度，看起来更淡 */
+    padding: 1.2rem 1rem;
+    margin-top: 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.05); /* 极浅分割线，不抢眼 */
+  }
+
+  .disclaimer-container {
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  .ai-disclaimer p {
+    margin: 0.6rem 0;
+  }
+
+  .ai-disclaimer strong {
+    font-weight: 500;
+    color: rgba(73, 80, 87, 0.75);     /* 标题稍深一点点但仍保持柔和 */
+  }
+
+  /* 小屏幕适配 */
+  @media (max-width: 640px) {
+    .ai-disclaimer {
+      font-size: 0.65rem;
+      padding: 0.8rem 0.75rem;
+    }
+  }
+                </style>
         <hr class="divider-custom">
         <div class="story-footer">
             <div class="footer-meta">
