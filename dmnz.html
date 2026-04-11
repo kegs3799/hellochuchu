@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>大码宣言 · 宽骨架自有光芒 | 徐之昂宣言</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: #f5f2ef; font-family: 'Google Sans', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; line-height: 1.5; color: #2c241e; }
+        .magazine-container { max-width: 1080px; margin: 0 auto; background-color: #ffffff; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05); }
+        .brand-bar { display: flex; align-items: center; justify-content: space-between; padding: 18px 28px; border-bottom: 1px solid #ede6df; background: white; position: sticky; top: 0; z-index: 10; }
+        .logo { font-size: 1.8rem; font-weight: 500; letter-spacing: -0.3px; background: linear-gradient(135deg, #b4645c, #d48c7a); -webkit-background-clip: text; background-clip: text; color: transparent; font-family: 'Times New Roman', 'Georgia', serif; }
+        .logo-sub { font-size: 0.75rem; font-weight: 400; color: #b67b6b; letter-spacing: 1px; margin-left: 6px; }
+        .nav-links { display: flex; gap: 28px; font-size: 0.9rem; font-weight: 500; }
+        .nav-links a { text-decoration: none; color: #4a3b33; transition: 0.2s; }
+        .nav-links a:hover { color: #b55a48; }
+        .icon-heart { font-size: 1.3rem; cursor: pointer; opacity: 0.8; }
+        .main-story { padding: 32px 36px 56px 36px; }
+        .article-tag { font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; color: #b46a5a; font-weight: 600; margin-bottom: 16px; border-left: 3px solid #d48c7a; padding-left: 12px; }
+        h1 { font-size: 3rem; font-weight: 700; line-height: 1.2; color: #2b221c; margin-bottom: 20px; letter-spacing: -0.01em; font-family: 'Times New Roman', 'Georgia', serif; }
+        .byline { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 0.85rem; color: #7f6b5e; border-bottom: 1px solid #f0e7e0; padding-bottom: 18px; margin-bottom: 28px; }
+        .author-name { font-weight: 600; color: #b4695a; }
+        .hero-image { margin: 8px 0 32px 0; border-radius: 28px; overflow: hidden; background-color: #f0e4db; box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.2); }
+        .hero-image img { width: 100%; height: auto; display: block; object-fit: cover; transition: transform 0.3s ease; }
+        .hero-image:hover img { transform: scale(1.01); }
+        .img-credit { font-size: 0.7rem; color: #9b887b; padding: 10px 12px 6px 12px; text-align: right; background: #ffffff; }
+        .essay-content { font-size: 1.125rem; color: #2b241f; line-height: 1.7; margin-top: 20px; }
+        .essay-content p { margin-bottom: 1.6rem; font-weight: 400; }
+        .essay-content strong { font-weight: 600; color: #b85c48; }
+        .pull-quote { margin: 32px 0 28px 0; padding: 24px 32px; background: #fef8f4; border-radius: 32px; font-size: 1.3rem; font-weight: 450; line-height: 1.4; color: #2f241e; border-left: 5px solid #e2aa98; font-family: 'Georgia', serif; text-align: center; }
+        .brand-message { background: #fef5f0; border-radius: 28px; padding: 32px 28px; margin: 40px 0 20px; text-align: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02); }
+        .brand-message h3 { font-size: 1.7rem; font-weight: 500; color: #aa6a58; margin-bottom: 18px; }
+        .brand-message p { font-size: 1rem; color: #4f3c32; max-width: 80%; margin: 0 auto; }
+        .action-buttons { display: flex; gap: 20px; justify-content: center; margin: 48px 0 24px; flex-wrap: wrap; }
+        .btn-primary { background: #b35f4b; color: white; border: none; padding: 12px 32px; font-size: 1rem; font-weight: 500; border-radius: 40px; cursor: pointer; transition: all 0.25s; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+        .btn-primary:hover { background: #9b4a38; transform: translateY(-2px); }
+        .btn-outline { background: transparent; border: 1px solid #c68d7a; color: #b35f4b; padding: 12px 32px; font-size: 1rem; font-weight: 500; border-radius: 40px; cursor: pointer; transition: 0.2s; }
+        .btn-outline:hover { background: #f9ede8; border-color: #a75844; }
+        .story-footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid #ede0d8; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; font-size: 0.8rem; color: #a08778; }
+        
+        /* 互动区域样式 */
+        .interaction-bar { display: flex; gap: 24px; align-items: center; padding: 20px 0; border-top: 1px solid #ede0d8; border-bottom: 1px solid #ede0d8; margin: 24px 0; }
+        .interaction-btn { background: none; border: none; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; gap: 6px; color: #4a3b33; transition: 0.2s; }
+        .interaction-btn:hover { color: #b55a48; }
+        .comment-box { margin: 20px 0; }
+        .comment-box textarea { width: 100%; padding: 14px; border: 1px solid #e0d5ce; border-radius: 16px; font-size: 0.95rem; font-family: inherit; resize: vertical; background: #fdfbfa; }
+        .comment-box button { margin-top: 12px; padding: 10px 24px; background: #b35f4b; color: white; border: none; border-radius: 30px; font-size: 0.9rem; cursor: pointer; transition: 0.2s; }
+        .comment-box button:hover { background: #9b4a38; }
+        .comments-list { margin-top: 32px; }
+        .comment-item { padding: 16px; border-bottom: 1px solid #f0e7e0; }
+        .comment-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
+        .comment-nickname { font-weight: 600; color: #b4695a; }
+        .comment-time { font-size: 0.75rem; color: #a08778; }
+        .comment-content { color: #2b241f; margin-bottom: 8px; }
+        .comment-actions { display: flex; gap: 16px; font-size: 0.8rem; }
+        .comment-actions button { background: none; border: none; color: #a08778; cursor: pointer; }
+        .comment-actions button:hover { color: #b55a48; }
+        .reply-form { margin-left: 32px; margin-top: 12px; display: none; }
+        .reply-form textarea { width: 100%; padding: 10px; border: 1px solid #e0d5ce; border-radius: 12px; font-size: 0.9rem; }
+        .reply-form button { margin-top: 8px; padding: 6px 16px; background: #d48c7a; color: white; border: none; border-radius: 20px; font-size: 0.8rem; cursor: pointer; }
+        
+        .toast-msg { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #2f241ee6; backdrop-filter: blur(6px); color: #fff5ef; padding: 10px 24px; border-radius: 40px; font-size: 0.85rem; z-index: 1200; opacity: 0; transition: opacity 0.2s; pointer-events: none; }
+        
+        /* 登录注册样式 */
+        .auth-panel { background: #fef8f4; border-radius: 20px; padding: 24px; margin: 24px 0; }
+        .auth-panel input { width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid #e0d5ce; border-radius: 30px; font-size: 0.95rem; background: white; }
+        .auth-panel button { padding: 10px 20px; background: #b35f4b; color: white; border: none; border-radius: 30px; font-size: 0.9rem; cursor: pointer; margin-right: 10px; }
+        .user-panel { background: #fef8f4; border-radius: 20px; padding: 16px 24px; margin: 24px 0; display: flex; justify-content: space-between; align-items: center; }
+        .user-panel span { color: #b4695a; font-weight: 600; }
+        
+        @media (max-width: 720px) {
+            .brand-bar { padding: 12px 20px; }
+            .nav-links { display: none; }
+            .main-story { padding: 24px 20px 40px 20px; }
+            h1 { font-size: 2rem; }
+            .essay-content { font-size: 1rem; }
+            .pull-quote { font-size: 1.1rem; padding: 20px 18px; }
+            .brand-message p { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+<div class="magazine-container">
+    <div class="brand-bar">
+        <div class="logo">WIDE·HER<span class="logo-sub">宽骨自有光</span></div>
+        <div class="nav-links">
+            <a href="index.html">首页</a>
+            <a href="wide-her-story.html">宣言</a>
+            <a href="pearl-harbor-diplomacy.html">国际</a>
+            <a href="#">关于</a>
+        </div>
+        <div class="icon-heart" id="auth-icon">👤</div>
+    </div>
+
+    <div class="main-story">
+        <div class="article-tag">#大码自信宣言 · 独家讲述</div>
+        <h1>告别自卑，大码女装的自信宣言</h1>
+        <div class="byline">
+            <span>作者 <span class="author-name">宽骨架女孩 · 品牌主理人「徐之昂」</span></span>
+            <span>✦ 2025年4月 · 真实故事</span>
+            <span>📖 阅读约 5 分钟</span>
+        </div>
+
+        <div class="hero-image">
+            <img src="https://raw.githubusercontent.com/kegs3799/images/edb5715afe0bc8d31725c39eaed5cf0cd5d35466/587ab9e1-0c74-45be-a9f7-1fd0a57d027b.png" alt="自信的大码女孩">
+            <div class="img-credit">📸 镜头下的我：骨架宽大，却撑起独一无二的剪裁 | 品牌实拍</div>
+        </div>
+
+        <div class="essay-content">
+            <p>今天，想和大家分享一张特别的照片。这是年轻时的我，一个因雄性激素分泌过多而拥有宽骨架的女孩「徐之昂」。曾经，我对着镜子数过锁骨的棱角，量过腰围的尺寸，也曾在试衣间的褶皱里，把"不够瘦"三个字反复咀嚼。</p>
+            <p>后来，我创办了这家大码女装店。不是因为"擅长"，而是因为"需要"——需要让和我一样的女孩，不必再把身材当缺点。我们骨架宽，所以撑得起更有设计感的剪裁；我们腰腹有肉，所以更懂得"包容"二字的温柔。</p>
+            <div class="pull-quote"><span class="quote-text">"我们骨架宽，所以撑得起更有设计感的剪裁；我们腰腹有肉，所以更懂得包容二字的温柔。"</span></div>
+            <p>现在的我，穿着自己设计的衣服，站在镜头前。不再遮掩，不再道歉。大码不是"将就"，而是"讲究"。</p>
+            <p>最后，想对所有女孩说：你的身体，从来不是需要被修改的"错误"。愿我们都能在镜子里，看见闪闪发光的自己。</p>
+        </div>
+
+        <!-- 登录/注册面板 -->
+        <div id="auth-area"></div>
+
+        <!-- 互动按钮栏 -->
+        <div class="interaction-bar">
+            <button class="interaction-btn" id="like-btn">🤍 点赞 <span id="like-count">0</span></button>
+            <button class="interaction-btn" id="favorite-btn">☆ 收藏 <span id="favorite-count">0</span></button>
+            <span style="color: #a08778;">💬 评论 <span id="comment-count">0</span></span>
+        </div>
+
+        <!-- 评论输入框 -->
+        <div class="comment-box">
+            <textarea id="comment-input" rows="3" placeholder="写下你的评论..."></textarea>
+            <button id="post-comment-btn">发表评论</button>
+        </div>
+
+        <!-- 评论列表 -->
+        <div class="comments-list" id="comments-list"></div>
+
+        <div class="brand-message">
+            <h3>✨ 宽骨架 · 自有光芒 ✨</h3>
+            <p>不遮掩、不道歉，我们为每一种真实的身材设计。</p>
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn-primary" id="shareStoryBtn">📤 分享她的宣言</button>
+            <button class="btn-outline" id="copyStoryLink">📋 复制故事链接</button>
+        </div>
+
+        <div class="story-footer">
+            <div><span>🏷️ 大码女装 · 身体自爱</span> <span>💬 自信即高定</span></div>
+            <div><span>❤️ 每个尺寸都是艺术品</span> <span>#WideHerStory</span></div>
+        </div>
+    </div>
+</div>
+
+<!-- 免责声明 -->
+<footer class="ai-disclaimer">
+  <div class="disclaimer-container">
+    <p>
+      <strong>免责声明</strong><br>
+      本故事及其附带的所有视觉内容（包括但不限于插画、人物形象、场景画面等）均由人工智能技术生成。
+      故事中出现的所有人物名称、地名、组织名称、事件等均为AI在创作过程中随机生成或虚构，纯粹用于情节构建与艺术表达。
+    </p>
+    <p>
+      任何现实中的个人、实体、事件或组织如有名称或特征上的雷同，均属偶然巧合，绝非有意影射、暗示或丑化。
+      作者及发布平台不对任何因误解或类比而产生的关联承担责任。
+    </p>
+    <p>
+      本作品不构成对任何现实人物、群体或事件的评价、声明或立场表达。请读者以虚构作品的标准加以理解与欣赏。
+    </p>
+  </div>
+</footer>
+
+<style>
+  .ai-disclaimer {
+    background-color: transparent;
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-size: 0.7rem;
+    line-height: 1.5;
+    color: rgba(108, 117, 125, 0.65);
+    padding: 1.2rem 1rem;
+    margin-top: 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  .disclaimer-container {
+    max-width: 880px;
+    margin: 0 auto;
+  }
+  .ai-disclaimer p {
+    margin: 0.6rem 0;
+  }
+  .ai-disclaimer strong {
+    font-weight: 500;
+    color: rgba(73, 80, 87, 0.75);
+  }
+  @media (max-width: 640px) {
+    .ai-disclaimer {
+      font-size: 0.65rem;
+      padding: 0.8rem 0.75rem;
+    }
+  }
+</style>
+
+<div id="toastMessage" class="toast-msg">✨ 链接已复制</div>
+
+<!-- Supabase SDK 和所有功能 -->
+<script type="module">
+    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
+    
+    const SUPABASE_URL = 'https://ofmnewnfikrisaidiggh.supabase.co'
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9mbW5ld25maWtyaXNhaWRpZ2doIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU4OTQ0NzcsImV4cCI6MjA5MTQ3MDQ3N30.2PV7Kg5kAVfPTxK1odNzCIiXWuksIQKo6EJYK9e3iXg'
+    
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+    window.supabase = supabase
+    
+    const NEWS_SLUG = 'wide-her-story'
+    const pageUrl = window.location.href
+    const pageTitle = document.title
+    const toastEl = document.getElementById('toastMessage')
+    
+    function showToast(msg) { 
+        if (toastEl) {
+            toastEl.textContent = msg; 
+            toastEl.style.opacity = '1'; 
+            setTimeout(() => toastEl.style.opacity = '0', 2200); 
+        }
+    }
+    
+    // ========== 注册登录 ==========
+    async function signUp(nickname, password) {
+        if (!nickname || !password) { alert('请填写昵称和密码'); return null; }
+        if (password.length < 6) { alert('密码至少6位'); return null; }
+        const { data, error } = await supabase.auth.signUp({ 
+            email: nickname + '@fake.user', 
+            password: password 
+        })
+        if (error) { 
+            alert(error.message.includes('already') ? '昵称已被占用' : '注册失败'); 
+            return null; 
+        }
+        alert('注册成功！欢迎，' + nickname); 
+        renderAuthUI(); 
+        return data.user;
+    }
+    
+    async function signIn(nickname, password) {
+        if (!nickname || !password) { alert('请填写昵称和密码'); return null; }
+        const { data, error } = await supabase.auth.signInWithPassword({ 
+            email: nickname + '@fake.user', 
+            password: password 
+        })
+        if (error) { alert('昵称或密码错误'); return null; }
+        alert('登录成功！欢迎，' + nickname); 
+        renderAuthUI(); 
+        refreshAllUI(); 
+        return data.user;
+    }
+    
+    async function signOutUser() { 
+        await supabase.auth.signOut(); 
+        renderAuthUI(); 
+        refreshAllUI(); 
+        alert('已登出'); 
+    }
+    
+    // ========== 评论 ==========
+    async function getComments() {
+        const { data } = await supabase.from('comments').select('*').eq('news_slug', NEWS_SLUG).order('created_at', { ascending: true });
+        return data || [];
+    }
+    
+    async function postComment(content, parentId = null) {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (!session) { alert('请先登录'); return null; }
+        if (!content?.trim()) { alert('请输入评论内容'); return null; }
+        
+        const nickname = session.user.email.replace('@fake.user', '');
+        
+        const { data, error } = await supabase.from('comments').insert({
+            news_slug: NEWS_SLUG, 
+            user_id: session.user.id, 
+            nickname: nickname, 
+            content: content.trim(), 
+            parent_id: parentId
+        }).select();
+        if (error) { alert('发表失败'); return null; }
+        return data[0];
+    }
+    
+    async function deleteComment(commentId) {
+        const { error } = await supabase.from('comments').delete().eq('id', commentId);
+        return !error;
+    }
+    
+    // ========== 点赞 ==========
+    async function getLikeInfo() {
+        const { count } = await supabase.from('likes').select('*', { count: 'exact', head: true }).eq('news_slug', NEWS_SLUG);
+        const { data: { session } } = await supabase.auth.getSession();
+        let userLiked = false;
+        if (session) { 
+            const { data } = await supabase.from('likes').select('*').eq('news_slug', NEWS_SLUG).eq('user_id', session.user.id).maybeSingle(); 
+            userLiked = !!data; 
+        }
+        return { count: count || 0, userLiked };
+    }
+    
+    async function toggleLike() {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (!session) { alert('请先登录'); return; }
+        const { data: existing } = await supabase.from('likes').select('*').eq('news_slug', NEWS_SLUG).eq('user_id', session.user.id).maybeSingle();
+        if (existing) { await supabase.from('likes').delete().eq('id', existing.id); }
+        else { await supabase.from('likes').insert({ news_slug: NEWS_SLUG, user_id: session.user.id }); }
+        refreshLikeUI();
+    }
+    
+    // ========== 收藏 ==========
+    async function getFavoriteInfo() {
+        const { count } = await supabase.from('favorites').select('*', { count: 'exact', head: true }).eq('news_slug', NEWS_SLUG);
+        const { data: { session } } = await supabase.auth.getSession();
+        let userFavorited = false;
+        if (session) { 
+            const { data } = await supabase.from('favorites').select('*').eq('news_slug', NEWS_SLUG).eq('user_id', session.user.id).maybeSingle(); 
+            userFavorited = !!data; 
+        }
+        return { count: count || 0, userFavorited };
+    }
+    
+    async function toggleFavorite() {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (!session) { alert('请先登录'); return; }
+        const { data: existing } = await supabase.from('favorites').select('*').eq('news_slug', NEWS_SLUG).eq('user_id', session.user.id).maybeSingle();
+        if (existing) { await supabase.from('favorites').delete().eq('id', existing.id); }
+        else { await supabase.from('favorites').insert({ news_slug: NEWS_SLUG, user_id: session.user.id }); }
+        refreshFavoriteUI();
+    }
+    
+    // ========== UI 渲染 ==========
+    function escapeHtml(text) { 
+        const div = document.createElement('div'); 
+        div.textContent = text || ''; 
+        return div.innerHTML; 
+    }
+    
+    function formatTime(ts) { 
+        const d = new Date(ts), n = new Date(), diff = n - d; 
+        if (diff < 6e4) return '刚刚'; 
+        if (diff < 36e5) return Math.floor(diff/6e4) + '分钟前'; 
+        if (diff < 864e5) return Math.floor(diff/36e5) + '小时前'; 
+        return d.toLocaleDateString('zh-CN'); 
+    }
+    
+    async function renderComments() {
+        const container = document.getElementById('comments-list');
+        if (!container) return;
+        const comments = await getComments();
+        const { data: { session } } = await supabase.auth.getSession();
+        const currentUserId = session?.user?.id;
+        const rootComments = comments.filter(c => !c.parent_id);
+        const replies = comments.filter(c => c.parent_id);
+        
+        const countEl = document.getElementById('comment-count');
+        if (countEl) countEl.textContent = comments.length;
+        
+        function renderItem(c, depth = 0) {
+            const childReplies = replies.filter(r => r.parent_id === c.id);
+            const isOwner = currentUserId === c.user_id;
+            let html = `<div class="comment-item" style="margin-left: ${depth * 24}px;">
+                <div class="comment-header"><span class="comment-nickname">${escapeHtml(c.nickname)}</span><span class="comment-time">${formatTime(c.created_at)}</span></div>
+                <div class="comment-content">${escapeHtml(c.content)}</div>
+                <div class="comment-actions">
+                    <button class="reply-btn" data-id="${c.id}">回复</button>
+                    ${isOwner ? `<button class="delete-btn" data-id="${c.id}">删除</button>` : ''}
+                </div>
+                <div class="reply-form" id="reply-form-${c.id}">
+                    <textarea id="reply-input-${c.id}" rows="2" placeholder="写下回复..."></textarea>
+                    <button class="submit-reply" data-id="${c.id}">发表回复</button>
+                </div>
+            </div>`;
+            childReplies.forEach(r => html += renderItem(r, depth + 1));
+            return html;
+        }
+        
+        container.innerHTML = rootComments.map(c => renderItem(c, 0)).join('') || '<p style="color:#999; text-align:center; padding:24px;">暂无评论，快来抢沙发~</p>';
+        
+        document.querySelectorAll('.reply-btn').forEach(btn => btn.addEventListener('click', () => {
+            document.getElementById(`reply-form-${btn.dataset.id}`).style.display = 'block';
+        }));
+        document.querySelectorAll('.submit-reply').forEach(btn => btn.addEventListener('click', async () => {
+            const id = btn.dataset.id;
+            const input = document.getElementById(`reply-input-${id}`);
+            if (await postComment(input.value, parseInt(id))) { 
+                input.value = ''; 
+                renderComments(); 
+            }
+        }));
+        document.querySelectorAll('.delete-btn').forEach(btn => btn.addEventListener('click', async () => {
+            if (confirm('删除这条评论？') && await deleteComment(btn.dataset.id)) renderComments();
+        }));
+    }
+    
+    async function refreshLikeUI() {
+        const info = await getLikeInfo();
+        const countEl = document.getElementById('like-count');
+        const btnEl = document.getElementById('like-btn');
+        if (countEl) countEl.textContent = info.count;
+        if (btnEl) btnEl.innerHTML = (info.userLiked ? '❤️' : '🤍') + ' 点赞 <span id="like-count">' + info.count + '</span>';
+    }
+    
+    async function refreshFavoriteUI() {
+        const info = await getFavoriteInfo();
+        const countEl = document.getElementById('favorite-count');
+        const btnEl = document.getElementById('favorite-btn');
+        if (countEl) countEl.textContent = info.count;
+        if (btnEl) btnEl.innerHTML = (info.userFavorited ? '⭐' : '☆') + ' 收藏 <span id="favorite-count">' + info.count + '</span>';
+    }
+    
+    async function renderAuthUI() {
+        const area = document.getElementById('auth-area');
+        if (!area) return;
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session) {
+            const nickname = session.user.email.replace('@fake.user', '');
+            area.innerHTML = `<div class="user-panel"><span>👤 ${escapeHtml(nickname)}</span><button class="btn-outline" style="padding:6px 16px;" id="signout-btn">登出</button></div>`;
+            document.getElementById('signout-btn')?.addEventListener('click', signOutUser);
+        } else {
+            area.innerHTML = `<div class="auth-panel">
+                <input type="text" id="signup-nickname" placeholder="昵称" />
+                <input type="password" id="signup-password" placeholder="密码（至少6位）" />
+                <button id="signup-btn">注册</button>
+                <button id="signin-btn">登录</button>
+            </div>`;
+            document.getElementById('signup-btn')?.addEventListener('click', () => {
+                const nick = document.getElementById('signup-nickname');
+                const pass = document.getElementById('signup-password');
+                if (nick && pass) signUp(nick.value, pass.value);
+            });
+            document.getElementById('signin-btn')?.addEventListener('click', () => {
+                const nick = document.getElementById('signup-nickname');
+                const pass = document.getElementById('signup-password');
+                if (nick && pass) signIn(nick.value, pass.value);
+            });
+        }
+    }
+    
+    async function refreshAllUI() { 
+        await Promise.all([refreshLikeUI(), refreshFavoriteUI(), renderComments()]); 
+    }
+    
+    // ========== 分享功能 ==========
+    async function copyToClipboard(text) { 
+        try { 
+            await navigator.clipboard.writeText(text); 
+            showToast('📎 链接已复制！'); 
+        } catch { 
+            showToast('复制失败'); 
+        } 
+    }
+    
+    function handleShare() {
+        if (navigator.share) {
+            navigator.share({ title: pageTitle, text: '告别自卑，大码女装的自信宣言', url: pageUrl }).catch(() => {});
+        } else {
+            copyToClipboard(pageUrl);
+        }
+    }
+    
+    // ========== 初始化 ==========
+    document.addEventListener('DOMContentLoaded', () => {
+        renderAuthUI();
+        refreshAllUI();
+        document.getElementById('like-btn')?.addEventListener('click', toggleLike);
+        document.getElementById('favorite-btn')?.addEventListener('click', toggleFavorite);
+        document.getElementById('post-comment-btn')?.addEventListener('click', async () => {
+            const input = document.getElementById('comment-input');
+            if (input && await postComment(input.value)) { 
+                input.value = ''; 
+                renderComments(); 
+            }
+        });
+        document.getElementById('shareStoryBtn')?.addEventListener('click', handleShare);
+        document.getElementById('copyStoryLink')?.addEventListener('click', () => copyToClipboard(pageUrl));
+        document.getElementById('auth-icon')?.addEventListener('click', () => {
+            document.getElementById('auth-area')?.scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+</script>
+</body>
+</html>
