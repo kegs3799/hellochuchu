@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>之昂新闻 · 深度与温度并存</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: #f5f5f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            line-height: 1.5;
+            color: #222;
+        }
+        
+        /* 顶部导航栏 */
+        .header {
+            background: #c0392b;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .logo-sub {
+            font-size: 14px;
+            opacity: 0.9;
+            border-left: 1px solid rgba(255,255,255,0.3);
+            padding-left: 12px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 28px;
+        }
+        
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            opacity: 0.9;
+            transition: opacity 0.2s;
+        }
+        
+        .nav-menu a:hover {
+            opacity: 1;
+        }
+        
+        .user-area {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .user-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .user-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        /* 主容器 */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 24px;
+        }
+        
+        /* 左侧内容区 */
+        .content-main {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        
+        /* 头条 Banner */
+        .hero-banner {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 16px;
+            overflow: hidden;
+            color: white;
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero-text {
+            flex: 1;
+            padding: 32px;
+        }
+        
+        .hero-label {
+            display: inline-block;
+            background: #e74c3c;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        
+        .hero-title {
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 12px;
+        }
+        
+        .hero-desc {
+            font-size: 15px;
+            opacity: 0.8;
+            margin-bottom: 20px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .hero-btn {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            text-decoration: none;
+            padding: 10px 24px;
+            border-radius: 24px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        
+        .hero-btn:hover {
+            background: #c0392b;
+        }
+        
+        .hero-image {
+            width: 280px;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        /* 新闻卡片列表 */
+        .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .section-title h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #222;
+            border-left: 4px solid #c0392b;
+            padding-left: 12px;
+        }
+        
+        .news-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            padding: 16px;
+            gap: 20px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+            transition: box-shadow 0.2s;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+        }
+        
+        .news-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .card-image {
+            width: 200px;
+            height: 140px;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .card-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card-category {
+            font-size: 12px;
+            color: #c0392b;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        
+        .card-title {
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 8px;
+            color: #222;
+        }
+        
+        .card-desc {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .card-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 13px;
+            color: #999;
+            margin-top: auto;
+        }
+        
+        /* 管理按钮 */
+        .admin-actions {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            display: flex;
+            gap: 4px;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        
+        .news-card:hover .admin-actions {
+            opacity: 1;
+        }
+        
+        .admin-btn {
+            background: rgba(0,0,0,0.6);
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            cursor: pointer;
+        }
+        
+        .admin-btn:hover {
+            background: #c0392b;
+        }
+        
+        /* 右侧边栏 */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        
+        .sidebar-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+        }
+        
+        .sidebar-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .hot-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .hot-item:last-child {
+            border-bottom: none;
+        }
+        
+        .hot-rank {
+            width: 24px;
+            height: 24px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: #666;
+        }
+        
+        .hot-rank.top1 { background: #c0392b; color: white; }
+        .hot-rank.top2 { background: #e74c3c; color: white; }
+        .hot-rank.top3 { background: #f39c12; color: white; }
+        
+        .hot-info {
+            flex: 1;
+        }
+        
+        .hot-title {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        
+        .hot-meta {
+            font-size: 12px;
+            color: #999;
+        }
+        
+        /* 管理面板 */
+        .admin-panel {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+        
+        .admin-panel h4 {
+            color: #856404;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .admin-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .admin-form input,
+        .admin-form textarea,
+        .admin-form select {
+            padding: 10px 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+        
+        .admin-form textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+        
+        .admin-form-row {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .admin-form-row input {
+            flex: 1;
+        }
+        
+        .image-upload-area {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .image-upload-area input {
+            flex: 1;
+        }
+        
+        .upload-btn {
+            padding: 10px 16px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .upload-btn:hover {
+            background: #218838;
+        }
+        
+        .admin-submit {
+            padding: 12px;
+            background: #c0392b;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+        
+        .admin-submit:hover {
+            background: #a93226;
+        }
+        
+        .preview-image {
+            max-width: 100%;
+            max-height: 100px;
+            border-radius: 8px;
+            margin-top: 8px;
+        }
+        
+        /* 登录面板 */
+        .auth-panel {
+            margin-top: 8px;
+        }
+        
+        .auth-input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        
+        .auth-btn {
+            width: 100%;
+            padding: 10px;
+            background: #c0392b;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-bottom: 8px;
+        }
+        
+        .auth-btn.outline {
+            background: white;
+            color: #c0392b;
+            border: 1px solid #c0392b;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: #c0392b;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .user-detail {
+            flex: 1;
+        }
+        
+        .user-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .user-logout {
+            color: #999;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        
+        /* 页脚 */
+        .footer {
+            background: white;
+            border-top: 1px solid #eee;
+            margin-top: 40px;
+            padding: 30px 0;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .footer-copyright {
+            color: #999;
+            font-size: 13px;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+        
+        .footer-links a {
+            color: #666;
+            text-decoration: none;
+            font-size: 13px;
+        }
+        
+        .ai-disclaimer {
+            max-width: 1200px;
+            margin: 20px auto 0;
+            padding: 20px 24px;
+            text-align: center;
+            color: rgba(108, 117, 125, 0.65);
+            font-size: 0.7rem;
+            line-height: 1.5;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .toast-message {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #323232e6;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-size: 14px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: none;
+        }
+        
+        /* 加载状态 */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+        
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 10px 16px;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .logo {
+                font-size: 22px;
+            }
+            
+            .logo-sub {
+                display: none;
+            }
+            
+            .main-container {
+                grid-template-columns: 1fr;
+                padding: 16px;
+            }
+            
+            .hero-content {
+                flex-direction: column;
+            }
+            
+            .hero-text {
+                padding: 20px;
+            }
+            
+            .hero-title {
+                font-size: 24px;
+            }
+            
+            .hero-image {
+                width: 100%;
+                height: 180px;
+            }
+            
+            .news-card {
+                flex-direction: column;
+                padding: 12px;
+            }
+            
+            .card-image {
+                width: 100%;
+                height: 180px;
+            }
+            
+            .admin-form-row {
+                flex-direction: column;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-area">
+                <a href="index.html" class="logo">之昂新闻</a>
+                <span class="logo-sub">深度 · 温度 · 态度</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html">首页</a>
+                <a href="#">国际</a>
+                <a href="#">深度</a>
+                <a href="#">生活</a>
+                <a href="#">人物</a>
+            </nav>
+            <div class="user-area">
+                <button class="user-btn" id="header-auth-btn">👤 登录</button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- 主内容区 -->
+    <div class="main-container">
+        <!-- 左侧内容 -->
+        <div class="content-main">
+            <!-- 管理面板（仅管理员可见） -->
+            <div id="admin-panel-container"></div>
+            
+            <!-- 头条 Banner -->
+            <div id="hero-banner-container">
+                <div class="loading">加载中...</div>
+            </div>
+            
+            <!-- 最新要闻 -->
+            <div class="news-list">
+                <div class="section-title">
+                    <h3>📰 最新要闻</h3>
+                </div>
+                <div id="news-list-container">
+                    <div class="loading">加载中...</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 右侧边栏 -->
+        <aside class="sidebar">
+            <!-- 登录/注册面板 -->
+            <div class="sidebar-card">
+                <h4 class="sidebar-title">👤 用户中心</h4>
+                <div id="sidebar-auth-area">
+                    <div class="auth-panel">
+                        <input type="text" id="auth-nickname" class="auth-input" placeholder="昵称" />
+                        <input type="password" id="auth-password" class="auth-input" placeholder="密码（至少6位）" />
+                        <button class="auth-btn" id="sidebar-signup">注册</button>
+                        <button class="auth-btn outline" id="sidebar-signin">登录</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 热门推荐 -->
+            <div class="sidebar-card">
+                <h4 class="sidebar-title">🔥 热门推荐</h4>
+                <div id="hot-list-container">
+                    <div class="loading">加载中...</div>
+                </div>
+            </div>
+            
+            <!-- 标签云 -->
+            <div class="sidebar-card">
+                <h4 class="sidebar-title">🏷️ 热门标签</h4>
+                <div class="tag-cloud" id="tag-cloud">
+                    <a href="#" class="tag">国际新闻</a>
+                    <a href="#" class="tag">外交观察</a>
+                    <a href="#" class="tag">人物专访</a>
+                    <a href="#" class="tag">大码女装</a>
+                    <a href="#" class="tag">身体自爱</a>
+                    <a href="#" class="tag">深度报道</a>
+                </div>
+            </div>
+        </aside>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-copyright">
+                © 2025 之昂新闻 · 深度与温度并存
+            </div>
+            <div class="footer-links">
+                <a href="#">关于我们</a>
+                <a href="#">联系我们</a>
+                <a href="#">隐私政策</a>
+                <a href="#">用户协议</a>
+            </div>
+        </div>
+        
+        <div class="ai-disclaimer">
+            <p><strong>免责声明</strong> 本网站所有新闻内容、人物形象、场景画面等均由人工智能技术生成。故事中出现的所有人物名称、地名、组织名称、事件等均为AI创作过程中随机生成或虚构。任何现实中的个人、实体、事件或组织如有雷同，均属偶然巧合。</p>
+        </div>
+    </footer>
+    
+    <div id="toastMessage" class="toast-message"></div>
+    
+    <!-- 文件上传 input（隐藏） -->
+    <input type="file" id="image-upload-input" accept="image/*" style="display: none;" />
+
+    <!-- Supabase SDK 和所有功能 -->
+    <script type="module">
+        import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
+        
+        const SUPABASE_URL = 'https://ofmnewnfikrisaidiggh.supabase.co'
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9mbW5ld25maWtyaXNhaWRpZ2doIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU4OTQ0NzcsImV4cCI6MjA5MTQ3MDQ3N30.2PV7Kg5kAVfPTxK1odNzCIiXWuksIQKo6EJYK9e3iXg'
+        const IMGBB_API_KEY = '78dff409b39a5c0ca2a9d7345479c353'
+        
+        const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+        
+        let currentUser = null
+        let isAdmin = false
+        let editingImageUrl = ''
+        
+        const toastEl = document.getElementById('toastMessage')
+        function showToast(msg) {
+            if (toastEl) {
+                toastEl.textContent = msg
+                toastEl.style.opacity = '1'
+                setTimeout(() => toastEl.style.opacity = '0', 2500)
+            }
+        }
+        
+        // ========== 注册登录 ==========
+        async function signUp(nickname, password) {
+            if (!nickname || !password) { alert('请填写昵称和密码'); return null; }
+            if (password.length < 6) { alert('密码至少6位'); return null; }
+            const { data, error } = await supabase.auth.signUp({ 
+                email: nickname + '@fake.user', 
+                password: password 
+            })
+            if (error) { 
+                alert(error.message.includes('already') ? '昵称已被占用' : '注册失败'); 
+                return null; 
+            }
+            showToast('注册成功！欢迎，' + nickname)
+            await checkUser()
+            return data.user
+        }
+        
+        async function signIn(nickname, password) {
+            if (!nickname || !password) { alert('请填写昵称和密码'); return null; }
+            const { data, error } = await supabase.auth.signInWithPassword({ 
+                email: nickname + '@fake.user', 
+                password: password 
+            })
+            if (error) { alert('昵称或密码错误'); return null; }
+            showToast('登录成功！欢迎，' + nickname)
+            await checkUser()
+            return data.user
+        }
+        
+        async function signOutUser() { 
+            await supabase.auth.signOut(); 
+            currentUser = null
+            isAdmin = false
+            await checkUser()
+            showToast('已登出')
+        }
+        
+        async function checkUser() {
+            const { data: { session } } = await supabase.auth.getSession()
+            if (session) {
+                currentUser = session.user
+                const nickname = session.user.email.replace('@fake.user', '')
+                isAdmin = (nickname === 'admin')
+            } else {
+                currentUser = null
+                isAdmin = false
+            }
+            renderAuthUI()
+            renderAdminPanel()
+            await loadAllNews()
+        }
+        
+        function escapeHtml(text) { 
+            const div = document.createElement('div'); 
+            div.textContent = text || ''; 
+            return div.innerHTML; 
+        }
+        
+        function renderAuthUI() {
+            const sidebarArea = document.getElementById('sidebar-auth-area')
+            const headerBtn = document.getElementById('header-auth-btn')
+            
+            if (currentUser) {
+                const nickname = currentUser.email.replace('@fake.user', '')
+                
+                if (sidebarArea) {
+                    sidebarArea.innerHTML = `
+                        <div class="user-info">
+                            <div class="user-avatar">${escapeHtml(nickname.charAt(0).toUpperCase())}</div>
+                            <div class="user-detail">
+                                <div class="user-name">${escapeHtml(nickname)} ${isAdmin ? '👑' : ''}</div>
+                                <span class="user-logout" id="sidebar-logout">退出登录</span>
+                            </div>
+                        </div>
+                    `
+                    document.getElementById('sidebar-logout')?.addEventListener('click', signOutUser)
+                }
+                
+                if (headerBtn) {
+                    headerBtn.innerHTML = `👤 ${escapeHtml(nickname)}`
+                }
+            } else {
+                if (sidebarArea) {
+                    sidebarArea.innerHTML = `
+                        <div class="auth-panel">
+                            <input type="text" id="auth-nickname" class="auth-input" placeholder="昵称" />
+                            <input type="password" id="auth-password" class="auth-input" placeholder="密码（至少6位）" />
+                            <button class="auth-btn" id="sidebar-signup">注册</button>
+                            <button class="auth-btn outline" id="sidebar-signin">登录</button>
+                        </div>
+                    `
+                    document.getElementById('sidebar-signup')?.addEventListener('click', () => {
+                        const nick = document.getElementById('auth-nickname')
+                        const pass = document.getElementById('auth-password')
+                        if (nick && pass) signUp(nick.value, pass.value)
+                    })
+                    document.getElementById('sidebar-signin')?.addEventListener('click', () => {
+                        const nick = document.getElementById('auth-nickname')
+                        const pass = document.getElementById('auth-password')
+                        if (nick && pass) signIn(nick.value, pass.value)
+                    })
+                }
+                
+                if (headerBtn) {
+                    headerBtn.innerHTML = `👤 登录`
+                }
+            }
+        }
+        
+        // ========== 图片上传 ==========
+        async function uploadImageToImgBB(file) {
+            const formData = new FormData()
+            formData.append('image', file)
+            
+            try {
+                const response = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
+                    method: 'POST',
+                    body: formData
+                })
+                const data = await response.json()
+                if (data.success) {
+                    return data.data.url
+                } else {
+                    throw new Error('上传失败')
+                }
+            } catch (error) {
+                console.error('图片上传失败:', error)
+                alert('图片上传失败，请稍后重试')
+                return null
+            }
+        }
+        
+        // ========== 新闻操作 ==========
+        async function loadAllNews() {
+            await Promise.all([
+                loadHeroBanner(),
+                loadNewsList(),
+                loadHotList()
+            ])
+        }
+        
+        async function loadHeroBanner() {
+            const container = document.getElementById('hero-banner-container')
+            const { data, error } = await supabase
+                .from('news')
+                .select('*')
+                .eq('is_hero', true)
+                .order('created_at', { ascending: false })
+                .limit(1)
+                .maybeSingle()
+            
+            if (error) {
+                console.error('加载头条失败:', error)
+                return
+            }
+            
+            if (!data) {
+                container.innerHTML = `
+                    <div class="hero-banner">
+                        <div class="hero-content" style="justify-content: center; padding: 60px; text-align: center; background: #1a1a2e; color: white;">
+                            <div>暂无头条新闻，请在管理面板设置</div>
+                        </div>
+                    </div>
+                `
+                return
+            }
+            
+            container.innerHTML = `
+                <div class="hero-banner">
+                    <div class="hero-content">
+                        <div class="hero-text">
+                            <span class="hero-label">🔥 今日头条</span>
+                            <h2 class="hero-title">${escapeHtml(data.title)}</h2>
+                            <p class="hero-desc">${escapeHtml(data.description || '')}</p>
+                            <a href="${data.page_url || '#'}" class="hero-btn">阅读全文 →</a>
+                        </div>
+                        <img class="hero-image" src="${data.image_url || ''}" alt="${escapeHtml(data.title)}" onerror="this.src='https://via.placeholder.com/280x200?text=No+Image'">
+                    </div>
+                </div>
+            `
+        }
+        
+        async function loadNewsList() {
+            const container = document.getElementById('news-list-container')
+            const { data, error } = await supabase
+                .from('news')
+                .select('*')
+                .order('created_at', { ascending: false })
+            
+            if (error) {
+                container.innerHTML = '<div class="loading">加载失败</div>'
+                return
+            }
+            
+            if (!data || data.length === 0) {
+                container.innerHTML = '<div class="loading">暂无新闻</div>'
+                return
+            }
+            
+            let html = ''
+            data.forEach(news => {
+                html += `
+                    <a href="${news.page_url || '#'}" class="news-card" data-id="${news.id}">
+                        <div class="card-image">
+                            <img src="${news.image_url || ''}" alt="${escapeHtml(news.title)}" onerror="this.src='https://via.placeholder.com/200x140?text=No+Image'">
+                        </div>
+                        <div class="card-content">
+                            <span class="card-category">${escapeHtml(news.category || '📰 新闻')}</span>
+                            <h3 class="card-title">${escapeHtml(news.title)}</h3>
+                            <p class="card-desc">${escapeHtml(news.description || '')}</p>
+                            <div class="card-meta">
+                                <span>📅 ${news.created_at ? new Date(news.created_at).toLocaleDateString('zh-CN') : ''}</span>
+                                <span>👁️ ${news.views || 0} 阅读</span>
+                            </div>
+                        </div>
+                        ${isAdmin ? `
+                            <div class="admin-actions" onclick="event.preventDefault(); event.stopPropagation();">
+                                <button class="admin-btn" onclick="window.setHero('${news.id}')">⭐ 设为头条</button>
+                                <button class="admin-btn" onclick="window.deleteNews('${news.id}')">🗑️ 删除</button>
+                            </div>
+                        ` : ''}
+                    </a>
+                `
+            })
+            container.innerHTML = html
+        }
+        
+        async function loadHotList() {
+            const container = document.getElementById('hot-list-container')
+            const { data, error } = await supabase
+                .from('news')
+                .select('*')
+                .eq('is_hot', true)
+                .order('hot_rank', { ascending: true })
+                .limit(5)
+            
+            if (error || !data || data.length === 0) {
+                container.innerHTML = '<div class="loading">暂无热门</div>'
+                return
+            }
+            
+            let html = ''
+            data.forEach((news, index) => {
+                const rankClass = index === 0 ? 'top1' : index === 1 ? 'top2' : index === 2 ? 'top3' : ''
+                html += `
+                    <a href="${news.page_url || '#'}" class="hot-item">
+                        <span class="hot-rank ${rankClass}">${index + 1}</span>
+                        <div class="hot-info">
+                            <div class="hot-title">${escapeHtml(news.title)}</div>
+                            <div class="hot-meta">🔥 ${news.views || 0} 阅读</div>
+                        </div>
+                    </a>
+                `
+            })
+            container.innerHTML = html
+        }
+        
+        async function createNews(newsData) {
+            const { data, error } = await supabase
+                .from('news')
+                .insert([newsData])
+                .select()
+            
+            if (error) {
+                alert('发布失败: ' + error.message)
+                return null
+            }
+            
+            showToast('新闻发布成功！')
+            await loadAllNews()
+            return data[0]
+        }
+        
+        async function setHeroNews(newsId) {
+            // 先取消所有头条
+            await supabase.from('news').update({ is_hero: false }).neq('id', 0)
+            // 设置新头条
+            const { error } = await supabase.from('news').update({ is_hero: true }).eq('id', newsId)
+            if (error) {
+                alert('设置失败')
+            } else {
+                showToast('已设为头条')
+                await loadAllNews()
+            }
+        }
+        
+        async function deleteNewsById(newsId) {
+            if (!confirm('确定删除这条新闻吗？')) return
+            const { error } = await supabase.from('news').delete().eq('id', newsId)
+            if (error) {
+                alert('删除失败')
+            } else {
+                showToast('新闻已删除')
+                await loadAllNews()
+            }
+        }
+        
+        // 暴露给全局（供卡片按钮调用）
+        window.setHero = setHeroNews
+        window.deleteNews = deleteNewsById
+        
+        // ========== 管理面板 ==========
+        function renderAdminPanel() {
+            const container = document.getElementById('admin-panel-container')
+            
+            if (!isAdmin) {
+                container.innerHTML = ''
+                return
+            }
+            
+            container.innerHTML = `
+                <div class="admin-panel">
+                    <h4>👑 管理员面板 · 发布新闻</h4>
+                    <div class="admin-form">
+                        <input type="text" id="news-title" placeholder="新闻标题 *" />
+                        <textarea id="news-desc" placeholder="新闻摘要/描述"></textarea>
+                        <div class="admin-form-row">
+                            <input type="text" id="news-category" placeholder="分类（如：🌍 国际 · 外交观察）" value="📰 新闻" />
+                            <input type="text" id="news-category-slug" placeholder="分类标识（英文）" value="news" />
+                        </div>
+                        <div class="image-upload-area">
+                            <input type="text" id="news-image-url" placeholder="图片 URL" />
+                            <button class="upload-btn" id="upload-image-btn">📁 本地上传</button>
+                        </div>
+                        <img id="image-preview" class="preview-image" style="display: none;" />
+                        <input type="text" id="news-page-url" placeholder="详情页链接（如 /article.html）*" />
+                        <div class="admin-form-row">
+                            <label style="display: flex; align-items: center; gap: 8px;">
+                                <input type="checkbox" id="news-is-hero" /> 设为头条
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px;">
+                                <input type="checkbox" id="news-is-hot" checked /> 加入热门推荐
+                            </label>
+                            <input type="number" id="news-hot-rank" placeholder="热门排序" value="999" style="width: 100px;" />
+                        </div>
+                        <button class="admin-submit" id="publish-news-btn">🚀 发布新闻</button>
+                    </div>
+                </div>
+            `
+            
+            // 图片预览
+            const imageUrlInput = document.getElementById('news-image-url')
+            const previewImg = document.getElementById('image-preview')
+            imageUrlInput.addEventListener('input', () => {
+                const url = imageUrlInput.value
+                if (url) {
+                    previewImg.src = url
+                    previewImg.style.display = 'block'
+                } else {
+                    previewImg.style.display = 'none'
+                }
+            })
+            
+            // 本地上传
+            document.getElementById('upload-image-btn').addEventListener('click', () => {
+                document.getElementById('image-upload-input').click()
+            })
+            
+            document.getElementById('image-upload-input').addEventListener('change', async (e) => {
+                const file = e.target.files[0]
+                if (!file) return
+                
+                showToast('图片上传中...')
+                const url = await uploadImageToImgBB(file)
+                if (url) {
+                    document.getElementById('news-image-url').value = url
+                    document.getElementById('image-preview').src = url
+                    document.getElementById('image-preview').style.display = 'block'
+                    showToast('图片上传成功！')
+                }
+                e.target.value = ''
+            })
+            
+            // 发布新闻
+            document.getElementById('publish-news-btn').addEventListener('click', async () => {
+                const title = document.getElementById('news-title').value.trim()
+                const pageUrl = document.getElementById('news-page-url').value.trim()
+                
+                if (!title) { alert('请输入标题'); return }
+                if (!pageUrl) { alert('请输入详情页链接'); return }
+                
+                const newsData = {
+                    title: title,
+                    description: document.getElementById('news-desc').value.trim(),
+                    category: document.getElementById('news-category').value.trim() || '📰 新闻',
+                    category_slug: document.getElementById('news-category-slug').value.trim() || 'news',
+                    image_url: document.getElementById('news-image-url').value.trim(),
+                    page_url: pageUrl,
+                    is_hero: document.getElementById('news-is-hero').checked,
+                    is_hot: document.getElementById('news-is-hot').checked,
+                    hot_rank: parseInt(document.getElementById('news-hot-rank').value) || 999,
+                    views: 0
+                }
+                
+                await createNews(newsData)
+                
+                // 清空表单
+                document.getElementById('news-title').value = ''
+                document.getElementById('news-desc').value = ''
+                document.getElementById('news-image-url').value = ''
+                document.getElementById('news-page-url').value = ''
+                document.getElementById('image-preview').style.display = 'none'
+            })
+        }
+        
+        // ========== 初始化 ==========
+        document.addEventListener('DOMContentLoaded', async () => {
+            await checkUser()
+            
+            // 标签云点击
+            document.querySelectorAll('.tag').forEach(tag => {
+                tag.addEventListener('click', (e) => {
+                    e.preventDefault()
+                    showToast('标签筛选功能开发中...')
+                })
+            })
+        })
+    </script>
+</body>
+</html>
