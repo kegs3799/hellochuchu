@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>宝贝回家 · 紧急寻找徐之昂 | 15岁男生失踪</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: #f5f2ef; font-family: 'Google Sans', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; line-height: 1.5; color: #2c241e; }
+        .magazine-container { max-width: 1080px; margin: 0 auto; background-color: #ffffff; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05); }
+        .brand-bar { display: flex; align-items: center; justify-content: space-between; padding: 18px 28px; border-bottom: 1px solid #ede6df; background: white; position: sticky; top: 0; z-index: 10; }
+        .logo { font-size: 1.8rem; font-weight: 500; letter-spacing: -0.3px; background: linear-gradient(135deg, #c45c3c, #e08c6e); -webkit-background-clip: text; background-clip: text; color: transparent; font-family: 'Times New Roman', 'Georgia', serif; }
+        .logo-sub { font-size: 0.75rem; font-weight: 400; color: #b45a3a; letter-spacing: 1px; margin-left: 6px; }
+        .nav-links { display: flex; gap: 28px; font-size: 0.9rem; font-weight: 500; }
+        .nav-links a { text-decoration: none; color: #4a3b33; transition: 0.2s; }
+        .nav-links a:hover { color: #c4603c; }
+        .icon-heart { font-size: 1.3rem; cursor: pointer; opacity: 0.8; }
+        .main-story { padding: 32px 36px 56px 36px; }
+        .article-tag { font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; color: #c45c3c; font-weight: 600; margin-bottom: 16px; border-left: 3px solid #e08c6e; padding-left: 12px; }
+        h1 { font-size: 3rem; font-weight: 700; line-height: 1.2; color: #2b221c; margin-bottom: 20px; letter-spacing: -0.01em; font-family: 'Times New Roman', 'Georgia', serif; }
+        .byline { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 0.85rem; color: #7f6b5e; border-bottom: 1px solid #f0e7e0; padding-bottom: 18px; margin-bottom: 28px; }
+        .author-name { font-weight: 600; color: #c4603c; }
+        .hero-image { margin: 8px 0 32px 0; border-radius: 28px; overflow: hidden; background-color: #f0e4db; box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.2); }
+        .hero-image img { width: 100%; height: auto; display: block; object-fit: cover; transition: transform 0.3s ease; }
+        .hero-image:hover img { transform: scale(1.01); }
+        .img-credit { font-size: 0.7rem; color: #9b887b; padding: 10px 12px 6px 12px; text-align: right; background: #ffffff; }
+        .essay-content { font-size: 1.125rem; color: #2b241f; line-height: 1.7; margin-top: 20px; }
+        .essay-content p { margin-bottom: 1.6rem; font-weight: 400; }
+        .essay-content strong { font-weight: 600; color: #c45c3c; }
+        .pull-quote { margin: 32px 0 28px 0; padding: 24px 32px; background: #fef8f4; border-radius: 32px; font-size: 1.3rem; font-weight: 450; line-height: 1.4; color: #2f241e; border-left: 5px solid #e2aa98; font-family: 'Georgia', serif; text-align: center; }
+        .brand-message { background: #fef5f0; border-radius: 28px; padding: 32px 28px; margin: 40px 0 20px; text-align: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02); }
+        .brand-message h3 { font-size: 1.7rem; font-weight: 500; color: #c4603c; margin-bottom: 18px; }
+        .brand-message p { font-size: 1rem; color: #4f3c32; max-width: 80%; margin: 0 auto; }
+        .action-buttons { display: flex; gap: 20px; justify-content: center; margin: 48px 0 24px; flex-wrap: wrap; }
+        .btn-primary { background: #c45c3c; color: white; border: none; padding: 12px 32px; font-size: 1rem; font-weight: 500; border-radius: 40px; cursor: pointer; transition: all 0.25s; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+        .btn-primary:hover { background: #a54428; transform: translateY(-2px); }
+        .btn-outline { background: transparent; border: 1px solid #d48c6e; color: #c45c3c; padding: 12px 32px; font-size: 1rem; font-weight: 500; border-radius: 40px; cursor: pointer; transition: 0.2s; }
+        .btn-outline:hover { background: #f9ede8; border-color: #a75844; }
+        .story-footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid #ede0d8; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; font-size: 0.8rem; color: #a08778; }
+        
+        /* 互动区域样式 */
+        .interaction-bar { display: flex; gap: 24px; align-items: center; padding: 20px 0; border-top: 1px solid #ede0d8; border-bottom: 1px solid #ede0d8; margin: 24px 0; }
+        .interaction-btn { background: none; border: none; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; gap: 6px; color: #4a3b33; transition: 0.2s; }
+        .interaction-btn:hover { color: #c4603c; }
+        .comment-box { margin: 20px 0; }
+        .comment-box textarea { width: 100%; padding: 14px; border: 1px solid #e0d5ce; border-radius: 16px; font-size: 0.95rem; font-family: inherit; resize: vertical; background: #fdfbfa; }
+        .comment-box button { margin-top: 12px; padding: 10px 24px; background: #c45c3c; color: white; border: none; border-radius: 30px; font-size: 0.9rem; cursor: pointer; transition: 0.2s; }
+        .comment-box button:hover { background: #a54428; }
+        .comments-list { margin-top: 32px; }
+        .comment-item { padding: 16px; border-bottom: 1px solid #f0e7e0; }
+        .comment-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
+        .comment-nickname { font-weight: 600; color: #c4603c; }
+        .comment-time { font-size: 0.75rem; color: #a08778; }
+        .comment-content { color: #2b241f; margin-bottom: 8px; }
+        .comment-actions { display: flex; gap: 16px; font-size: 0.8rem; }
+        .comment-actions button { background: none; border: none; color: #a08778; cursor: pointer; }
+        .comment-actions button:hover { color: #c4603c; }
+        .reply-form { margin-left: 32px; margin-top: 12px; display: none; }
+        .reply-form textarea { width: 100%; padding: 10px; border: 1px solid #e0d5ce; border-radius: 12px; font-size: 0.9rem; }
+        .reply-form button { margin-top: 8px; padding: 6px 16px; background: #d48c6e; color: white; border: none; border-radius: 20px; font-size: 0.8rem; cursor: pointer; }
+        
+        .toast-msg { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #2f241ee6; backdrop-filter: blur(6px); color: #fff5ef; padding: 10px 24px; border-radius: 40px; font-size: 0.85rem; z-index: 1200; opacity: 0; transition: opacity 0.2s; pointer-events: none; }
+        
+        /* 登录注册样式 */
+        .auth-panel { background: #fef8f4; border-radius: 20px; padding: 24px; margin: 24px 0; }
+        .auth-panel input { width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid #e0d5ce; border-radius: 30px; font-size: 0.95rem; background: white; }
+        .auth-panel button { padding: 10px 20px; background: #c45c3c; color: white; border: none; border-radius: 30px; font-size: 0.9rem; cursor: pointer; margin-right: 10px; }
+        .user-panel { background: #fef8f4; border-radius: 20px; padding: 16px 24px; margin: 24px 0; display: flex; justify-content: space-between; align-items: center; }
+        .user-panel span { color: #c4603c; font-weight: 600; }
+        
+        /* 紧急线索区域 */
+        .urgent-tip { background: #fff3e6; border-left: 6px solid #e25822; border-radius: 20px; padding: 22px 28px; margin: 32px 0 24px; }
+        .urgent-tip h4 { font-size: 1.25rem; color: #bc4a2a; margin-bottom: 12px; }
+        .urgent-tip p { margin-bottom: 10px; font-size: 0.98rem; }
+        
+        @media (max-width: 720px) {
+            .brand-bar { padding: 12px 20px; }
+            .nav-links { display: none; }
+            .main-story { padding: 24px 20px 40px 20px; }
+            h1 { font-size: 2rem; }
+            .essay-content { font-size: 1rem; }
+            .pull-quote { font-size: 1.1rem; padding: 20px 18px; }
+            .brand-message p { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+<div class="magazine-container">
+    <div class="brand-bar">
+        <div class="logo">宝贝回家·守望<span class="logo-sub">紧急寻找</span></div>
+        <div class="nav-links">
+            <a href="#">首页</a>
+            <a href="#">寻人启事</a>
+            <a href="#">提供线索</a>
+            <a href="#">关于我们</a>
+        </div>
+        <div class="icon-heart" id="auth-icon">👤</div>
+    </div>
+
+    <div class="main-story">
+        <div class="article-tag">⚠️ 紧急寻人 </div>
+        <h1>寻找15岁少年徐之昂<br>泰式精品按摩馆附近失踪</h1>
+        <div class="byline">
+            <span>发布者 <span class="author-name">宝贝回家志愿者团队</span></span>
+            <span>✦ 2025年4月19日 · 恳请扩散</span>
+            <span>📢 全城紧急搜寻</span>
+        </div>
+
+        <div class="hero-image">
+            <img src="https://i.ibb.co/352jbn6r/IMG-20260419-174327.png" alt="徐之昂失踪前近期生活照" onerror="this.onerror=null; this.src='https://placehold.co/800x500/ffd9c4/8b5a44?text=照片加载中';">
+            <div class="img-credit">📸 失踪者：徐之昂（15岁） 身高158cm，宽等体型，短发，失踪时身穿灰色短袖</div>
+        </div>
+
+        <div class="essay-content">
+            <p><strong>紧急寻人！</strong> 15岁男生徐之昂于2025年4月18日晚上19:40左右，在「泰式精品按摩馆」附近失踪。当时他与不明女性约定在按摩馆旁的奶茶店碰面，但迟迟未现身，电话关机，随身携带的黑色书包下落不明。</p>
+            <p>家属已报警，警方调取周边监控发现：当晚19:53，徐之昂出现在按摩馆后巷的监控画面中，身边疑似有一名穿浅灰色外套的成年女子与其短暂交谈，随后两人沿巷子往南方向离开，之后失去踪迹。目前公安机关正在全力追查，恳请广大市民提供任何有效线索。</p>
+            <div class="pull-quote"><span class="quote-text">“孩子你在哪里？全家人都急疯了，任何见过他的人请立刻联系警方！我们只要他平安回家。”</span>—— 徐之昂母亲含泪恳求</div>
+            <p><strong>体貌特征：</strong> 15岁，身高158cm左右，体重约200kg，短发，浓眉，戴黑框眼镜，。失踪时穿着灰色短袖。</p>
+            <p>如果您见过疑似少年，或曾在按摩馆、附近公交站、商业区看到过相似身影，请立即联系家属：<strong>19191919178</strong>（徐女士）。任何微小线索都可能成为关键，您的每一次转发都是希望。</p>
+        </div>
+
+        <!-- 紧急线索区域 -->
+        <div class="urgent-tip">
+            <h4>📣 直接线索征集</h4>
+            <p>🕘 最后出现时间：2025年4月18日 19:53  ·  地点：泰式按摩馆后巷</p>
+            <p>🧥 疑似带走人员特征：老年男性，浅灰短袖，深色长裤，身高约158cm，体型宽。</p>
+        </div>
+
+        <!-- 登录/注册面板 -->
+        <div id="auth-area"></div>
+
+        <!-- 互动按钮栏 -->
+        <div class="interaction-bar">
+            <button class="interaction-btn" id="like-btn">🤍 愿平安 <span id="like-count">0</span></button>
+            <button class="interaction-btn" id="favorite-btn">☆ 收藏本页 <span id="favorite-count">0</span></button>
+            <span style="color: #a08778;">💬 提供线索/评论 <span id="comment-count">0</span></span>
+        </div>
+
+        <!-- 评论输入框 -->
+        <div class="comment-box">
+            <textarea id="comment-input" rows="3" placeholder="如有线索或想说的话，请在此留言。任何信息都会转交给家属..."></textarea>
+            <button id="post-comment-btn">发布线索/评论</button>
+        </div>
+
+        <!-- 评论列表 -->
+        <div class="comments-list" id="comments-list"></div>
+
+        <div class="brand-message">
+            <h3>✨ 让爱照亮回家的路 ✨</h3>
+            <p>每一次转发、每一个留意，都可能让一个家庭重获团圆。恳请扩散寻人信息。</p>
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn-primary" id="shareStoryBtn">📢 转发寻人启事</button>
+            <button class="btn-outline" id="copyStoryLink">📋 复制寻人链接</button>
+        </div>
+
+        <div class="story-footer">
+            <div><span>🏷️ #宝贝回家</span> <span>💬 #寻找徐之昂</span></div>
+            <div><span>❤️ 让爱传递 </span> <span>#全国协寻</span></div>
+        </div>
+    </div>
+</div>
+
+<!-- 免责声明 -->
+<footer class="ai-disclaimer">
+  <div class="disclaimer-container">
+    <p>
+      <strong>特别声明</strong><br>
+      本寻人启事所涉及人物“徐之昂”为虚拟姓名，故事背景及失踪情节均为公益警示模拟创作，旨在唤起社会对青少年安全及失踪问题的关注。
+      页面中的“泰式精品按摩馆”、“建设路”等均为虚构场景，任何与现实机构或人物的雷同纯属巧合。请勿将本页面信息作为真实警情依据，如遇真实失踪请立即报警。
+    </p>
+    <p>
+      页面内所有图片（包括失踪者照片）均为AI生成或示意素材
+    </p>
+  </div>
+</footer>
+
+<style>
+  .ai-disclaimer {
+    background-color: transparent;
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-size: 0.7rem;
+    line-height: 1.5;
+    color: rgba(108, 117, 125, 0.65);
+    padding: 1.2rem 1rem;
+    margin-top: 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  .disclaimer-container {
+    max-width: 880px;
+    margin: 0 auto;
+  }
+  .ai-disclaimer p {
+    margin: 0.6rem 0;
+  }
+  .ai-disclaimer strong {
+    font-weight: 500;
+    color: rgba(73, 80, 87, 0.75);
+  }
+  @media (max-width: 640px) {
+    .ai-disclaimer {
+      font-size: 0.65rem;
+      padding: 0.8rem 0.75rem;
+    }
+  }
+</style>
+
+<div id="toastMessage" class="toast-msg">✨ 链接已复制，感谢扩散</div>
+
+<!-- Supabase SDK 和互动功能（评论、点赞、收藏等，完全保留原交互逻辑，适配寻人主题） -->
+<script type="module">
+    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
+    
+    const SUPABASE_URL = 'https://ofmnewnfikrisaidiggh.supabase.co'
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9mbW5ld25maWtyaXNhaWRpZ2doIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU4OTQ0NzcsImV4cCI6MjA5MTQ3MDQ3N30.2PV7Kg5kAVfPTxK1odNzCIiXWuksIQKo6EJYK9e3iXg'
+    
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+    window.supabase = supabase
+    
+    const NEWS_SLUG = 'missing-xuzhiang-2025'   // 独立slug，与原项目数据隔离但共用认证体系
+    const pageUrl = window.location.href
+    const pageTitle = document.title
+    const toastEl = document.getElementById('toastMessage')
+    
+    function showToast(msg) { 
+        if (toastEl) {
+            toastEl.textContent = msg; 
+            toastEl.style.opacity = '1'; 
+            setTimeout(() => toastEl.style.opacity = '0', 2200); 
+        }
+    }
+    
+    // ========== 注册登录（与原逻辑相同，邮箱采用昵称+domain）==========
+    async function signUp(nickname, password) {
+        if (!nickname || !password) { alert('请填写昵称和密码'); return null; }
+        if (password.length < 6) { alert('密码至少6位'); return null; }
+        const { data, error } = await supabase.auth.signUp({ 
+            email: nickname + '@missing.user', 
+            password: password 
+        })
+        if (error) { 
+            alert(error.message.includes('already') ? '昵称已被占用' : '注册失败'); 
+            return null; 
+        }
+        alert('注册成功！感谢您关注宝贝回家，' + nickname); 
+        renderAuthUI(); 
+        return data.user;
+    }
+    
+    async function signIn(nickname, password) {
+        if (!nickname || !password) { alert('请填写昵称和密码'); return null; }
+        const { data, error } = await supabase.auth.signInWithPassword({ 
+            email: nickname + '@missing.user', 
+            password: password 
+        })
+        if (error) { alert('昵称或密码错误'); return null; }
+        alert('登录成功！欢迎，' + nickname); 
+        renderAuthUI(); 
+        refreshAllUI(); 
+        return data.user;
+    }
+    
+    async function signOutUser() { 
+        await supabase.auth.signOut(); 
+        renderAuthUI(); 
+        refreshAllUI(); 
+        alert('已登出'); 
+    }
+    
+    // ========== 评论/线索 ==========
+    async function getComments() {
+        const { data } = await supabase.from('comments').select('*').eq('news_slug', NEWS_SLUG).order('created_at', { ascending: true });
+        return data || [];
+    }
+    
+    async function postComment(content, parentId = null) {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (!session) { alert('请先登录后再发布线索或评论'); return null; }
+        if (!content?.trim()) { alert('请输入评论或线索内容'); return null; }
+        const nickname = session.user.email.replace('@missing.user', '');
+        const { data, error } = await supabase.from('comments').insert({
+            news_slug: NEWS_SLUG, 
+            user_id: session.user.id, 
+            nickname: nickname, 
+            content: content.trim(), 
+            parent_id: parentId
+        }).select();
+        if (error) { alert('发布失败，请稍后重试'); return null; }
+        return data[0];
+    }
+    
+    async function deleteComment(commentId) {
+        const { error } = await supabase.from('comments').delete().eq('id', commentId);
+        return !error;
+    }
+    
+    // ========== 点赞（愿平安） ==========
+    async function getLikeInfo() {
+        const { count } = await supabase.from('likes').select('*', { count: 'exact', head: true }).eq('news_slug', NEWS_SLUG);
+        const { data: { session } } = await supabase.auth.getSession();
+        let userLiked = false;
+        if (session) { 
+            const { data } = await supabase.from('likes').select('*').eq('news_slug', NEWS_SLUG).eq('user_id', session.user.id).maybeSingle(); 
+            userLiked = !!data; 
+        }
+        return { count: count || 0, userLiked };
+    }
+    
+    async function toggleLike() {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (!session) { alert('请先登录，为平安祈愿'); return; }
+        const { data: existing } = await supabase.from('likes').select('*').eq('news_slug', NEWS_SLUG).eq('user_id', session.user.id).maybeSingle();
+        if (existing) { await supabase.from('likes').delete().eq('id', existing.id); }
+        else { await supabase.from('likes').insert({ news_slug: NEWS_SLUG, user_id: session.user.id }); }
+        refreshLikeUI();
+    }
+    
+    // ========== 收藏 ==========
+    async function getFavoriteInfo() {
+        const { count } = await supabase.from('favorites').select('*', { count: 'exact', head: true }).eq('news_slug', NEWS_SLUG);
+        const { data: { session } } = await supabase.auth.getSession();
+        let userFavorited = false;
+        if (session) { 
+            const { data } = await supabase.from('favorites').select('*').eq('news_slug', NEWS_SLUG).eq('user_id', session.user.id).maybeSingle(); 
+            userFavorited = !!data; 
+        }
+        return { count: count || 0, userFavorited };
+    }
+    
+    async function toggleFavorite() {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (!session) { alert('请先登录，以便关注寻人进展'); return; }
+        const { data: existing } = await supabase.from('favorites').select('*').eq('news_slug', NEWS_SLUG).eq('user_id', session.user.id).maybeSingle();
+        if (existing) { await supabase.from('favorites').delete().eq('id', existing.id); }
+        else { await supabase.from('favorites').insert({ news_slug: NEWS_SLUG, user_id: session.user.id }); }
+        refreshFavoriteUI();
+    }
+    
+    // ========== UI 渲染 ==========
+    function escapeHtml(text) { 
+        const div = document.createElement('div'); 
+        div.textContent = text || ''; 
+        return div.innerHTML; 
+    }
+    
+    function formatTime(ts) { 
+        const d = new Date(ts), n = new Date(), diff = n - d; 
+        if (diff < 6e4) return '刚刚'; 
+        if (diff < 36e5) return Math.floor(diff/6e4) + '分钟前'; 
+        if (diff < 864e5) return Math.floor(diff/36e5) + '小时前'; 
+        return d.toLocaleDateString('zh-CN'); 
+    }
+    
+    async function renderComments() {
+        const container = document.getElementById('comments-list');
+        if (!container) return;
+        const comments = await getComments();
+        const { data: { session } } = await supabase.auth.getSession();
+        const currentUserId = session?.user?.id;
+        const rootComments = comments.filter(c => !c.parent_id);
+        const replies = comments.filter(c => c.parent_id);
+        
+        const countEl = document.getElementById('comment-count');
+        if (countEl) countEl.textContent = comments.length;
+        
+        function renderItem(c, depth = 0) {
+            const childReplies = replies.filter(r => r.parent_id === c.id);
+            const isOwner = currentUserId === c.user_id;
+            let html = `<div class="comment-item" style="margin-left: ${depth * 24}px;">
+                <div class="comment-header"><span class="comment-nickname">${escapeHtml(c.nickname)}</span><span class="comment-time">${formatTime(c.created_at)}</span></div>
+                <div class="comment-content">${escapeHtml(c.content)}</div>
+                <div class="comment-actions">
+                    <button class="reply-btn" data-id="${c.id}">回复</button>
+                    ${isOwner ? `<button class="delete-btn" data-id="${c.id}">删除</button>` : ''}
+                </div>
+                <div class="reply-form" id="reply-form-${c.id}">
+                    <textarea id="reply-input-${c.id}" rows="2" placeholder="写下回复..."></textarea>
+                    <button class="submit-reply" data-id="${c.id}">发表回复</button>
+                </div>
+            </div>`;
+            childReplies.forEach(r => html += renderItem(r, depth + 1));
+            return html;
+        }
+        
+        container.innerHTML = rootComments.map(c => renderItem(c, 0)).join('') || '<p style="color:#999; text-align:center; padding:24px;">暂无线索留言，如果你有任何发现请立即登录提供线索。</p>';
+        
+        document.querySelectorAll('.reply-btn').forEach(btn => btn.addEventListener('click', () => {
+            document.getElementById(`reply-form-${btn.dataset.id}`).style.display = 'block';
+        }));
+        document.querySelectorAll('.submit-reply').forEach(btn => btn.addEventListener('click', async () => {
+            const id = btn.dataset.id;
+            const input = document.getElementById(`reply-input-${id}`);
+            if (await postComment(input.value, parseInt(id))) { 
+                input.value = ''; 
+                renderComments(); 
+            }
+        }));
+        document.querySelectorAll('.delete-btn').forEach(btn => btn.addEventListener('click', async () => {
+            if (confirm('删除这条线索/评论？') && await deleteComment(btn.dataset.id)) renderComments();
+        }));
+    }
+    
+    async function refreshLikeUI() {
+        const info = await getLikeInfo();
+        const countEl = document.getElementById('like-count');
+        const btnEl = document.getElementById('like-btn');
+        if (countEl) countEl.textContent = info.count;
+        if (btnEl) btnEl.innerHTML = (info.userLiked ? '❤️' : '🤍') + ' 愿平安 <span id="like-count">' + info.count + '</span>';
+    }
+    
+    async function refreshFavoriteUI() {
+        const info = await getFavoriteInfo();
+        const countEl = document.getElementById('favorite-count');
+        const btnEl = document.getElementById('favorite-btn');
+        if (countEl) countEl.textContent = info.count;
+        if (btnEl) btnEl.innerHTML = (info.userFavorited ? '⭐' : '☆') + ' 收藏本页 <span id="favorite-count">' + info.count + '</span>';
+    }
+    
+    async function renderAuthUI() {
+        const area = document.getElementById('auth-area');
+        if (!area) return;
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session) {
+            const nickname = session.user.email.replace('@missing.user', '');
+            area.innerHTML = `<div class="user-panel"><span>👤 ${escapeHtml(nickname)} (志愿者)</span><button class="btn-outline" style="padding:6px 16px;" id="signout-btn">登出</button></div>`;
+            document.getElementById('signout-btn')?.addEventListener('click', signOutUser);
+        } else {
+            area.innerHTML = `<div class="auth-panel">
+                <input type="text" id="signup-nickname" placeholder="昵称（用于显示）" />
+                <input type="password" id="signup-password" placeholder="密码（至少6位）" />
+                <button id="signup-btn">注册账号</button>
+                <button id="signin-btn">登录</button>
+                <p style="font-size:12px; margin-top:12px;">登录后可提供线索或祈愿平安</p>
+            </div>`;
+            document.getElementById('signup-btn')?.addEventListener('click', () => {
+                const nick = document.getElementById('signup-nickname');
+                const pass = document.getElementById('signup-password');
+                if (nick && pass) signUp(nick.value, pass.value);
+            });
+            document.getElementById('signin-btn')?.addEventListener('click', () => {
+                const nick = document.getElementById('signup-nickname');
+                const pass = document.getElementById('signup-password');
+                if (nick && pass) signIn(nick.value, pass.value);
+            });
+        }
+    }
+    
+    async function refreshAllUI() { 
+        await Promise.all([refreshLikeUI(), refreshFavoriteUI(), renderComments()]); 
+    }
+    
+    // ========== 分享/复制 ==========
+    async function copyToClipboard(text) { 
+        try { 
+            await navigator.clipboard.writeText(text); 
+            showToast('📎 寻人链接已复制！请广泛转发'); 
+        } catch { 
+            showToast('复制失败'); 
+        } 
+    }
+    
+    function handleShare() {
+        if (navigator.share) {
+            navigator.share({ title: pageTitle, text: '紧急寻人！15岁男生徐之昂失踪，请帮扩散', url: pageUrl }).catch(() => {});
+        } else {
+            copyToClipboard(pageUrl);
+        }
+    }
+    
+    // ========== 初始化 ==========
+    document.addEventListener('DOMContentLoaded', () => {
+        renderAuthUI();
+        refreshAllUI();
+        document.getElementById('like-btn')?.addEventListener('click', toggleLike);
+        document.getElementById('favorite-btn')?.addEventListener('click', toggleFavorite);
+        document.getElementById('post-comment-btn')?.addEventListener('click', async () => {
+            const input = document.getElementById('comment-input');
+            if (input && await postComment(input.value)) { 
+                input.value = ''; 
+                renderComments(); 
+            }
+        });
+        document.getElementById('shareStoryBtn')?.addEventListener('click', handleShare);
+        document.getElementById('copyStoryLink')?.addEventListener('click', () => copyToClipboard(pageUrl));
+        document.getElementById('auth-icon')?.addEventListener('click', () => {
+            document.getElementById('auth-area')?.scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+</script>
+</body>
+</html>
