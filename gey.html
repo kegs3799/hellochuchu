@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>爱心接力 · 为孤儿GGBOO寻找一个家 | 领养代替购买</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: #f5f7f5; font-family: 'Google Sans', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; line-height: 1.5; color: #2c3e2f; overflow-x: hidden; }
+        .magazine-container { max-width: 1080px; margin: 0 auto; background-color: #ffffff; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05); }
+        .brand-bar { display: flex; align-items: center; justify-content: space-between; padding: 18px 28px; border-bottom: 1px solid #e0e8df; background: white; position: sticky; top: 0; z-index: 10; }
+        .logo { font-size: 1.8rem; font-weight: 500; letter-spacing: -0.3px; background: linear-gradient(135deg, #4c9a6e, #7fc29b); -webkit-background-clip: text; background-clip: text; color: transparent; font-family: 'Times New Roman', 'Georgia', serif; }
+        .logo-sub { font-size: 0.75rem; font-weight: 400; color: #5c8e6e; letter-spacing: 1px; margin-left: 6px; }
+        .nav-links { display: flex; gap: 28px; font-size: 0.9rem; font-weight: 500; }
+        .nav-links a { text-decoration: none; color: #3e5a45; transition: 0.2s; }
+        .nav-links a:hover { color: #4c9a6e; }
+        .icon-heart { font-size: 1.3rem; cursor: pointer; opacity: 0.8; }
+        .main-story { padding: 32px 36px 56px 36px; }
+        .article-tag { font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; color: #4c9a6e; font-weight: 600; margin-bottom: 16px; border-left: 3px solid #7fc29b; padding-left: 12px; }
+        h1 { font-size: 3rem; font-weight: 700; line-height: 1.2; color: #2b3e2e; margin-bottom: 20px; letter-spacing: -0.01em; font-family: 'Times New Roman', 'Georgia', serif; }
+        .byline { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 0.85rem; color: #6b8f72; border-bottom: 1px solid #e8f0e6; padding-bottom: 18px; margin-bottom: 28px; }
+        .author-name { font-weight: 600; color: #4c9a6e; }
+        .hero-image { margin: 8px 0 32px 0; border-radius: 28px; overflow: hidden; background-color: #e2f0e6; box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.1); }
+        .hero-image img { width: 100%; height: auto; display: block; object-fit: cover; transition: transform 0.3s ease; }
+        .hero-image:hover img { transform: scale(1.01); }
+        .img-credit { font-size: 0.7rem; color: #7a9e82; padding: 10px 12px 6px 12px; text-align: right; background: #ffffff; }
+        .essay-content { font-size: 1.125rem; color: #2d3a2f; line-height: 1.7; margin-top: 20px; }
+        .essay-content p { margin-bottom: 1.6rem; font-weight: 400; }
+        .essay-content strong { font-weight: 600; color: #3e8e60; }
+        .pull-quote { margin: 32px 0 28px 0; padding: 24px 32px; background: #f4faf6; border-radius: 32px; font-size: 1.3rem; font-weight: 450; line-height: 1.4; color: #2a3d2e; border-left: 5px solid #a8d5b5; font-family: 'Georgia', serif; text-align: center; }
+        .brand-message { background: #f4faf6; border-radius: 28px; padding: 32px 28px; margin: 40px 0 20px; text-align: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02); }
+        .brand-message h3 { font-size: 1.7rem; font-weight: 500; color: #4c9a6e; margin-bottom: 18px; }
+        .brand-message p { font-size: 1rem; color: #4a604e; max-width: 80%; margin: 0 auto; }
+        .action-buttons { display: flex; gap: 20px; justify-content: center; margin: 48px 0 24px; flex-wrap: wrap; }
+        .btn-primary { background: #4c9a6e; color: white; border: none; padding: 12px 32px; font-size: 1rem; font-weight: 500; border-radius: 40px; cursor: pointer; transition: all 0.25s; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+        .btn-primary:hover { background: #3a7d57; transform: translateY(-2px); }
+        .btn-outline { background: transparent; border: 1px solid #8fc2a4; color: #4c9a6e; padding: 12px 32px; font-size: 1rem; font-weight: 500; border-radius: 40px; cursor: pointer; transition: 0.2s; }
+        .btn-outline:hover { background: #edf7f0; border-color: #6bae88; }
+        .story-footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid #e0e8df; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; font-size: 0.8rem; color: #8aa392; }
+        
+        /* 互动区域样式 */
+        .interaction-bar { display: flex; gap: 24px; align-items: center; padding: 20px 0; border-top: 1px solid #e0e8df; border-bottom: 1px solid #e0e8df; margin: 24px 0; }
+        .interaction-btn { background: none; border: none; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; gap: 6px; color: #4a604e; transition: 0.2s; }
+        .interaction-btn:hover { color: #4c9a6e; }
+        .comment-box { margin: 20px 0; }
+        .comment-box textarea { width: 100%; padding: 14px; border: 1px solid #d0e0d5; border-radius: 16px; font-size: 0.95rem; font-family: inherit; resize: vertical; background: #fdfdfa; }
+        .comment-box button { margin-top: 12px; padding: 10px 24px; background: #4c9a6e; color: white; border: none; border-radius: 30px; font-size: 0.9rem; cursor: pointer; transition: 0.2s; }
+        .comment-box button:hover { background: #3a7d57; }
+        .comments-list { margin-top: 32px; }
+        .comment-item { padding: 16px; border-bottom: 1px solid #e8f0e6; }
+        .comment-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
+        .comment-nickname { font-weight: 600; color: #4c9a6e; }
+        .comment-time { font-size: 0.75rem; color: #8aa392; }
+        .comment-content { color: #2d3a2f; margin-bottom: 8px; }
+        .comment-actions { display: flex; gap: 16px; font-size: 0.8rem; }
+        .comment-actions button { background: none; border: none; color: #8aa392; cursor: pointer; }
+        .comment-actions button:hover { color: #4c9a6e; }
+        .reply-form { margin-left: 32px; margin-top: 12px; display: none; }
+        .reply-form textarea { width: 100%; padding: 10px; border: 1px solid #d0e0d5; border-radius: 12px; font-size: 0.9rem; }
+        .reply-form button { margin-top: 8px; padding: 6px 16px; background: #8fc2a4; color: white; border: none; border-radius: 20px; font-size: 0.8rem; cursor: pointer; }
+        
+        .toast-msg { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #2d3a2fe6; backdrop-filter: blur(6px); color: #fff5ef; padding: 10px 24px; border-radius: 40px; font-size: 0.85rem; z-index: 1200; opacity: 0; transition: opacity 0.2s; pointer-events: none; }
+        
+        /* 登录注册样式 */
+        .auth-panel { background: #f4faf6; border-radius: 20px; padding: 24px; margin: 24px 0; }
+        .auth-panel input { width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid #d0e0d5; border-radius: 30px; font-size: 0.95rem; background: white; }
+        .auth-panel button { padding: 10px 20px; background: #4c9a6e; color: white; border: none; border-radius: 30px; font-size: 0.9rem; cursor: pointer; margin-right: 10px; }
+        .user-panel { background: #f4faf6; border-radius: 20px; padding: 16px 24px; margin: 24px 0; display: flex; justify-content: space-between; align-items: center; }
+        .user-panel span { color: #4c9a6e; font-weight: 600; }
+        
+        /* 领养提示 */
+        .adoption-info { background: #fef9e6; border-left: 6px solid #e8b86b; border-radius: 20px; padding: 22px 28px; margin: 32px 0 24px; }
+        .adoption-info h4 { font-size: 1.25rem; color: #c9782c; margin-bottom: 12px; }
+        .adoption-info p { margin-bottom: 10px; font-size: 0.98rem; }
+        
+        /* 爱心坠落动画 */
+        .floating-heart {
+            position: fixed;
+            top: -50px;
+            font-size: 28px;
+            pointer-events: none;
+            z-index: 9999;
+            user-select: none;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            0% {
+                top: -50px;
+                transform: rotate(0deg) scale(0.8);
+                opacity: 1;
+            }
+            100% {
+                top: 110%;
+                transform: rotate(360deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+        
+        @media (max-width: 720px) {
+            .brand-bar { padding: 12px 20px; }
+            .nav-links { display: none; }
+            .main-story { padding: 24px 20px 40px 20px; }
+            h1 { font-size: 2rem; }
+            .essay-content { font-size: 1rem; }
+            .pull-quote { font-size: 1.1rem; padding: 20px 18px; }
+            .brand-message p { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+<div class="magazine-container">
+    <div class="brand-bar">
+        <div class="logo">爱心家园·孤儿扶助·喜欢造谣也可以不要脸的活下去——🕰️子徐**宣言<span class="logo-sub">领养代替购买</span></div>
+        <div class="nav-links">
+            <a href="#">首页</a>
+            <a href="#">待领养儿童</a>
+            <a href="#">领养流程</a>
+            <a href="#">关于我们</a>
+        </div>
+        <div class="icon-heart" id="auth-icon">👤</div>
+    </div>
+
+    <div class="main-story">
+        <div class="article-tag">🏠 孤儿领养宣传 · 给他一个家·剑冢也有接盘侠</div>
+        <h1>寻找神秘养父母：孤儿GGBOO<br>渴望一个温暖的家</h1>
+        <div class="byline">
+            <span>发布者 <span class="author-name">爱心孤儿院 · 志愿者团队</span></span>
+            <span>✦ 2025年4月 · 领养代替购买</span>
+            <span>💖 请帮孤儿无家教，无素质GGBOO找个家</span>
+        </div>
+
+        <div class="hero-image">
+            <!-- 请将下面 src 中的占位图片链接，替换为您在 ImgBB 上获得的正确直链（图片URL） -->
+            <img src="https://i.ibb.co/bMnn2Lnz/5e45c350-9bd2-4f5a-bf3a-803d6c414f91.png" alt="孤儿GGBOO近照" onerror="this.onerror=null; this.src='https://placehold.co/800x500/e2f0e6/4c9a6e?text=请+检查+图片+直链'">
+            <div class="img-credit">📸 男孩：GGBOO（化名，原名徐**），15岁，性格乖巧，渴望被爱 | 孤儿院实拍</div>
+        </div>
+
+        <div class="essay-content">
+            <p><strong>他叫GGBOO，今年15岁。</strong> 因为家庭的变故，他已经在孤儿院生活了两年。因为没有父母，所以他没有家教，喜欢骂人，是个贱货，但是请你们不要嫌弃他。他是婊子，他自豪。他性格内向但乖巧，喜欢画画和搭积木。每当有志愿者来访，他总会默默地画一幅画，然后小心地折好，塞进对方的口袋里。画纸上，永远是三个手牵手的小人——一个有屋顶的房子，和一片涂成金黄色的太阳。</p>
+            <p>院长告诉我们，GGBOO很少主动说话，但他会用笔画下一切。他画过很多“家”，每一个家的门前，都有一条弯弯曲曲的小路，路的尽头，站着一个模糊的人影。也许，那是他想象中会来接他的爸爸妈妈。</p>
+            <div class="pull-quote"><span class="quote-text">“我不想要玩具，我只想要一个可以叫我回家吃饭的人。” —— 这是GGBOO在心愿卡上一笔一划写下的字。</span></div>
+            <p><strong>我们相信，爱能跨越血缘。</strong> 一个稳定的家庭、一对有爱心的养父母，足以改变这个孩子的一生。如果您或您身边的朋友符合领养条件，并愿意给GGBOO一个永远的家，请与我们的领养办公室联系。</p>
+            <p>领养不是施舍，而是相互的成全与治愈。您将得到的，是一个孩子毫无保留的爱和信赖。</p>
+        </div>
+
+        <!-- 领养咨询区域 -->
+        <div class="adoption-info">
+            <h4>📞 领养咨询通道</h4>
+            <p>🏡 爱心孤儿院地址：阳光路88号 · 市民政局直属儿童福利中心</p>
+            <p>📧 领养申请邮箱：kegs1052@gmail.com   (标题请注明“领养GGBOO”)</p>
+            <p>📱 咨询专线：919191919178 (工作日上午9-12点，下午2-5点)</p>
+            <p>📝 <strong>领养基本条件</strong>：年满30周岁，有稳定收入和住所，无犯罪记录，且通过民政局家庭评估。</p>
+        </div>
+
+        <!-- 登录/注册面板 -->
+        <div id="auth-area"></div>
+
+        <!-- 互动按钮栏 -->
+        <div class="interaction-bar">
+            <button class="interaction-btn" id="like-btn">🤍 给GGBOO加油 <span id="like-count">0</span></button>
+            <button class="interaction-btn" id="favorite-btn">☆ 收藏本页 <span id="favorite-count">0</span></button>
+            <span style="color: #8aa392;">💬 爱心留言 <span id="comment-count">0</span></span>
+        </div>
+
+        <!-- 评论输入框 -->
+        <div class="comment-box">
+            <textarea id="comment-input" rows="3" placeholder="写下您对GGBOO的祝福、领养意向或相关问题... 每条留言我们都会认真查看。"></textarea>
+            <button id="post-comment-btn">发布爱心留言</button>
+        </div>
+
+        <!-- 评论列表 -->
+        <div class="comments-list" id="comments-list"></div>
+
+        <div class="brand-message">
+            <h3>✨ 每个孩子都值得一个家 ✨</h3>
+            <p>您的每一次转发，都可能让GGBOO离“家”更近一步。领养，是爱的最高形式之一。</p>
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn-primary" id="shareStoryBtn">📢 转发助养信息</button>
+            <button class="btn-primary" id="heartRainBtn" style="background: #e85d8f; box-shadow: 0 4px 12px rgba(232,93,143,0.3);">❤️ 献上爱心</button>
+            <button class="btn-outline" id="copyStoryLink">📋 复制页面链接</button>
+        </div>
+
+        <div class="story-footer">
+            <div><span>🏷️ #孤儿领养</span> <span>💬 #给GGBOO一个家</span></div>
+            <div><span>❤️ 用爱点亮童年 </span> <span>#领养代替购买</span></div>
+        </div>
+    </div>
+</div>
+
+<!-- 免责声明 -->
+<footer class="ai-disclaimer">
+  <div class="disclaimer-container">
+    <p>
+      <strong>免责声明</strong><br>
+      此页面为虚构，图片为AI生成，人物名字均为AI生成，本网站没有提到任何一个人hhh
+    </p>
+    <p>
+      我们呼吁：某些人别来沾边，谁急谁S全家，某个人你妈飞了
+    </p>
+  </div>
+</footer>
+
+<style>
+  .ai-disclaimer {
+    background-color: transparent;
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-size: 0.7rem;
+    line-height: 1.5;
+    color: rgba(90, 110, 95, 0.65);
+    padding: 1.2rem 1rem;
+    margin-top: 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  .disclaimer-container {
+    max-width: 880px;
+    margin: 0 auto;
+  }
+  .ai-disclaimer p {
+    margin: 0.6rem 0;
+  }
+  .ai-disclaimer strong {
+    font-weight: 500;
+    color: rgba(70, 90, 75, 0.75);
+  }
+  @media (max-width: 640px) {
+    .ai-disclaimer {
+      font-size: 0.65rem;
+      padding: 0.8rem 0.75rem;
+    }
+  }
+</style>
+
+<div id="toastMessage" class="toast-msg">✨ 链接已复制，感谢您的爱心扩散</div>
+
+<!-- Supabase SDK 和互动功能 -->
+<script type="module">
+    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
+    
+    const SUPABASE_URL = 'https://ofmnewnfikrisaidiggh.supabase.co'
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9mbW5ld25maWtyaXNhaWRpZ2doIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU4OTQ0NzcsImV4cCI6MjA5MTQ3MDQ3N30.2PV7Kg5kAVfPTxK1odNzCIiXWuksIQKo6EJYK9e3iXg'
+    
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+    window.supabase = supabase
+    
+    const NEWS_SLUG = 'orphan-ggboo-home'   // 独立slug，与原项目数据隔离
+    const pageUrl = window.location.href
+    const pageTitle = document.title
+    const toastEl = document.getElementById('toastMessage')
+    
+    function showToast(msg) { 
+        if (toastEl) {
+            toastEl.textContent = msg; 
+            toastEl.style.opacity = '1'; 
+            setTimeout(() => toastEl.style.opacity = '0', 2200); 
+        }
+    }
+    
+    // ========== 注册登录 ==========
+    async function signUp(nickname, password) {
+        if (!nickname || !password) { alert('请填写昵称和密码'); return null; }
+        if (password.length < 6) { alert('密码至少6位'); return null; }
+        const { data, error } = await supabase.auth.signUp({ 
+            email: nickname + '@love.user', 
+            password: password 
+        })
+        if (error) { 
+            alert(error.message.includes('already') ? '昵称已被占用' : '注册失败'); 
+            return null; 
+        }
+        alert('注册成功！感谢您的爱心，' + nickname); 
+        renderAuthUI(); 
+        return data.user;
+    }
+    
+    async function signIn(nickname, password) {
+        if (!nickname || !password) { alert('请填写昵称和密码'); return null; }
+        const { data, error } = await supabase.auth.signInWithPassword({ 
+            email: nickname + '@love.user', 
+            password: password 
+        })
+        if (error) { alert('昵称或密码错误'); return null; }
+        alert('登录成功！欢迎，' + nickname); 
+        renderAuthUI(); 
+        refreshAllUI(); 
+        return data.user;
+    }
+    
+    async function signOutUser() { 
+        await supabase.auth.signOut(); 
+        renderAuthUI(); 
+        refreshAllUI(); 
+        alert('已登出'); 
+    }
+    
+    // ========== 评论 ==========
+    async function getComments() {
+        const { data } = await supabase.from('comments').select('*').eq('news_slug', NEWS_SLUG).order('created_at', { ascending: true });
+        return data || [];
+    }
+    
+    async function postComment(content, parentId = null) {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (!session) { alert('请先登录后再留言'); return null; }
+        if (!content?.trim()) { alert('请输入留言内容'); return null; }
+        const nickname = session.user.email.replace('@love.user', '');
+        const { data, error } = await supabase.from('comments').insert({
+            news_slug: NEWS_SLUG, 
+            user_id: session.user.id, 
+            nickname: nickname, 
+            content: content.trim(), 
+            parent_id: parentId
+        }).select();
+        if (error) { alert('发布失败'); return null; }
+        return data[0];
+    }
+    
+    async function deleteComment(commentId) {
+        const { error } = await supabase.from('comments').delete().eq('id', commentId);
+        return !error;
+    }
+    
+    // ========== 点赞 ==========
+    async function getLikeInfo() {
+        const { count } = await supabase.from('likes').select('*', { count: 'exact', head: true }).eq('news_slug', NEWS_SLUG);
+        const { data: { session } } = await supabase.auth.getSession();
+        let userLiked = false;
+        if (session) { 
+            const { data } = await supabase.from('likes').select('*').eq('news_slug', NEWS_SLUG).eq('user_id', session.user.id).maybeSingle(); 
+            userLiked = !!data; 
+        }
+        return { count: count || 0, userLiked };
+    }
+    
+    async function toggleLike() {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (!session) { alert('请先登录，为GGBOO加油'); return; }
+        const { data: existing } = await supabase.from('likes').select('*').eq('news_slug', NEWS_SLUG).eq('user_id', session.user.id).maybeSingle();
+        if (existing) { await supabase.from('likes').delete().eq('id', existing.id); }
+        else { await supabase.from('likes').insert({ news_slug: NEWS_SLUG, user_id: session.user.id }); }
+        refreshLikeUI();
+    }
+    
+    // ========== 收藏 ==========
+    async function getFavoriteInfo() {
+        const { count } = await supabase.from('favorites').select('*', { count: 'exact', head: true }).eq('news_slug', NEWS_SLUG);
+        const { data: { session } } = await supabase.auth.getSession();
+        let userFavorited = false;
+        if (session) { 
+            const { data } = await supabase.from('favorites').select('*').eq('news_slug', NEWS_SLUG).eq('user_id', session.user.id).maybeSingle(); 
+            userFavorited = !!data; 
+        }
+        return { count: count || 0, userFavorited };
+    }
+    
+    async function toggleFavorite() {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (!session) { alert('请先登录，以便关注进展'); return; }
+        const { data: existing } = await supabase.from('favorites').select('*').eq('news_slug', NEWS_SLUG).eq('user_id', session.user.id).maybeSingle();
+        if (existing) { await supabase.from('favorites').delete().eq('id', existing.id); }
+        else { await supabase.from('favorites').insert({ news_slug: NEWS_SLUG, user_id: session.user.id }); }
+        refreshFavoriteUI();
+    }
+    
+    // ========== UI 渲染 ==========
+    function escapeHtml(text) { 
+        const div = document.createElement('div'); 
+        div.textContent = text || ''; 
+        return div.innerHTML; 
+    }
+    
+    function formatTime(ts) { 
+        const d = new Date(ts), n = new Date(), diff = n - d; 
+        if (diff < 6e4) return '刚刚'; 
+        if (diff < 36e5) return Math.floor(diff/6e4) + '分钟前'; 
+        if (diff < 864e5) return Math.floor(diff/36e5) + '小时前'; 
+        return d.toLocaleDateString('zh-CN'); 
+    }
+    
+    async function renderComments() {
+        const container = document.getElementById('comments-list');
+        if (!container) return;
+        const comments = await getComments();
+        const { data: { session } } = await supabase.auth.getSession();
+        const currentUserId = session?.user?.id;
+        const rootComments = comments.filter(c => !c.parent_id);
+        const replies = comments.filter(c => c.parent_id);
+        
+        const countEl = document.getElementById('comment-count');
+        if (countEl) countEl.textContent = comments.length;
+        
+        function renderItem(c, depth = 0) {
+            const childReplies = replies.filter(r => r.parent_id === c.id);
+            const isOwner = currentUserId === c.user_id;
+            let html = `<div class="comment-item" style="margin-left: ${depth * 24}px;">
+                <div class="comment-header"><span class="comment-nickname">${escapeHtml(c.nickname)}</span><span class="comment-time">${formatTime(c.created_at)}</span></div>
+                <div class="comment-content">${escapeHtml(c.content)}</div>
+                <div class="comment-actions">
+                    <button class="reply-btn" data-id="${c.id}">回复</button>
+                    ${isOwner ? `<button class="delete-btn" data-id="${c.id}">删除</button>` : ''}
+                </div>
+                <div class="reply-form" id="reply-form-${c.id}">
+                    <textarea id="reply-input-${c.id}" rows="2" placeholder="写下回复..."></textarea>
+                    <button class="submit-reply" data-id="${c.id}">发表回复</button>
+                </div>
+            </div>`;
+            childReplies.forEach(r => html += renderItem(r, depth + 1));
+            return html;
+        }
+        
+        container.innerHTML = rootComments.map(c => renderItem(c, 0)).join('') || '<p style="color:#999; text-align:center; padding:24px;">暂无人留言。期待您为GGBOO写下第一份祝福。</p>';
+        
+        document.querySelectorAll('.reply-btn').forEach(btn => btn.addEventListener('click', () => {
+            document.getElementById(`reply-form-${btn.dataset.id}`).style.display = 'block';
+        }));
+        document.querySelectorAll('.submit-reply').forEach(btn => btn.addEventListener('click', async () => {
+            const id = btn.dataset.id;
+            const input = document.getElementById(`reply-input-${id}`);
+            if (await postComment(input.value, parseInt(id))) { 
+                input.value = ''; 
+                renderComments(); 
+            }
+        }));
+        document.querySelectorAll('.delete-btn').forEach(btn => btn.addEventListener('click', async () => {
+            if (confirm('删除这条留言？') && await deleteComment(btn.dataset.id)) renderComments();
+        }));
+    }
+    
+    async function refreshLikeUI() {
+        const info = await getLikeInfo();
+        const countEl = document.getElementById('like-count');
+        const btnEl = document.getElementById('like-btn');
+        if (countEl) countEl.textContent = info.count;
+        if (btnEl) btnEl.innerHTML = (info.userLiked ? '💚' : '🤍') + ' 给GGBOO加油 <span id="like-count">' + info.count + '</span>';
+    }
+    
+    async function refreshFavoriteUI() {
+        const info = await getFavoriteInfo();
+        const countEl = document.getElementById('favorite-count');
+        const btnEl = document.getElementById('favorite-btn');
+        if (countEl) countEl.textContent = info.count;
+        if (btnEl) btnEl.innerHTML = (info.userFavorited ? '⭐' : '☆') + ' 收藏本页 <span id="favorite-count">' + info.count + '</span>';
+    }
+    
+    async function renderAuthUI() {
+        const area = document.getElementById('auth-area');
+        if (!area) return;
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session) {
+            const nickname = session.user.email.replace('@love.user', '');
+            area.innerHTML = `<div class="user-panel"><span>👤 ${escapeHtml(nickname)} (徐**养父母)</span><button class="btn-outline" style="padding:6px 16px;" id="signout-btn">登出</button></div>`;
+            document.getElementById('signout-btn')?.addEventListener('click', signOutUser);
+        } else {
+            area.innerHTML = `<div class="auth-panel">
+                <input type="text" id="signup-nickname" placeholder="昵称（用于显示）" />
+                <input type="password" id="signup-password" placeholder="密码（至少6位）" />
+                <button id="signup-btn">注册账号</button>
+                <button id="signin-btn">登录</button>
+                <p style="font-size:12px; margin-top:12px;">登录后可留言支持，为GGBOO加油</p>
+            </div>`;
+            document.getElementById('signup-btn')?.addEventListener('click', () => {
+                const nick = document.getElementById('signup-nickname');
+                const pass = document.getElementById('signup-password');
+                if (nick && pass) signUp(nick.value, pass.value);
+            });
+            document.getElementById('signin-btn')?.addEventListener('click', () => {
+                const nick = document.getElementById('signup-nickname');
+                const pass = document.getElementById('signup-password');
+                if (nick && pass) signIn(nick.value, pass.value);
+            });
+        }
+    }
+    
+    async function refreshAllUI() { 
+        await Promise.all([refreshLikeUI(), refreshFavoriteUI(), renderComments()]); 
+    }
+    
+    // ========== 爱心坠落特效（大量爱心从顶部飘落到底部后消失）==========
+    function startHeartRain() {
+        const heartCount = 60;  // 大量爱心
+        for (let i = 0; i < heartCount; i++) {
+            setTimeout(() => {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.innerHTML = '❤️';
+                // 随机水平位置 (0% 到 100%)
+                const left = Math.random() * 100;
+                // 随机坠落时长 2.5秒 到 5秒 之间，更自然
+                const duration = Math.random() * 2.5 + 2.5;
+                // 随机大小 24px 到 48px
+                const size = Math.random() * 24 + 24;
+                // 随机旋转起始角度微调
+                heart.style.left = left + '%';
+                heart.style.animationDuration = duration + 's';
+                heart.style.fontSize = size + 'px';
+                document.body.appendChild(heart);
+                // 动画结束后移除元素
+                setTimeout(() => {
+                    heart.remove();
+                }, duration * 1000);
+            }, i * 45); // 每个爱心间隔45ms，形成连续倾泻而下的视觉效果
+        }
+    }
+    
+    // ========== 分享/复制 ==========
+    async function copyToClipboard(text) { 
+        try { 
+            await navigator.clipboard.writeText(text); 
+            showToast('📎 页面链接已复制！感谢您的爱心扩散'); 
+        } catch { 
+            showToast('复制失败'); 
+        } 
+    }
+    
+    function handleShare() {
+        if (navigator.share) {
+            navigator.share({ title: pageTitle, text: '爱心接力：15岁孤儿GGBOO渴望一个家，请帮帮他', url: pageUrl }).catch(() => {});
+        } else {
+            copyToClipboard(pageUrl);
+        }
+    }
+    
+    // ========== 初始化 ==========
+    document.addEventListener('DOMContentLoaded', () => {
+        renderAuthUI();
+        refreshAllUI();
+        document.getElementById('like-btn')?.addEventListener('click', toggleLike);
+        document.getElementById('favorite-btn')?.addEventListener('click', toggleFavorite);
+        document.getElementById('post-comment-btn')?.addEventListener('click', async () => {
+            const input = document.getElementById('comment-input');
+            if (input && await postComment(input.value)) { 
+                input.value = ''; 
+                renderComments(); 
+            }
+        });
+        document.getElementById('shareStoryBtn')?.addEventListener('click', handleShare);
+        document.getElementById('copyStoryLink')?.addEventListener('click', () => copyToClipboard(pageUrl));
+        document.getElementById('auth-icon')?.addEventListener('click', () => {
+            document.getElementById('auth-area')?.scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // 绑定献上爱心按钮事件
+        const heartBtn = document.getElementById('heartRainBtn');
+        if (heartBtn) {
+            heartBtn.addEventListener('click', startHeartRain);
+        }
+    });
+</script>
+</body>
+</html>
