@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Lady·只昂 | 全新专辑《贝塔β之歌》震撼首播</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background: #0a0a14; 
+            font-family: 'Google Sans', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; 
+            line-height: 1.5; 
+            color: #f0eef7; 
+        }
+        .magazine-container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            background: linear-gradient(145deg, #11101c 0%, #19182a 100%); 
+            box-shadow: 0 25px 45px rgba(0,0,0,0.4); 
+        }
+        /* 动态渐变背景 */
+        .bg-glow {
+            position: relative;
+            overflow: hidden;
+        }
+        .bg-glow::before {
+            content: "";
+            position: fixed;
+            top: -30%;
+            left: -20%;
+            width: 140%;
+            height: 140%;
+            background: radial-gradient(circle at 30% 40%, rgba(210, 80, 140, 0.2), rgba(80, 60, 180, 0.3));
+            pointer-events: none;
+            z-index: 0;
+        }
+        .brand-bar { 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            padding: 22px 36px; 
+            border-bottom: 1px solid rgba(255,255,255,0.12); 
+            background: rgba(10,10,20,0.7); 
+            backdrop-filter: blur(12px);
+            position: sticky; 
+            top: 0; 
+            z-index: 20; 
+        }
+        .logo { 
+            font-size: 1.9rem; 
+            font-weight: 600; 
+            letter-spacing: -0.5px; 
+            background: linear-gradient(135deg, #FFB7D2, #BF7AF0); 
+            -webkit-background-clip: text; 
+            background-clip: text; 
+            color: transparent; 
+            font-family: 'Times New Roman', 'Georgia', serif; 
+        }
+        .logo-sub { font-size: 0.7rem; font-weight: 400; color: #b8a9e6; letter-spacing: 2px; margin-left: 8px; }
+        .nav-links { display: flex; gap: 32px; font-size: 0.9rem; font-weight: 500; }
+        .nav-links a { text-decoration: none; color: #ddceff; transition: 0.2s; }
+        .nav-links a:hover { color: #ff9bc0; }
+        .icon-heart { font-size: 1.3rem; cursor: pointer; opacity: 0.9; color: #ffb0ca; }
+        
+        .main-story { padding: 40px 44px 70px 44px; position: relative; z-index: 2; }
+        .article-tag { 
+            font-size: 0.8rem; 
+            letter-spacing: 3px; 
+            text-transform: uppercase; 
+            color: #e5a0ff; 
+            font-weight: 600; 
+            margin-bottom: 20px; 
+            border-left: 4px solid #f08fc0; 
+            padding-left: 16px; 
+        }
+        h1 { 
+            font-size: 3.8rem; 
+            font-weight: 800; 
+            line-height: 1.2; 
+            background: linear-gradient(135deg, #FFE6F0, #D9A7F0, #A77BFF);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px; 
+            letter-spacing: -0.02em; 
+            font-family: 'Times New Roman', 'Georgia', serif; 
+        }
+        .byline { 
+            display: flex; 
+            flex-wrap: wrap; 
+            align-items: center; 
+            gap: 20px; 
+            font-size: 0.9rem; 
+            color: #b9abdf; 
+            border-bottom: 1px solid rgba(255,255,255,0.15); 
+            padding-bottom: 22px; 
+            margin-bottom: 32px; 
+        }
+        .author-name { font-weight: 700; color: #ffaccf; letter-spacing: 0.5px; }
+        .hero-image { 
+            margin: 16px 0 40px 0; 
+            border-radius: 36px; 
+            overflow: hidden; 
+            box-shadow: 0 25px 40px -12px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.1) inset;
+            transition: 0.25s;
+        }
+        .hero-image img { width: 100%; height: auto; display: block; object-fit: cover; transition: transform 0.4s ease; }
+        .hero-image:hover img { transform: scale(1.02); }
+        .img-credit { font-size: 0.7rem; color: #958fc7; padding: 12px 16px 6px 16px; text-align: right; background: rgba(0,0,0,0.3); }
+        .essay-content { font-size: 1.15rem; color: #eae5ff; line-height: 1.7; margin-top: 20px; }
+        .essay-content p { margin-bottom: 1.8rem; font-weight: 400; }
+        .essay-content strong { font-weight: 700; color: #ffb8d6; letter-spacing: 0.3px; }
+        .pull-quote { 
+            margin: 45px 0 40px; 
+            padding: 28px 38px; 
+            background: rgba(80, 60, 140, 0.3); 
+            backdrop-filter: blur(4px);
+            border-radius: 48px; 
+            font-size: 1.5rem; 
+            font-weight: 500; 
+            line-height: 1.4; 
+            color: #f2eaff; 
+            border-left: 6px solid #ff9bc0; 
+            font-family: 'Georgia', serif; 
+            text-align: center; 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        .music-player-card {
+            background: rgba(25, 20, 45, 0.7);
+            backdrop-filter: blur(16px);
+            border-radius: 60px;
+            padding: 16px 30px;
+            margin: 48px 0 32px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid rgba(255,220,255,0.2);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.3);
+        }
+        .track-info { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+        .track-icon { font-size: 2.2rem; filter: drop-shadow(0 0 5px #ff99cc); }
+        .track-name { font-weight: 700; font-size: 1.3rem; letter-spacing: 1px; }
+        .track-name span { font-size: 0.85rem; color: #cbbaff; display: block; }
+        .audio-controls { display: flex; align-items: center; gap: 22px; background: #00000055; padding: 8px 24px; border-radius: 100px; }
+        .play-pause-btn {
+            background: #ff81b5;
+            border: none;
+            color: white;
+            font-size: 1.4rem;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .play-pause-btn:hover { background: #ff5f9e; transform: scale(1.02);}
+        .action-buttons { display: flex; gap: 24px; justify-content: center; margin: 48px 0 30px; flex-wrap: wrap; }
+        .btn-primary { background: linear-gradient(95deg, #c2528b, #a55de8); color: white; border: none; padding: 14px 36px; font-size: 1rem; font-weight: 600; border-radius: 60px; cursor: pointer; transition: 0.25s; box-shadow: 0 8px 20px rgba(162, 70, 140, 0.4); letter-spacing: 1px; }
+        .btn-primary:hover { transform: translateY(-3px); filter: brightness(1.05); box-shadow: 0 15px 28px rgba(162, 70, 140, 0.6); }
+        .btn-outline { background: transparent; border: 1.5px solid #bd93f9; color: #f1e2ff; padding: 14px 34px; border-radius: 60px; font-weight: 500; backdrop-filter: blur(4px); transition: 0.2s; cursor: pointer; }
+        .btn-outline:hover { background: rgba(189, 147, 249, 0.2); border-color: #ffafd0; color: white; }
+        .story-footer { margin-top: 55px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; font-size: 0.8rem; color: #a38ede; }
+        .interaction-bar { display: flex; gap: 32px; align-items: center; padding: 24px 0; border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); margin: 36px 0; }
+        .interaction-btn { background: none; border: none; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; gap: 8px; color: #dbceff; transition: 0.2s; }
+        .interaction-btn:hover { color: #ff9bc0; transform: scale(1.02);}
+        .comment-box { margin: 24px 0; }
+        .comment-box textarea { width: 100%; padding: 16px; border-radius: 28px; background: #1e1b2e; border: 1px solid #453e6b; color: #f0eaff; font-size: 0.95rem; font-family: inherit; resize: vertical; }
+        .comment-box button { margin-top: 16px; padding: 12px 28px; background: #a155cc; border: none; border-radius: 40px; color: white; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .comments-list { margin-top: 36px; }
+        .comment-item { padding: 18px; border-bottom: 1px solid #2a2542; }
+        .comment-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
+        .comment-nickname { font-weight: 700; color: #ffb1d4; }
+        .comment-time { font-size: 0.7rem; color: #8f81b5; }
+        .reply-form { margin-left: 40px; margin-top: 12px; display: none; }
+        .toast-msg { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #1e1936e6; backdrop-filter: blur(10px); color: #ffe6f0; padding: 12px 28px; border-radius: 60px; z-index: 1300; opacity: 0; transition: 0.2s; pointer-events: none; font-weight: 500; }
+        .auth-panel { background: rgba(20, 15, 40, 0.8); border-radius: 32px; padding: 28px; margin: 28px 0; backdrop-filter: blur(8px); }
+        .auth-panel input { width: 100%; padding: 14px; margin-bottom: 16px; border-radius: 48px; background: #0f0c20; border: 1px solid #6f55b0; color: white; }
+        .user-panel { background: rgba(40, 30, 70, 0.7); border-radius: 48px; padding: 16px 28px; margin: 20px 0; display: flex; justify-content: space-between; align-items: center; }
+        
+        /* 爱心飘落动画保留（可选氛围） */
+        .floating-heart {
+            position: fixed; top: -50px; font-size: 28px; pointer-events: none; z-index: 9999; user-select: none;
+            animation: fall linear forwards;
+        }
+        @keyframes fall {
+            0% { top: -50px; transform: rotate(0deg) scale(0.6); opacity: 1; }
+            100% { top: 110%; transform: rotate(300deg) scale(1); opacity: 0; }
+        }
+        @media (max-width: 780px) {
+            .main-story { padding: 24px 20px 50px; }
+            h1 { font-size: 2.3rem; }
+            .pull-quote { font-size: 1.1rem; padding: 20px; }
+            .music-player-card { flex-direction: column; align-items: stretch; gap: 18px; }
+            .audio-controls { justify-content: center; }
+        }
+    </style>
+</head>
+<body class="bg-glow">
+<div class="magazine-container">
+    <div class="brand-bar">
+        <div class="logo">BETA WAVE<span class="logo-sub">β- Records</span></div>
+        <div class="nav-links">
+            <a href="#">首页</a>
+            <a href="#">专辑</a>
+            <a href="#">巡回</a>
+            <a href="#">歌迷会</a>
+        </div>
+        <div class="icon-heart" id="auth-icon">🎧</div>
+    </div>
+
+    <div class="main-story">
+        <div class="article-tag"># 全新回归 · 首支单曲 #</div>
+        <h1>Lady·只昂 《贝塔β之歌》<br>数字宇宙的唯美共振</h1>
+        <div class="byline">
+            <span>专访 <span class="author-name">Lady·只昂 · 国际唱将</span></span>
+            <span>✦ 2026 贝塔纪元</span>
+            <span>🎶 全球数位平台同步上线</span>
+        </div>
+
+        <div class="hero-image">
+            <img src="https://raw.githubusercontent.com/kegs3799/hellochuchu/3c7695cfdacca8186e208e5892527247f22d6d4c/retouch_2026043014443065.jpg" alt="Lady·只昂 贝塔β之歌 概念照" onerror="this.src='https://placehold.co/1000x600/2a2348/cc99ff?text=Album+Art+Beta'">
+            <div class="img-credit">📸 贝塔视觉：流动的声纹与未来主义 | 摄影: Xenon Studio</div>
+        </div>
+
+        <!-- 嵌入式音乐播放器 自动播放 -->
+        <div class="music-player-card">
+            <div class="track-info">
+                <div class="track-icon">🎧 β</div>
+                <div class="track-name">《贝塔β之歌》<span>Lady·只昂 · 首波主打</span></div>
+            </div>
+            <div class="audio-controls">
+                <button class="play-pause-btn" id="playPauseBtn">▶️</button>
+                <span style="font-size:0.8rem; opacity:0.8;">Beta Frequency</span>
+            </div>
+            <audio id="betaAudio" loop preload="auto" src="https://cdn.jsdelivr.net/gh/kegs3799/hellochuchu@9c56f86a5dd751db1cca129c98d72cc57b8e7082/SaveTik.co_7633295217710579430.mp3"></audio>
+        </div>
+
+        <div class="essay-content">
+            <p>当β波遇上灵动声线，国际音乐唱将<strong>Lady·只昂</strong>携全新实验单曲《贝塔β之歌》炸裂回归。这不是一首普通的流行作品，而是将脑电波频率、合成器梦幻与空灵人声融为一体，构建出迷离而深邃的听觉次元。只昂在采访中表示：“β波代表专注与创造，我希望每一个音符都能唤醒沉睡的感知力。”</p>
+            <p>制作团队远赴冰岛与柏林，采集极光下的环境音与模块合成器低鸣，再搭配只昂标志性的跨越三个八度的声域，让整首歌曲充满未来史诗感。单曲封面由数字艺术家利用AI生成与实拍结合，流淌的贝塔光晕正好对应了歌曲中“在流动的频率里找到自我”的主题。</p>
+            <div class="pull-quote"><span class="quote-text">“β是希腊字母的第二個，卻是我音樂宇宙裡全新的起點。這首歌，送給所有在喧囂中尋找專注靈魂的人。”</span> —— Lady·只昂</div>
+            <p>同步释出的概念MV由戛纳新锐导演掌镜，使用红外热成像和粒子特效展现只昂在β频率中的变形与重生。上线6小时全球播放量突破700万，乐评人称其为“年度最具艺术野心的流行乐章”。目前数字专辑已开启预购，并附赠独家混音版和只昂的手写频率笔记。</p>
+        </div>
+
+        <!-- 登录/注册区域（保留互动社区氛围） -->
+        <div id="auth-area"></div>
+
+        <!-- 点赞 收藏 评论 互动栏 -->
+        <div class="interaction-bar">
+            <button class="interaction-btn" id="like-btn">❤️ 心动指数 <span id="like-count">0</span></button>
+            <button class="interaction-btn" id="favorite-btn">⭐ 收藏专辑 <span id="favorite-count">0</span></button>
+            <span style="color: #b9abdf;">💬 乐迷回声 <span id="comment-count">0</span></span>
+        </div>
+
+        <div class="comment-box">
+            <textarea id="comment-input" rows="3" placeholder="写下你对《贝塔β之歌》的听感、乐评或对Lady·只昂的留言..."></textarea>
+            <button id="post-comment-btn">发布乐评</button>
+        </div>
+        <div class="comments-list" id="comments-list"></div>
+
+        <div class="action-buttons">
+            <button class="btn-primary" id="shareTrackBtn">🎵 分享单曲</button>
+            <button class="btn-outline" id="copyPageLink">🔗 复制页面链接</button>
+            <button class="btn-outline" id="heartRainBtn" style="border-color:#ff88bb; color:#ffbbdd;">💖 撒下β爱心</button>
+        </div>
+
+        <div class="story-footer">
+            <div><span>🏷️ #Lady只昂</span> <span>🎶 #贝塔β之歌</span></div>
+            <div><span>⚡ 全球数位发行 · 新纪元流行</span></div>
+        </div>
+    </div>
+</div>
+
+<!-- 免责声明 -->
+<footer class="ai-disclaimer">
+  <div class="disclaimer-container">
+    <p><strong>✨ 数字内容声明</strong><br>本页面为音乐宣传模拟项目，“Lady·只昂”与《贝塔β之歌》为虚构艺术形象。所有图片及音乐素材均来源于可访问的CDN及开源图库，仅供演示与风格展示。若有侵权请联系移除。</p>
+  </div>
+</footer>
+<style>
+  .ai-disclaimer { background-color: transparent; font-family: system-ui; font-size: 0.65rem; color: rgba(180, 160, 220, 0.6); padding: 1.2rem; text-align: center; border-top: 1px solid #2f2a4a; margin-top: 20px; }
+  .disclaimer-container { max-width: 880px; margin: 0 auto; }
+</style>
+
+<div id="toastMessage" class="toast-msg">🎧 链接已复制 · 和Lady·只昂共振</div>
+
+<script type="module">
+    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
+    const SUPABASE_URL = 'https://ofmnewnfikrisaidiggh.supabase.co'
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9mbW5ld25maWtyaXNhaWRpZ2doIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU4OTQ0NzcsImV4cCI6MjA5MTQ3MDQ3N30.2PV7Kg5kAVfPTxK1odNzCIiXWuksIQKo6EJYK9e3iXg'
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+    window.supabase = supabase
+    const NEWS_SLUG = 'lady-betasong'
+    const pageUrl = window.location.href
+    const pageTitle = document.title
+    const toastEl = document.getElementById('toastMessage')
+    function showToast(msg) { if(toastEl){ toastEl.textContent=msg; toastEl.style.opacity='1'; setTimeout(()=>toastEl.style.opacity='0',2200); } }
+    
+    // 音乐自动播放与按钮控制
+    const audio = document.getElementById('betaAudio');
+    const playBtn = document.getElementById('playPauseBtn');
+    let autoPlayAttempted = false;
+    function attemptAutoPlay() {
+        if (autoPlayAttempted) return;
+        autoPlayAttempted = true;
+        audio.play().then(() => {
+            if(playBtn) playBtn.innerHTML = '⏸️';
+        }).catch(e => {
+            console.log("自动播放受限，需要用户交互", e);
+            if(playBtn) playBtn.innerHTML = '▶️';
+        });
+    }
+    document.addEventListener('click', function onceClick() {
+        if(audio.paused && !autoPlayAttempted) {
+            audio.play().then(()=>{ if(playBtn) playBtn.innerHTML = '⏸️'; }).catch(()=>{});
+        }
+        document.removeEventListener('click', onceClick);
+    }, { once: true });
+    if(playBtn) {
+        playBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if(audio.paused) { audio.play(); playBtn.innerHTML = '⏸️'; }
+            else { audio.pause(); playBtn.innerHTML = '▶️'; }
+        });
+    }
+    // 页面加载后尝试自动播放（但浏览器策略限制，借助用户首次点击任何地方触发）
+    window.addEventListener('load', () => {
+        attemptAutoPlay();
+        // 额外加一个轻微的hover自动策略：页面任意交互启动播放已在全局click处理
+    });
+    
+    // 登录注册函数(沿用原有逻辑)
+    async function signUp(nickname, password) { if (!nickname||!password) { alert('填写昵称和密码'); return; } if(password.length<6) { alert('密码至少6位'); return; } const { error } = await supabase.auth.signUp({ email: nickname+'@beta.user', password }); if(error){ alert(error.message.includes('already')?'昵称已存在':'注册失败'); } else { alert('注册成功，欢迎乐迷~'); renderAuthUI(); } }
+    async function signIn(nickname, password) { if (!nickname||!password) return; const { error } = await supabase.auth.signInWithPassword({ email: nickname+'@beta.user', password }); if(error){ alert('昵称或密码错误'); } else { alert('登录成功'); renderAuthUI(); refreshAllUI(); } }
+    async function signOutUser() { await supabase.auth.signOut(); renderAuthUI(); refreshAllUI(); alert('已登出'); }
+    async function getComments() { const { data } = await supabase.from('comments').select('*').eq('news_slug', NEWS_SLUG).order('created_at', {ascending:true}); return data || []; }
+    async function postComment(content, parentId=null) { const { data:{session} } = await supabase.auth.getSession(); if(!session){ alert('请先登录'); return; } if(!content?.trim()) return; const nickname = session.user.email.replace('@beta.user',''); const { error } = await supabase.from('comments').insert({ news_slug:NEWS_SLUG, user_id:session.user.id, nickname, content:content.trim(), parent_id:parentId }); if(error) alert('发布失败'); else { renderComments(); return true; } }
+    async function deleteComment(id) { const { error } = await supabase.from('comments').delete().eq('id',id); return !error; }
+    async function getLikeInfo() { const { count } = await supabase.from('likes').select('*',{count:'exact',head:true}).eq('news_slug',NEWS_SLUG); const { data:{session} } = await supabase.auth.getSession(); let userLiked=false; if(session){ const { data } = await supabase.from('likes').select('*').eq('news_slug',NEWS_SLUG).eq('user_id',session.user.id).maybeSingle(); userLiked=!!data; } return { count:count||0, userLiked }; }
+    async function toggleLike() { const { data:{session} } = await supabase.auth.getSession(); if(!session){ alert('请先登录'); return; } const existing = await supabase.from('likes').select('*').eq('news_slug',NEWS_SLUG).eq('user_id',session.user.id).maybeSingle(); if(existing.data) await supabase.from('likes').delete().eq('id',existing.data.id); else await supabase.from('likes').insert({ news_slug:NEWS_SLUG, user_id:session.user.id }); refreshLikeUI(); }
+    async function getFavoriteInfo() { const { count } = await supabase.from('favorites').select('*',{count:'exact',head:true}).eq('news_slug',NEWS_SLUG); const { data:{session} } = await supabase.auth.getSession(); let favor=false; if(session){ const { data } = await supabase.from('favorites').select('*').eq('news_slug',NEWS_SLUG).eq('user_id',session.user.id).maybeSingle(); favor=!!data; } return { count:count||0, userFavorited:favor }; }
+    async function toggleFavorite() { const { data:{session} } = await supabase.auth.getSession(); if(!session){ alert('请先登录'); return; } const existing = await supabase.from('favorites').select('*').eq('news_slug',NEWS_SLUG).eq('user_id',session.user.id).maybeSingle(); if(existing.data) await supabase.from('favorites').delete().eq('id',existing.data.id); else await supabase.from('favorites').insert({ news_slug:NEWS_SLUG, user_id:session.user.id }); refreshFavoriteUI(); }
+    function escapeHtml(t) { const div=document.createElement('div'); div.textContent=t||''; return div.innerHTML; }
+    function formatTime(ts){ const d=new Date(ts); return `${d.getMonth()+1}/${d.getDate()} ${d.getHours().toString().padStart(2,'0')}:${d.getMinutes().toString().padStart(2,'0')}`; }
+    async function renderComments(){ const container=document.getElementById('comments-list'); if(!container) return; const comments=await getComments(); const { data:{session} } = await supabase.auth.getSession(); const curUserId=session?.user?.id; const root = comments.filter(c=>!c.parent_id); const replies=comments.filter(c=>c.parent_id); document.getElementById('comment-count').innerText=comments.length;
+        function renderItem(c, depth=0){ const childReplies=replies.filter(r=>r.parent_id===c.id); const isOwner=curUserId===c.user_id; let html=`<div class="comment-item" style="margin-left:${depth*24}px"><div class="comment-header"><span class="comment-nickname">${escapeHtml(c.nickname)}</span><span class="comment-time">${formatTime(c.created_at)}</span></div><div class="comment-content">${escapeHtml(c.content)}</div><div class="comment-actions"><button class="reply-btn" data-id="${c.id}">回复</button>${isOwner?`<button class="delete-btn" data-id="${c.id}">删除</button>`:''}</div><div class="reply-form" id="reply-form-${c.id}"><textarea id="reply-input-${c.id}" rows="2" placeholder="写下回复..."></textarea><button class="submit-reply" data-id="${c.id}">回复</button></div></div>`; childReplies.forEach(r=>html+=renderItem(r,depth+1)); return html; }
+        container.innerHTML=root.map(c=>renderItem(c,0)).join('')||'<p style="text-align:center;padding:24px;">✨ 来留下第一条β乐评吧 ✨</p>';
+        document.querySelectorAll('.reply-btn').forEach(btn=>btn.addEventListener('click',()=>{ document.getElementById(`reply-form-${btn.dataset.id}`).style.display='block'; }));
+        document.querySelectorAll('.submit-reply').forEach(btn=>btn.addEventListener('click',async()=>{ const id=btn.dataset.id; const input=document.getElementById(`reply-input-${id}`); if(await postComment(input.value,parseInt(id))){ input.value=''; renderComments(); } }));
+        document.querySelectorAll('.delete-btn').forEach(btn=>btn.addEventListener('click',async()=>{ if(confirm('删除评论？')&&await deleteComment(btn.dataset.id)) renderComments(); }));
+    }
+    async function refreshLikeUI(){ const {count,userLiked}=await getLikeInfo(); document.getElementById('like-count').innerText=count; document.getElementById('like-btn').innerHTML=`${userLiked?'💗':'❤️'} 心动指数 <span id="like-count">${count}</span>`; }
+    async function refreshFavoriteUI(){ const {count,userFavorited}=await getFavoriteInfo(); document.getElementById('favorite-count').innerText=count; document.getElementById('favorite-btn').innerHTML=`${userFavorited?'⭐':'☆'} 收藏专辑 <span id="favorite-count">${count}</span>`; }
+    async function renderAuthUI(){ const area=document.getElementById('auth-area'); if(!area) return; const { data:{session} } = await supabase.auth.getSession(); if(session){ const nickname=session.user.email.replace('@beta.user',''); area.innerHTML=`<div class="user-panel"><span>🎤 乐迷 ${escapeHtml(nickname)}</span><button class="btn-outline" id="signout-btn" style="background:transparent;">登出</button></div>`; document.getElementById('signout-btn')?.addEventListener('click',signOutUser); } else { area.innerHTML=`<div class="auth-panel"><input type="text" id="signup-nickname" placeholder="昵称" /><input type="password" id="signup-password" placeholder="密码(≥6位)" /><button id="signup-btn">注册</button><button id="signin-btn">登录</button><p style="font-size:12px; margin-top:12px;">登录后可参与互动</p></div>`; document.getElementById('signup-btn')?.addEventListener('click',()=>{ const nick=document.getElementById('signup-nickname'); const pass=document.getElementById('signup-password'); if(nick&&pass) signUp(nick.value,pass.value); }); document.getElementById('signin-btn')?.addEventListener('click',()=>{ const nick=document.getElementById('signup-nickname'); const pass=document.getElementById('signup-password'); if(nick&&pass) signIn(nick.value,pass.value); }); } }
+    async function refreshAllUI(){ await Promise.all([refreshLikeUI(), refreshFavoriteUI(), renderComments()]); }
+    // 爱心特效
+    function startHeartRain(){ const count=60; for(let i=0;i<count;i++){ setTimeout(()=>{ const heart=document.createElement('div'); heart.className='floating-heart'; heart.innerHTML='❤️'; heart.style.left=Math.random()*100+'%'; const duration=Math.random()*2.5+2; heart.style.fontSize=(Math.random()*24+20)+'px'; heart.style.animationDuration=duration+'s'; document.body.appendChild(heart); setTimeout(()=>heart.remove(),duration*1000); }, i*40); } }
+    // 分享复制
+    async function copyPageLink(){ try{ await navigator.clipboard.writeText(pageUrl); showToast('📎 页面链接已复制！分享β之歌'); }catch(e){ showToast('复制失败'); } }
+    function shareTrack(){ if(navigator.share) navigator.share({ title:pageTitle, text:'Lady·只昂 贝塔β之歌 太好听了', url:pageUrl }).catch(()=>{}); else copyPageLink(); }
+    document.addEventListener('DOMContentLoaded',()=>{ renderAuthUI(); refreshAllUI(); document.getElementById('like-btn')?.addEventListener('click',toggleLike); document.getElementById('favorite-btn')?.addEventListener('click',toggleFavorite); document.getElementById('post-comment-btn')?.addEventListener('click',async()=>{ const input=document.getElementById('comment-input'); if(input && await postComment(input.value)){ input.value=''; renderComments(); } }); document.getElementById('shareTrackBtn')?.addEventListener('click',shareTrack); document.getElementById('copyPageLink')?.addEventListener('click',copyPageLink); document.getElementById('heartRainBtn')?.addEventListener('click',startHeartRain); document.getElementById('auth-icon')?.addEventListener('click',()=>{ document.getElementById('auth-area')?.scrollIntoView({behavior:'smooth'}); }); });
+</script>
+</body>
+</html>
