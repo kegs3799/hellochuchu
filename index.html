@@ -3,14 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>楚楚来咯~</title>
-    <!-- 使用与 DeepSeek 类似的字体与图标风格 -->
+    <title>楚楚来啦</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* 全局重置 & 字体 */
         * {
             margin: 0;
             padding: 0;
@@ -28,10 +26,9 @@
             margin: 0;
         }
 
-        /* 移动优先卡片 – 仿 DeepSeek 移动端简约风格 */
         .chat-app {
             width: 100%;
-            max-width: 480px;  /* 舒适的移动宽度 */
+            max-width: 480px;
             height: 100vh;
             max-height: 820px;
             background: #ffffff;
@@ -40,11 +37,9 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            transition: all 0.2s ease;
             position: relative;
         }
 
-        /* ---------- 头部：极简 · 仿 DeepSeek ---------- */
         .chat-header {
             padding: 18px 20px 12px 20px;
             border-bottom: 1px solid rgba(0,0,0,0.03);
@@ -92,7 +87,6 @@
             color: #2b5bd1;
             padding: 2px 10px;
             border-radius: 30px;
-            letter-spacing: 0.2px;
         }
 
         .header-right {
@@ -112,7 +106,6 @@
             color: #5b7bdb;
         }
 
-        /* ---------- 消息区域 ---------- */
         .messages-wrapper {
             flex: 1;
             overflow-y: auto;
@@ -132,7 +125,6 @@
             border-radius: 20px;
         }
 
-        /* 消息气泡 – 纯粹干净 */
         .message {
             display: flex;
             gap: 10px;
@@ -209,7 +201,6 @@
             font-family: 'SF Mono', monospace;
         }
 
-        /* 打字指示器 */
         .typing-indicator {
             display: flex;
             align-items: center;
@@ -234,7 +225,6 @@
             100% { opacity: 0.3; transform: scale(0.9); }
         }
 
-        /* ---------- 底部输入区：简洁大气 ---------- */
         .input-area {
             padding: 12px 16px 20px 16px;
             border-top: 1px solid rgba(0,0,0,0.02);
@@ -306,7 +296,6 @@
             box-shadow: none;
         }
 
-        /* ---------- 温馨提示条 (每10句提醒) ---------- */
         .reminder-bar {
             text-align: center;
             font-size: 13px;
@@ -324,7 +313,6 @@
             font-weight: 500;
         }
 
-        /* 小屏适配 */
         @media (max-width: 500px) {
             body { padding: 0; }
             .chat-app {
@@ -338,7 +326,6 @@
             .input-area { padding: 10px 12px 16px 12px; }
         }
 
-        /* 滚动条优化 */
         .messages-wrapper {
             scrollbar-width: thin;
         }
@@ -347,7 +334,6 @@
 <body>
     <div class="chat-app">
 
-        <!-- 头部：极简仿 DeepSeek -->
         <div class="chat-header">
             <div class="header-left">
                 <div class="avatar">楚</div>
@@ -361,17 +347,12 @@
             </div>
         </div>
 
-        <!-- 消息容器 -->
-        <div class="messages-wrapper" id="messagesWrapper">
-            <!-- 由 JavaScript 渲染 -->
-        </div>
+        <div class="messages-wrapper" id="messagesWrapper"></div>
 
-        <!-- 温馨提示条：每10句提醒一次（纯提醒，不限用） -->
         <div class="reminder-bar" id="reminderBar">
             <i class="far fa-comment-dots" style="margin-right: 4px;"></i> 和楚楚的每一次对话都很珍贵
         </div>
 
-        <!-- 底部输入 -->
         <div class="input-area">
             <div class="input-wrap">
                 <textarea id="userInput" rows="1" placeholder="给楚楚发条消息…" maxlength="2000"></textarea>
@@ -384,51 +365,30 @@
 
     <script>
         (function() {
-            // ============================================================
-            //  🎯 配置区域 —— 在这里填写你的 DeepSeek API Key
-            // ============================================================
             const CONFIG = {
-                // 【重要】替换成你自己的 DeepSeek API Key (以 sk- 开头)
-                API_KEY: 'b215737c75c040ec8b7c838110e36b97.vJDlbyIg93D0GG6d',  
-                
-                // 模型选择：deepseek-v4-flash 性价比极高
+                API_KEY: 'b215737c75c040ec8b7c838110e36b97.vJDlbyIg93D0GG6d',
                 MODEL: 'glm-4.5-air',
-                
-                // API 地址（官方）
                 API_BASE: 'https://open.bigmodel.cn/api/paas/v4/chat/completions',
-                
-                // 系统提示词 —— 楚楚人设
-                SYSTEM_PROMPT: '你是一个温柔、可爱、善解人意的AI助手，名字叫“楚楚”。你的语气活泼亲切，喜欢用轻松的语调跟用户聊天。回答要简洁有条理，但不要过于学术化，保持对话感。如果用户跟你打招呼，请热情回应并介绍自己。你基于 DeepSeek-V4-Flash 模型提供服务。'
+                SYSTEM_PROMPT: '你是一个温柔、可爱、善解人意的AI助手，名字叫"楚楚"。你的语气活泼亲切，喜欢用轻松的语调跟用户聊天。回答要简洁有条理，但不要过于学术化，保持对话感。如果用户跟你打招呼，请热情回应并介绍自己。'
             };
 
-            // ============================================================
-            //  DOM 引用 & 状态
-            // ============================================================
             const messagesWrapper = document.getElementById('messagesWrapper');
             const userInput = document.getElementById('userInput');
             const sendBtn = document.getElementById('sendBtn');
             const reminderBar = document.getElementById('reminderBar');
 
-            // 对话历史 (存储 { role, content })
             let conversation = [];
-            // 消息计数器 (仅用于提醒)
             let messageCount = 0;
-            // 是否正在处理
             let isProcessing = false;
 
-            // ============================================================
-            //  工具函数
-            // ============================================================
             function scrollToBottom() {
                 requestAnimationFrame(() => {
                     messagesWrapper.scrollTop = messagesWrapper.scrollHeight;
                 });
             }
 
-            // 渲染所有消息 (从 conversation 重建)
             function renderAllMessages() {
                 if (conversation.length === 0) {
-                    // 显示欢迎语
                     messagesWrapper.innerHTML = `
                         <div class="message" style="align-self: flex-start; max-width: 92%;">
                             <div class="msg-icon" style="background: #f0b6b6;">楚</div>
@@ -447,14 +407,12 @@
                     const isUser = msg.role === 'user';
                     const iconLabel = isUser ? '你' : '楚';
                     const iconBg = isUser ? '#2b5bd1' : '#f0b6b6';
-                    const bubbleClass = isUser ? 'bubble' : 'bubble';
                     const alignClass = isUser ? 'user' : '';
-                    // 简单处理换行
                     const contentHtml = msg.content.replace(/\n/g, '<br>');
                     html += `
                         <div class="message ${alignClass}">
                             <div class="msg-icon" style="background: ${iconBg};">${iconLabel}</div>
-                            <div class="${bubbleClass}">${contentHtml}</div>
+                            <div class="bubble">${contentHtml}</div>
                         </div>
                     `;
                 }
@@ -462,18 +420,15 @@
                 scrollToBottom();
             }
 
-            // 添加消息到历史并重新渲染
             function addMessageAndRender(role, content) {
                 conversation.push({ role, content });
                 renderAllMessages();
-                // 更新提醒条 (每10句)
                 if (role === 'user') {
                     messageCount++;
                     updateReminder();
                 }
             }
 
-            // 显示/移除 "正在输入"
             function showTyping() {
                 const typingDiv = document.createElement('div');
                 typingDiv.className = 'typing-indicator';
@@ -493,11 +448,9 @@
                 if (el) el.remove();
             }
 
-            // 更新温馨提示条 (每10句提醒，不限制使用)
             function updateReminder() {
                 if (messageCount % 10 === 0 && messageCount > 0) {
                     reminderBar.innerHTML = `<i class="far fa-smile" style="margin-right: 4px;"></i> 您今日聊天机会快要用完了哦~ 但别担心，楚楚会一直陪着你 ✨`;
-                    // 闪烁一下
                     reminderBar.style.color = '#2b5bd1';
                     setTimeout(() => {
                         reminderBar.style.color = '#8a92a6';
@@ -507,24 +460,18 @@
                 }
             }
 
-            // ============================================================
-            //  核心：调用 DeepSeek API
-            // ============================================================
             async function sendMessageToAI(userMessage) {
-                // 校验 API Key
                 const apiKey = CONFIG.API_KEY.trim();
-                // ✅ 替换成这个
-if (!apiKey || apiKey.trim() === '') {
-    alert('⚠️ 请先在代码中配置 API Key');
-    return false;
-        }
+
+                if (!apiKey || apiKey === '') {
+                    alert('⚠️ 请先在代码中配置有效的 API Key');
+                    return false;
+                }
 
                 if (isProcessing) return false;
 
-                // 1. 添加用户消息
                 addMessageAndRender('user', userMessage);
 
-                // 2. 构建请求体 (包含 system + 历史)
                 const messages = [
                     { role: 'system', content: CONFIG.SYSTEM_PROMPT },
                     ...conversation.filter(m => m.role !== 'system')
@@ -568,7 +515,6 @@ if (!apiKey || apiKey.trim() === '') {
                     const data = await response.json();
                     const reply = data.choices?.[0]?.message?.content || '抱歉，楚楚没有收到有效回复。';
 
-                    // 添加助手回复
                     addMessageAndRender('assistant', reply);
 
                 } catch (error) {
@@ -585,9 +531,6 @@ if (!apiKey || apiKey.trim() === '') {
                 return true;
             }
 
-            // ============================================================
-            //  UI 事件绑定
-            // ============================================================
             function handleSend() {
                 const text = userInput.value.trim();
                 if (!text || isProcessing) return;
@@ -605,21 +548,12 @@ if (!apiKey || apiKey.trim() === '') {
 
             sendBtn.addEventListener('click', handleSend);
 
-            // 自动扩展高度
             userInput.addEventListener('input', () => {
                 userInput.style.height = 'auto';
                 userInput.style.height = Math.min(userInput.scrollHeight, 120) + 'px';
             });
 
-            // ============================================================
-            //  初始化
-            // ============================================================
             function init() {
-                // 如果 API Key 是占位符，在控制台提醒
-                if (CONFIG.API_KEY === 'sk-你的DeepSeek_API_Key_请替换') {
-                    console.warn('⚠️ 请先在代码中配置 CONFIG.API_KEY');
-                }
-                // 清空历史，显示欢迎
                 conversation = [];
                 messageCount = 0;
                 renderAllMessages();
@@ -629,10 +563,7 @@ if (!apiKey || apiKey.trim() === '') {
 
             init();
 
-            // 暴露给外部（可选）
-            window.__chuchu = { conversation, messageCount, CONFIG };
-
         })();
     </script>
 </body>
-</html>
+    </html>
