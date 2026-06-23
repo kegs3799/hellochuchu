@@ -513,10 +513,11 @@
             async function sendMessageToAI(userMessage) {
                 // 校验 API Key
                 const apiKey = CONFIG.API_KEY.trim();
-                if (!apiKey || !apiKey.startsWith('sk-')) {
-                    alert('⚠️ 请先在代码中配置正确的 DeepSeek API Key (以 sk- 开头)');
-                    return false;
-                }
+                // ✅ 替换成这个
+if (!apiKey || apiKey.trim() === '') {
+    alert('⚠️ 请先在代码中配置 API Key');
+    return false;
+        }
 
                 if (isProcessing) return false;
 
