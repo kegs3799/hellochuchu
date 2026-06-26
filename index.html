@@ -156,7 +156,7 @@ $af.onsubmit=async e=>{
   if(p.length<6)return se('密码至少6位');
   $sb.disabled=true;$sb.textContent=isLogin?'登录中…':'注册中…';
   try{
-    const em=u.split('').map(c=>encodeURIComponent(c)).join('_')+'@chat.local';
+const em = u.normalize('NFKC').replace(/[^\w]/g, '') + '@chat.local';
     if(isLogin){
       const{r,error}=await sb.auth.signInWithPassword({email:em,password:p});
       if(error)throw error;
