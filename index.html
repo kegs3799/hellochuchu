@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>楚楚 AI Chat</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-json.min.js"></script>
+<style>
+:root[data-theme="light"]{
+--bg:#fff;--bg2:#f8f9fb;--glass:rgba(255,255,255,.72);--bubbleA:#f1f3f7;--bubbleU:linear-gradient(135deg,#e8688a,#f094b0);
+--text:#1a1a2e;--sub:#6b7280;--accent:#e8688a;--hover:#d94f73;--border:#e5e7eb;--shadow:0 4px 24px rgba(0,0,0,.06);
+}
+:root[data-theme="dark"]{
+--bg:#1a1a1e;--bg2:#252529;--glass:rgba(37,37,41,.75);--bubbleA:#2d2d31;--bubbleU:linear-gradient(135deg,#4c7cff,#6b93ff);
+--text:#f0f0f5;--sub:#9ca3af;--accent:#4c7cff;--hover:#6b93ff;--border:#3a3a3e;--shadow:0 4px 24px rgba(0,0,0,.3);
+}
+:root[data-theme="pink"]{
+--bg:#fff8f9;--bg2:#fff0f3;--glass:rgba(255,248,249,.78);--bubbleA:#ffeef2;--bubbleU:linear-gradient(135deg,#e8688a,#f094b0);
+--text:#2d1b21;--sub:#8b6b76;--accent:#e8688a;--hover:#d94f73;--border:#f5d0da;--shadow:0 4px 24px rgba(232,104,138,.1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:.3s}
+.auth-page{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px}
+.auth-card{width:100%;max-width:400px;padding:40px;background:var(--glass);backdrop-filter:blur(20px) saturate(180%);border-radius:16px;border:1px solid rgba(255,255,255,.3);box-shadow:var(--shadow)}
+.auth-card h1{font-size:26px;text-align:center;margin-bottom:6px}
+.auth-card>p{text-align:center;color:var(--sub);margin-bottom:28px;font-size:13px}
+.input-group{margin-bottom:16px}
+.input-group label{font-size:13px;font-weight:500;display:block;margin-bottom:6px}
+.input-group input{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:12px;font-size:15px;background:var(--bg);color:var(--text);outline:none;transition:.2s}
+.input-group input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(232,104,138,.12)}
+.hint{font-size:11px;color:var(--sub);margin-top:4px;padding-left:2px}
+.btn{width:100%;padding:13px;border:none;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;background:var(--accent);color:#fff;transition:.2s;margin-top:8px}
+.btn:hover{background:var(--hover);transform:scale(1.02)}
+.btn:disabled{opacity:.5;transform:none}
+.err{padding:10px 14px;background:rgba(239,68,68,.1);border-left:3px solid #ef4444;border-radius:8px;color:#dc2626;font-size:13px;margin-bottom:14px;display:none}.err.show{display:block}
+.sw{text-align:center;margin-top:18px;font-size:13px;color:var(--sub)}
+.sw button{background:none;border:none;color:var(--accent);cursor:pointer;font-weight:500}
+.chat-page{display:none;flex-direction:column;height:100vh}
+.header{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;border-bottom:1px solid var(--border);background:var(--glass);backdrop-filter:blur(12px);position:sticky;top:0;z-index:10}
+.ts{display:flex;gap:4px;background:var(--bg2);padding:3px;border-radius:8px}
+.tb{width:34px;height:34px;border:none;border-radius:6px;background:transparent;cursor:pointer;font-size:15px;transition:.2s}
+.tb:hover{background:var(--glass)}.tb.active{background:var(--accent);color:#fff}
+.lo{padding:7px 14px;border:1px solid var(--border);border-radius:8px;background:transparent;color:var(--sub);font-size:12px;cursor:pointer}
+.lo:hover{background:var(--bg2)}
+.msgs{flex:1;overflow-y:auto;padding:28px 20px;display:flex;flex-direction:column;gap:20px}
+.msg{display:flex;gap:10px;max-width:780px;margin:0 auto;width:100%;animation:fade .25s}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.msg.user{flex-direction:row-reverse}
+.av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0}
+.msg.assistant .av{background:var(--accent);color:#fff}
+.msg.user .av{background:var(--bg2);color:var(--sub)}
+.bbl{padding:12px 16px;border-radius:12px;font-size:14.5px;line-height:1.65;max-width:calc(100% - 50px)}
+.msg.assistant .bbl{background:var(--bubbleA);border-top-left-radius:4px}
+.msg.user .bbl{background:var(--bubbleU);color:#fff;border-top-right-radius:4px}
+.bbl pre{background:#1e1e2e!important;padding:12px;border-radius:8px;overflow-x:auto;margin:8px 0}
+.bbl code{font-family:'SF Mono',Monaco,monospace;font-size:12px}
+.empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--sub);text-align:center}
+.empty .ic{font-size:56px;margin-bottom:16px;opacity:.4}
+.empty h2{font-size:18px;font-weight:600;color:var(--text);margin-bottom:8px}
+.typing{display:flex;gap:5px;padding:6px 0}
+.typing span{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:tp 1.2s infinite ease-in-out}
+.typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}
+@keyframes tp{0%,100%{opacity:.3;transform:translateY(0)}50%{opacity:1;transform:translateY(-6px)}}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+</style>
+</head>
+<body>
+
+<div class="auth-page" id="ap">
+  <div class="auth-card">
+    <h1>楚楚 AI</h1>
+    <p id="subt">登录后开始对话</p>
+    <div class="err" id="err"></div>
+    <form id="af">
+      <div class="input-group">
+        <label>用户名</label>
+        <input id="un" placeholder="中文、字母、数字或下划线" required autocomplete="username"/>
+        <div class="hint">2–20位，支持中文、英文字母、数字、下划线</div>
+      </div>
+      <div class="input-group">
+        <label>密码</label>
+        <input id="pw" type="password" placeholder="至少6位" required autocomplete="current-password"/>
+        <div class="hint">至少6位字符</div>
+      </div>
+      <button class="btn" id="sb" type="submit">登录</button>
+    </form>
+    <div class="sw"><span id="st">还没有账号？</span> <button id="swb">注册</button></div>
+  </div>
+</div>
+
+<div class="chat-page" id="cp">
+  <div class="header">
+    <h1>楚楚 AI</h1>
+    <div class="ts">
+      <button class="tb active" data-t="light">☀️</button>
+      <button class="tb" data-t="dark">🌙</button>
+      <button class="tb" data-t="pink">💖</button>
+    </div>
+    <button class="lo" id="lo">退出</button>
+  </div>
+  <div class="msgs" id="msgs">
+    <div class="empty" id="es"><div class="ic">💬</div><h2>开始一段对话</h2><p>输入消息开始，对话自动保存到云端</p></div>
+  </div>
+  <div class="ia">
+    <div class="iw">
+      <div class="ir">
+        <textarea id="mi" rows="1" placeholder="输入消息，Shift+Enter换行…"/></textarea>
+        <button class="sb" id="send">➤</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const SB_URL='https://gisixdmjugrmbruwhpxd.supabase.co';
+const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdpc2l4ZG1qdWdybWJydXdocHhkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI0MTQxOTgsImV4cCI6MjA5Nzk5MDE5OH0.XU5QRV0SPJMJGayNsCSv888AvTW3JK3RcIUGHlNt9bA';
+const sb=window.supabase.createClient(SB_URL,SB_KEY);
+
+const $ap=document.getElementById('ap'),$cp=document.getElementById('cp');
+const $un=document.getElementById('un'),$pw=document.getElementById('pw');
+const $sb=document.getElementById('sb'),$swb=document.getElementById('swb');
+const $err=document.getElementById('err'),$st=document.getElementById('st');
+const $msgs=document.getElementById('msgs'),$es=document.getElementById('es');
+const $mi=document.getElementById('mi'),$send=document.getElementById('send');
+let isLogin=true,curUser=null,convId=null,msgs=[];
+
+// Theme
+document.querySelectorAll('.tb').forEach(b=>b.addEventListener('click',()=>{
+  document.documentElement.setAttribute('data-theme',b.dataset.t);
+  document.querySelectorAll('.tb').forEach(x=>x.classList.toggle('active',x===b));
+  localStorage.setItem('theme',b.dataset.t);
+}));
+(function(){const t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t);document.querySelectorAll('.tb').forEach(b=>b.classList.toggle('active',b.dataset.t===t))})();
+
+function se(m){$err.textContent=m;$err.classList.add('show')}
+function he(){$err.classList.remove('show')}
+
+$swb.onclick=()=>{
+  isLogin=!isLogin;
+  $sb.textContent=isLogin?'登录':'注册';
+  $st.textContent=isLogin?'还没有账号？':'已有账号？';
+  $swb.textContent=isLogin?'注册':'登录';
+  document.getElementById('subt').textContent=isLogin?'登录后开始对话':'创建账号开始使用';
+  he();
+};
+
+$af.onsubmit=async e=>{
+  e.preventDefault();he();
+  const u=$un.value.trim(),p=$pw.value;
+  if(!/^[\u4e00-\u9fa5a-zA-Z0-9_]{2,20}$/.test(u))return se('用户名2-20位，支持中文、字母、数字、下划线');
+  if(p.length<6)return se('密码至少6位');
+  $sb.disabled=true;$sb.textContent=isLogin?'登录中…':'注册中…';
+  try{
+    const em=u.split('').map(c=>encodeURIComponent(c)).join('_')+'@chat.local';
+    if(isLogin){
+      const{r,error}=await sb.auth.signInWithPassword({email:em,password:p});
+      if(error)throw error;
+    }else{
+      const{r,error}=await sb.auth.signUp({
+        email:em,password:p,
+        options:{data:{username:u}}
+      });
+      if(error)throw error;
+      if(r.user) await fetch('/api/sync-user',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:r.user.id,email:em,username:u})}).catch(()=>{});
+      if(!r.session) await sb.auth.signInWithPassword({email:em,password:p});
+    }
+  }catch(err){
+    if(err.message.includes('Invalid login'))se('用户名或密码错误');
+    else if(err.message.includes('already registered')||err.message.includes('already been registered'))se('用户名已被占用');
+    else se(err.message||'操作失败');
+  }finally{$sb.disabled=false;$sb.textContent=isLogin?'登录':'注册'}
+};
+
+sb.auth.onAuthStateChange((_,s)=>{if(s?.user){curUser=s.user;showChat();loadConv()}else{showAuth()}});
+sb.auth.getSession().then(({data:{session}})=>{if(session?.user){curUser=session.user;showChat();loadConv()}else showAuth()});
+
+function showAuth(){$ap.style.display='flex';$cp.style.display='none';$un.value='';$pw.value='';he()}
+function showChat(){$ap.style.display='none';$cp.style.display='flex'}
+
+$lo.onclick=()=>{sb.auth.signOut();msgs=[];convId=null;$msgs.innerHTML='<div class="empty" id="es"><div class="ic">💬</div><h2>开始一段对话</h2><p>输入消息开始，对话自动保存到云端</p></div>'}
+
+async function loadConv(){
+  if(!curUser)return;
+  try{
+    const r=await fetch(`/api/conversations?userId=${curUser.id}`);
+    const rows=await r.json();
+    if(rows?.length){
+      convId=rows[0].id;
+      const mr=await fetch(`/api/conversations?conversationId=${convId}`);
+      const ms=await mr.json();
+      if(ms?.length){
+        $es.style.display='none';
+        msgs=ms.map(m=>({role:m.role,content:m.content}));
+        ms.forEach(m=>addMsgDom(m.role,m.content));
+      }
+    }
+  }catch{}
+}
+
+function addMsgDom(role,c){
+  $es.style.display='none';
+  const d=document.createElement('div');d.className='msg '+role;
+  d.innerHTML=`<div class="av">${role==='user'?'你':'AI'}</div><div class="bbl">${fmt(c)}</div>`;
+  $msgs.appendChild(d);$msgs.scrollTop=$msgs.scrollHeight;
+  msgs.push({role,content:c});
+}
+function fmt(c){
+  c=c.replace(/```(\w*)\n([\s\S]*?)```/g,(m,l,cd)=>`<pre><code class="language-${l||'plaintext'}">${Prism.highlight(cd.trim(),Prism.languages[l||'plaintext']||Prism.languages.plaintext,l||'plaintext')}</code></pre>`);
+  c=c.replace(/`([^`]+)`/g,'<code style="background:#f0f0f0;padding:1px 5px;border-radius:4px;font-size:12px;">$1</code>');
+  return c.replace(/\n/g,'<br>');
+}
+function typingInd(){
+  const d=document.createElement('div');d.className='msg assistant';
+  d.innerHTML=`<div class="av">AI</div><div class="bbl"><div class="typing"><span></span><span></span><span></span></div></div>`;
+  $msgs.appendChild(d);$msgs.scrollTop=$msgs.scrollHeight;return d;
+}
+
+async function send(){
+  const t=$mi.value.trim();if(!t)return;
+  $mi.value='';$mi.style.height='auto';$send.disabled=true;
+  addMsgDom('user',t);
+  if(!convId){
+    convId=crypto.randomUUID();
+    await fetch('/api/conversations',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({id:convId,user_id:curUser.id,title:t.slice(0,30)+(t.length>30?'…':''),created_at:Date.now(),updated_at:Date.now()})}).catch(()=>{});
+    await fetch('/api/messages',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({id:crypto.randomUUID(),conversation_id:convId,role:'user',content:t,created_at:Date.now()})}).catch(()=>{});
+  }
+  const ti=typingInd();
+  try{
+    const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:msgs.slice(-10)})});
+    ti.remove();
+    if(!res.ok)throw new Error();
+    const d=await res.json();
+    addMsgDom('assistant',d.content||'…');
+    await fetch('/api/messages',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({id:crypto.randomUUID(),conversation_id:convId,role:'assistant',content:d.content||'…',created_at:Date.now()})}).catch(()=>{});
+  }catch{e=ti;ti?.remove();addMsgDom('assistant','网络出错了，请稍后再试～')}
+  finally{$send.disabled=false}
+}
+$send.onclick=send;
+$mi.onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}};
+$mi.oninput=()=>{$mi.style.height='auto';$mi.style.height=Math.min($mi.scrollHeight,150)+'px'};
+</script>
+</body>
+</html>
