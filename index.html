@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>超超超超便宜 · 帮做网站</title>
+   
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: #0f0f11;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            margin: 0;
+        }
+
+        
+        .card {
+            max-width: 480px;
+            width: 100%;
+            background: rgba(26, 26, 30, 0.86);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 36px;
+            padding: 32px 28px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: all 0.2s ease;
+            color: #e8e8ea;
+        }
+
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .badge {
+            background: rgba(80, 160, 255, 0.12);
+            color: #7aa9ff;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 6px 14px;
+            border-radius: 40px;
+            letter-spacing: 0.3px;
+            border: 1px solid rgba(80, 160, 255, 0.08);
+        }
+
+        .badge strong {
+            font-weight: 600;
+            color: #9bbfff;
+        }
+
+        .telegram-tag {
+            color: #6d6d78;
+            font-size: 14px;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .telegram-tag span {
+            background: #1f1f23;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 12px;
+            color: #b0b0ba;
+            border: 1px solid #2a2a2f;
+        }
+
+        
+        .hero {
+            margin-bottom: 28px;
+        }
+
+        .hero h1 {
+            font-size: 32px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #f0f0f4 0%, #b8bcc9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        .hero .sub {
+            font-size: 16px;
+            color: #8e8e9a;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .hero .sub .price-tag {
+            background: #2d2d33;
+            padding: 4px 14px;
+            border-radius: 40px;
+            font-size: 20px;
+            font-weight: 600;
+            color: #d0d4e0;
+            letter-spacing: 0.5px;
+            border: 1px solid #3d3d44;
+        }
+
+        .hero .sub .price-tag small {
+            font-size: 14px;
+            font-weight: 400;
+            color: #8a8a96;
+        }
+
+        
+        .feature-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin: 24px 0 28px;
+        }
+
+        .feature-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 14px 18px;
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: 0.15s;
+            backdrop-filter: blur(4px);
+        }
+
+        .feature-row .emoji-bg {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .feature-row .content {
+            flex: 1;
+        }
+
+        .feature-row .content .title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #e4e4ea;
+            letter-spacing: 0.2px;
+        }
+
+        .feature-row .content .desc {
+            font-size: 14px;
+            color: #83838f;
+            margin-top: 2px;
+            line-height: 1.4;
+        }
+
+        .feature-row .content .desc strong {
+            color: #b4b9cc;
+            font-weight: 500;
+        }
+
+        
+        .compare-section {
+            background: rgba(0, 0, 0, 0.35);
+            border-radius: 24px;
+            padding: 18px 20px;
+            margin: 18px 0 26px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .compare-title {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #6d6d7a;
+            margin-bottom: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .compare-title span {
+            background: #1e1e23;
+            padding: 2px 12px;
+            border-radius: 30px;
+            font-size: 11px;
+            color: #b0b0ba;
+        }
+
+        .compare-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .compare-item:last-child {
+            border-bottom: 0;
+        }
+
+        .compare-item .left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #b0b0ba;
+            font-size: 15px;
+        }
+
+        .compare-item .left .cross {
+            color: #ff6b6b;
+            font-weight: 400;
+            opacity: 0.7;
+        }
+
+        .compare-item .right {
+            color: #8bcb8f;
+            font-weight: 500;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .compare-item .right .check {
+            color: #6fcf97;
+        }
+
+        .wp-bad {
+            color: #9e9eab;
+            font-size: 14px;
+            background: rgba(255, 80, 80, 0.04);
+            padding: 3px 12px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 80, 80, 0.06);
+        }
+
+        .our-good {
+            color: #b0d4b0;
+            background: rgba(80, 200, 120, 0.04);
+            padding: 3px 12px;
+            border-radius: 30px;
+            border: 1px solid rgba(80, 200, 120, 0.06);
+        }
+
+        
+        .action {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .btn-primary {
+            background: #2d6bff;
+            border: none;
+            border-radius: 60px;
+            padding: 16px 20px;
+            color: white;
+            font-weight: 600;
+            font-size: 18px;
+            letter-spacing: 0.3px;
+            text-align: center;
+            cursor: default;
+            box-shadow: 0 6px 20px rgba(45, 107, 255, 0.15);
+            transition: 0.15s;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: linear-gradient(145deg, #2d6bff, #1f54e0);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary .small-note {
+            font-weight: 400;
+            font-size: 15px;
+            opacity: 0.8;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 60px;
+            padding: 14px 20px;
+            color: #a8a8b5;
+            font-weight: 400;
+            font-size: 15px;
+            text-align: center;
+            cursor: default;
+            backdrop-filter: blur(4px);
+        }
+
+        .btn-secondary span {
+            color: #c0c0cf;
+            font-weight: 500;
+        }
+
+        
+        .footer-note {
+            margin-top: 24px;
+            font-size: 13px;
+            color: #5d5d68;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.02);
+            padding-top: 20px;
+            letter-spacing: 0.2px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-note span {
+            background: #1a1a1e;
+            padding: 2px 14px;
+            border-radius: 30px;
+            border: 1px solid #25252b;
+        }
+
+        .footer-note strong {
+            color: #86869e;
+            font-weight: 400;
+        }
+
+        /* 响应式微调 */
+        @media (max-width: 420px) {
+            .card { padding: 24px 18px; }
+            .hero h1 { font-size: 28px; }
+            .feature-row { padding: 12px 14px; }
+            .compare-item { flex-wrap: wrap; gap: 6px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    
+    <div class="header">
+        <div class="badge">
+            ⚡ <strong>黑奴价</strong> · 20元封顶
+        </div>
+        <div class="telegram-tag">
+            <span>◎ 即开即用</span>
+        </div>
+    </div>
+
+    <div class="hero">
+        <h1>帮做网站<br>包域名 · 包模板</h1>
+        <div class="sub">
+            <span>随意定制 · 表白整蛊 · 纪念日</span>
+            <span class="price-tag">¥20 <small>封顶</small></span>
+        </div>
+    </div>
+
+    <!-- 核心亮点 · 仿 TG 信息块 -->
+    <div class="feature-grid">
+        <div class="feature-row">
+            <div class="emoji-bg">🧩</div>
+            <div class="content">
+                <div class="title">包域名 + 备案</div>
+                <div class="desc">无需任何技术，<strong>域名直接绑定</strong>，上线即用</div>
+            </div>
+        </div>
+        <div class="feature-row">
+            <div class="emoji-bg">🎨</div>
+            <div class="content">
+                <div class="title">模板随意定制</div>
+                <div class="desc">表白页 · 整蛊朋友 · 纪念日 · 个人名片 · 你想做啥就做啥</div>
+            </div>
+        </div>
+        <div class="feature-row">
+            <div class="emoji-bg">⚡</div>
+            <div class="content">
+                <div class="title">方便 · 省事 · 快</div>
+                <div class="desc">告诉我需求，<strong>最快当天交付</strong>，不用自己折腾代码</div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="compare-section">
+        <div class="compare-title">
+            <span>📌 对比</span> 为什么不用 WordPress？
+        </div>
+
+        <div class="compare-item">
+            <div class="left">
+                <span class="cross">✕</span> WP 二级域名
+            </div>
+            <div class="right">
+                <span class="wp-bad">经常被墙 · 慢</span>
+            </div>
+        </div>
+        <div class="compare-item">
+            <div class="left">
+                <span class="cross">✕</span> 需要技术基础
+            </div>
+            <div class="right">
+                <span class="wp-bad">服务器 · 环境 · 主题</span>
+            </div>
+        </div>
+        <div class="compare-item">
+            <div class="left">
+                <span style="color: #8bcb8f;">✓</span> 我们的方案
+            </div>
+            <div class="right">
+                <span class="our-good">域名绑定 · 成品交付</span>
+            </div>
+        </div>
+        <div class="compare-item" style="border-bottom: none; padding-bottom: 4px;">
+            <div class="left" style="color: #b8b8c4;">
+                <span style="color: #8bcb8f;">✓</span> 价格
+            </div>
+            <div class="right">
+                <span style="background: #1e2a1e; padding: 2px 16px; border-radius: 40px; border: 1px solid #2f4a2f; color: #9cd49c;">¥20 封顶</span>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="action">
+        <div class="btn-primary">
+            👋 说需求 · 我帮你做 <span class="small-note">(私信QQ3901632715)</span>
+        </div>
+        <div class="btn-secondary">
+            <span>⚙️ 包域名 · 包模板 · 随意定制</span>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        <span>📦 个人开发者 · 无中间商</span>
+        <span>🕒 24h 响应</span>
+        <span><strong>封顶</strong> ¥20</span>
+    </div>
+</div>
+
+</body>
+</html>
