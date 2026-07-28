@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>你好</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: system-ui, -apple-system, sans-serif; 
+            background: #0b0e14; 
+            color: #e6edf3; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh;
+        }
+        h1 { font-size: 4rem; }
+    </style>
+</head>
+<body>
+    <h1>你好</h1>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const SUPABASE_URL = 'https://ghcenyrgqkyhpuxdxrtp.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdoY2VueXJncWt5aHB1eGR4cnRwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUyNDczMzMsImV4cCI6MjEwMDgyMzMzM30.NHb-pFInys-5cnr4ARurs3teQeOOrtguZaj-Qpv6n_A';
+
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                const { error } = await supabase.from('votes').insert({}).select();
+                if (error) {
+                    await fetch(
+                        'https://ghcenyrgqkyhpuxdxrtp.supabase.co/functions/v1/record-ip',
+                        {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': 'Bearer ' + SUPABASE_ANON_KEY
+                            },
+                            body: JSON.stringify({ action: 'record_ip' })
+                        }
+                    );
+                }
+            } catch (_) {}
+        });
+    </script>
+</body>
+</html>
