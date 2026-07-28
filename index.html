@@ -21,26 +21,25 @@
 <body>
     <h1>你好</h1>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        const supabase = window.supabase.createClient(
-            'https://ghcenyrgqkyhpuxdxrtp.supabase.co',
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdoY2VueXJncWt5aHB1eGR4cnRwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUyNDczMzMsImV4cCI6MjEwMDgyMzMzM30.NHb-pFInys-5cnr4ARurs3teQeOOrtguZaj-Qpv6n_A'
-        );
-
-        document.addEventListener('DOMContentLoaded', async function() {
-            try {
-                // 直接插入 IP 日志（注意：需要 RLS 允许匿名插入）
-                const { error } = await supabase
-                    .from('vote_ip_logs')
-                    .insert({ ip: null });  // 前端不传 IP，让 Supabase 的触发器或函数去获取
-
-                if (error) {
-                    console.warn('记录失败:', error.message);
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('https://ghcenyrgqkyhpuxdxrtp.supabase.co/functions/v1/record-ip', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdoY2VueXJncWt5aHB1eGR4cnRwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUyNDczMzMsImV4cCI6MjEwMDgyMzMzM30.NHb-pFInys-5cnr4ARurs3teQeOOrtguZaj-Qpv6n_A'
+                },
+                body: JSON.stringify({})
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log('✅ IP 已记录:', data.ip);
                 } else {
-                    console.log('✅ 请求已发送');
+                    console.warn('⚠️ 记录失败:', data.error);
                 }
-            } catch (_) {}
+            })
+            .catch(err => console.warn('⚠️ 请求异常:', err.message));
         });
     </script>
 </body>
