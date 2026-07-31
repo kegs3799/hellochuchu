@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>匿名问卷</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*{box-sizing:border-box;font-family:system-ui;margin:0;padding:0}
+body{background:#f8f5f2;padding:20px}
+.wrap{max-width:700px;margin:0 auto;background:#fff;padding:24px;border-radius:16px}
+.q-item{margin:20px 0;padding:16px;border-bottom:1px solid #eee}
+button{padding:12px 24px;background:#ff8e72;color:#fff;border:none;border-radius:10px;font-size:16px}
+textarea,input{width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;margin-top:6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h2 id="sTitle"></h2>
+<p id="sDesc" style="color:#666;margin-bottom:20px"></p>
+<div id="qBox"></div>
+<button onclick="submitAnswer()">提交问卷</button>
+<div id="tip"></div>
+</div>
+
+<script>
+// ====================【配置区】填入Supabase信息 ====================
+const SUPABASE_URL = "https://dmyohvogxgcmlwmmjrtn.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRteW9odm9neGdjbWx3bW1qcnRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU0Nzg1MTcsImV4cCI6MjEwMTA1NDUxN30.qC3Sp_ynk5YKvYSScABRRVs7I8EE16hbayahGFdmNxM";
+// =================================================================
+const supabase = window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const url = new URL(location.href);
+const surveyId = url.searchParams.get("id");
+const userTag = url.searchParams.get("tag") || "未知填写人";
+let questionData = [];
+
+async function loadSurvey(){
+  const {data:survey} = await supabase.from("surveys").select("*").eq("id",surveyId).single();
+  const {data:questions} = await supabase.from("questions").select("*").eq("survey_id",surveyId);
+  document.getElementById("sTitle").innerText = survey.title;
+  document.getElementById("sDesc").innerText = survey.desc;
+  questionData = questions;
+  render();
+}
+
+function render(){
+  const box = document.getElementById("qBox");
+  box.innerHTML = "";
+  questionData.forEach((q,index)=>{
+    const div = document.createElement("div");
+    div.className="q-item";
+    div.innerHTML = `<p><b>${index+1}. ${q.title}</b> ${q.required?'<span style="color:red">*</span>':''}</p>`;
+    if(q.qtype === "single"){
+      q.options.forEach(opt=>{
+        div.innerHTML += `<label><input type="radio" name="q${q.id}" value="${opt}"> ${opt}</label><br>`
+      })
+    }else if(q.qtype === "multi"){
+      q.options.forEach(opt=>{
+        div.innerHTML += `<label><input type="checkbox" name="q${q.id}" value="${opt}"> ${opt}</label><br>`
+      })
+    }else{
+      div.innerHTML += `<textarea name="q${q.id}" placeholder="写下你的回答"></textarea>`
+    }
+    box.appendChild(div);
+  })
+}
+
+async function submitAnswer(){
+  const answerData = {};
+  questionData.forEach(q=>{
+    if(q.qtype === "single"){
+      const sel = document.querySelector(`input[name="q${q.id}"]:checked`);
+      answerData[q.id] = sel?.value || "";
+    }else if(q.qtype === "multi"){
+      const checked = document.querySelectorAll(`input[name="q${q.id}"]:checked`);
+      answerData[q.id] = Array.from(checked).map(el=>el.value);
+    }else{
+      answerData[q.id] = document.querySelector(`textarea[name="q${q.id}"]`).value;
+    }
+  })
+  await supabase.from("answers").insert([{
+    survey_id:surveyId,
+    user_tag:userTag,
+    answer_data:answerData
+  }]);
+  document.getElementById("tip").innerHTML = "<h3>✅提交成功！</h3>";
+}
+loadSurvey();
+</script>
+
+<style>
+  .watermark-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;  /* 让水印不干扰点击 */
+    z-index: 9999;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='180'%3E%3Ctext x='20' y='110' font-family='Microsoft YaHei, sans-serif' font-size='26' fill='rgba(0,0,0,0.07)' transform='rotate(-25, 140, 90)'%3E测试版水印*柳%3C/text%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 280px 180px;
+  }
+</style>
+<div class="watermark-layer"></div>
+</body>
+</html>
