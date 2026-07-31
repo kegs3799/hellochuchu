@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>创建问卷</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+        body {
+            background-color: #f9f5f1;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 820px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 36px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+        h1 {
+            font-size: 26px;
+            color: #222;
+            margin-bottom: 28px;
+        }
+        .form-item {
+            margin-bottom: 20px;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 15px;
+            outline: none;
+            transition: 0.2s;
+        }
+        input:focus, textarea:focus, select:focus {
+            border-color: #4088ee;
+            box-shadow: 0 0 0 3px rgba(64,136,238,0.15);
+        }
+        .btn-group {
+            display: flex;
+            gap:14px;
+            margin-top:24px;
+        }
+        button {
+            padding:14px 26px;
+            border: none;
+            border-radius:10px;
+            font-size:15px;
+            cursor: pointer;
+            transition:0.2s;
+        }
+        .btn-add {
+            background: #ff8c69;
+            color:white;
+        }
+        .btn-add:hover {
+            background:#ff754e;
+        }
+        .btn-create {
+            background:#4088ee;
+            color:white;
+        }
+        .btn-create:hover {
+            background:#2e78e3;
+        }
+        .question-block {
+            border:1px solid #eee;
+            border-radius:12px;
+            padding:20px;
+            margin:16px 0;
+        }
+        .q-row {
+            margin:12px 0;
+        }
+        .delete-q {
+            background:#ef4444;
+            color:#fff;
+            padding:8px 14px;
+            margin-top:10px;
+        }
+        .link-box {
+            margin-top:24px;
+            padding:16px;
+            background:#f0f7ff;
+            border-radius:10px;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>新建好友问卷</h1>
+    <div class="form-item">
+        <input id="title" placeholder="问卷标题">
+    </div>
+    <div class="form-item">
+        <textarea id="desc" rows="3" placeholder="问卷简介（选填）"></textarea>
+    </div>
+
+    <div id="questionList"></div>
+
+    <div class="btn-group">
+        <button class="btn-add" id="addQuestionBtn">添加题目</button>
+        <button class="btn-create" id="submitBtn">生成问卷链接</button>
+    </div>
+
+    <div class="link-box" id="resultBox" style="display:none;">
+        <p>问卷填写链接：<span id="shareLink"></span></p>
+    </div>
+</div>
+
+<script>
+// =====================【请修改这里！填入你的Supabase信息】====================
+const SUPABASE_URL = "https://dmyohvogxgcmlwmmjrtn.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRteW9odm9neGdjbWx3bW1qcnRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU0Nzg1MTcsImV4cCI6MjEwMTA1NDUxN30.qC3Sp_ynk5YKvYSScABRRVs7I8EE16hbayahGFdmNxM";
+// ==========================================================================
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+let questionList = [];
+const questionWrap = document.getElementById("questionList");
+const titleInput = document.getElementById("title");
+const descInput = document.getElementById("desc");
+const resultBox = document.getElementById("resultBox");
+const shareLinkText = document.getElementById("shareLink");
+
+// 添加题目
+document.getElementById("addQuestionBtn").addEventListener("click", ()=>{
+    const id = Date.now();
+    questionList.push({
+        tempId: id,
+        title:"",
+        qtype:"single",
+        options:["选项1","选项2"],
+        required:true
+    });
+    renderQuestions();
+});
+
+// 渲染所有题目
+function renderQuestions(){
+    questionWrap.innerHTML = "";
+    questionList.forEach((item,index)=>{
+        const block = document.createElement("div");
+        block.className = "question-block";
+        block.innerHTML = `
+            <div class="q-row">
+                <input type="text" class="q-title" value="${item.title}" placeholder="输入问题标题">
+            </div>
+            <div class="q-row">
+                <select class="q-type">
+                    <option value="single" ${item.qtype==='single'?'selected':''}>单选</option>
+                    <option value="multi" ${item.qtype==='multi'?'selected':''}>多选</option>
+                    <option value="text" ${item.qtype==='text'?'selected':''}>文本题</option>
+                </select>
+            </div>
+            <div class="option-area" style="${item.qtype==='text'?'display:none':''}">
+                ${item.options.map((opt,i)=>`
+                    <div style="margin:6px 0;">
+                        <input class="opt-input" value="${opt}" placeholder="选项${i+1}">
+                    </div>
+                `).join('')}
+                <button type="button" class="add-option">+新增选项</button>
+            </div>
+            <div class="q-row">
+                <label>
+                    <input type="checkbox" class="q-required" ${item.required?'checked':''}> 必填
+                </label>
+            </div>
+            <button class="delete-q">删除该题目</button>
+        `;
+        questionWrap.appendChild(block);
+
+        // 题型切换
+        const typeSel = block.querySelector(".q-type");
+        const optArea = block.querySelector(".option-area");
+        typeSel.onchange = function(){
+            questionList[index].qtype = this.value;
+            optArea.style.display = this.value === "text" ? "none" : "block";
+        }
+        // 删除题目
+        block.querySelector(".delete-q").onclick = function(){
+            questionList.splice(index,1);
+            renderQuestions();
+        }
+        // 问题标题监听
+        block.querySelector(".q-title").oninput = function(){
+            questionList[index].title = this.value;
+        }
+        // 必填勾选
+        block.querySelector(".q-required").onchange = function(){
+            questionList[index].required = this.checked;
+        }
+        // 新增选项
+        block.querySelector(".add-option").onclick = function(){
+            questionList[index].options.push("");
+            renderQuestions();
+        }
+        // 选项输入监听
+        const optInputs = block.querySelectorAll(".opt-input");
+        optInputs.forEach((inp,oi)=>{
+            inp.oninput = function(){
+                questionList[index].options[oi] = this.value;
+            }
+        })
+    })
+}
+
+// 生成问卷链接 提交按钮
+document.getElementById("submitBtn").addEventListener("click",async function(){
+    const title = titleInput.value.trim();
+    const desc = descInput.value.trim();
+    if(!title){
+        alert("请填写问卷标题！");
+        return;
+    }
+    if(questionList.length ===0){
+        alert("至少添加一道题目！");
+        return;
+    }
+    // 校验题目
+    for(const q of questionList){
+        if(!q.title.trim()){
+            alert("存在空白问题标题，请完善！");
+            return;
+        }
+        if(q.qtype !== "text"){
+            const filterOpt = q.options.filter(o=>o.trim()!=='');
+            if(filterOpt.length <2){
+                alert(`【${q.title}】选择题至少保留2个有效选项`);
+                return;
+            }
+        }
+    }
+
+    // 生成唯一问卷ID
+    const surveyId = "sv_"+Math.random().toString(36).slice(2,10);
+    // 插入问卷主表
+    const {data:surveyData, error:surveyErr} = await supabase
+        .from("surveys")
+        .insert([{
+            id:surveyId,
+            title:title,
+            desc:desc
+        }]).select();
+    if(surveyErr){
+        alert("创建问卷失败："+surveyErr.message);
+        console.error(surveyErr);
+        return;
+    }
+
+    // 批量插入题目
+    const insertQuestions = questionList.map(q=>{
+        return {
+            survey_id: surveyId,
+            title: q.title,
+            qtype: q.qtype,
+            options: q.qtype === "text" ? null : q.options.filter(s=>s.trim()!==''),
+            required: q.required
+        }
+    })
+    const {error:qErr} = await supabase.from("questions").insert(insertQuestions);
+    if(qErr){
+        alert("题目保存失败："+qErr.message);
+        console.error(qErr);
+        return;
+    }
+
+    // 展示分享链接
+    const shareUrl = `${location.origin}/fill.html?id=${surveyId}`;
+    shareLinkText.innerText = shareUrl;
+    resultBox.style.display = "block";
+});
+</script>
+
+<style>
+  .watermark-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;  /* 让水印不干扰点击 */
+    z-index: 9999;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='180'%3E%3Ctext x='20' y='110' font-family='Microsoft YaHei, sans-serif' font-size='26' fill='rgba(0,0,0,0.07)' transform='rotate(-25, 140, 90)'%3E测试版水印*柳%3C/text%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 280px 180px;
+  }
+</style>
+<div class="watermark-layer"></div>
+</body>
+</html>
